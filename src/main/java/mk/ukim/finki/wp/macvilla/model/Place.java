@@ -10,12 +10,14 @@ public class Place {
     private Long placeId;
     // FK to the manager that registered the place
     private Long managerId;
+    // FK to the City in which the place is situated
+    private Long cityId;
     private String name;
     private String description;
     private String address;
     private String telephoneNumber;
     private Integer price;
-    private String category;
+    private Long categoryId;
     private Float rating;
     // list of pictures
     private List<String> gallery;
@@ -30,16 +32,17 @@ public class Place {
         this.gallery = new ArrayList<>();
     }
 
-    public Place(Long managerId, String name, String description, String address,
-                 String telephoneNumber, Integer price, String category,
+    public Place(Long managerId, Long cityId, String name, String description, String address,
+                 String telephoneNumber, Integer price, Long categoryId,
                  List<String> gallery, String thumbnail, Coordinates map) {
         this.managerId = managerId;
+        this.cityId = cityId;
         this.name = name;
         this.description = description;
         this.address = address;
         this.telephoneNumber = telephoneNumber;
         this.price = price;
-        this.category = category;
+        this.categoryId = categoryId;
         this.gallery = gallery;
         this.thumbnail = thumbnail;
         this.map = map;
