@@ -1,10 +1,12 @@
 package mk.ukim.finki.wp.macvilla.service;
 
+import mk.ukim.finki.wp.macvilla.model.Client;
+import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.model.Review;
 import java.util.List;
 
 public interface ReviewService {
-    Review create(String content, Float rating, Long authorId, Long placeId);
+    Review create(String content, Float rating, Client author, Place place);
 
     List<Review> listAllReviewsByPlaceId(Long placeId);
 

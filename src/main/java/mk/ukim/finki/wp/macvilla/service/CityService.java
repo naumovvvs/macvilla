@@ -16,6 +16,6 @@ public interface CityService {
 
     List<City> findAllByName(String name);
 
-    List<City> findByDescriptionLike(String searchText);
+    List<City> findAllByDescriptionLike(String searchText);
 
 }

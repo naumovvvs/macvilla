@@ -3,7 +3,6 @@ package mk.ukim.finki.wp.macvilla.repository;
 import mk.ukim.finki.wp.macvilla.model.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository

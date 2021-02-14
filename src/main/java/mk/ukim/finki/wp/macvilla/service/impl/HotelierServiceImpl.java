@@ -5,11 +5,7 @@ import mk.ukim.finki.wp.macvilla.model.exceptions.CategoryNotFoundException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.CityNotFoundException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.HotelierNotFoundException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.PlaceNotFoundException;
-import mk.ukim.finki.wp.macvilla.repository.HotelierRepository;
-import mk.ukim.finki.wp.macvilla.service.CategoryService;
-import mk.ukim.finki.wp.macvilla.service.CityService;
-import mk.ukim.finki.wp.macvilla.service.HotelierService;
-import mk.ukim.finki.wp.macvilla.service.PlaceService;
+import mk.ukim.finki.wp.macvilla.service.*;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -18,23 +14,17 @@ import java.util.stream.Collectors;
 @Service
 public class HotelierServiceImpl implements HotelierService {
 
-    private final HotelierRepository hotelierRepository;
+    private final UserService userService;
     private final PlaceService placeService;
     private final CityService cityService;
     private final CategoryService categoryService;
 
-    public HotelierServiceImpl(HotelierRepository hotelierRepository, PlaceService placeService,
+    public HotelierServiceImpl(UserService userService, PlaceService placeService,
                                CityService cityService, CategoryService categoryService) {
-        this.hotelierRepository = hotelierRepository;
+        this.userService = userService;
         this.placeService = placeService;
         this.cityService = cityService;
         this.categoryService = categoryService;
-    }
-
-    @Override
-    public Hotelier save(String username, String password, String name, String surname, String email, String avatarURL) {
-        //TODO: After user service is created
-        return null;
     }
 
     @Override
@@ -44,7 +34,7 @@ public class HotelierServiceImpl implements HotelierService {
 
     @Override
     public Optional<Place> findPlace(Long managerId, Long placeId) {
-        Optional<Hotelier> hotelier = this.hotelierRepository.findById(managerId);
+        Optional<User> hotelier = this.userService.findById(managerId);
 
         if(hotelier.isPresent()){
             return Optional.of(this.placeService
@@ -58,11 +48,12 @@ public class HotelierServiceImpl implements HotelierService {
 
     @Override
     public Optional<Place> deletePlace(Long managerId, Long placeId) {
-        Optional<Hotelier> hotelier = this.hotelierRepository.findById(managerId);
+        Optional<User> hotelier = this.userService.findById(managerId);
 
         if(hotelier.isPresent()){
             Optional<Place> managedPlace = this.findPlace(managerId, placeId);
-            managedPlace.ifPresent(place -> hotelier.get().getManagedPlaces().remove(place.getPlaceId()));
+            //managedPlace.ifPresent(place -> this.placeService.removeById(managedPlace.get().getPlaceId()));
+            //TODO: Finish when place service changes are pushed
 
             return managedPlace;
         } else {
@@ -71,15 +62,22 @@ public class HotelierServiceImpl implements HotelierService {
     }
 
     @Override
-    public Place addPlace(Long managerId, Long cityId, String name, String description, String address, String telephoneNumber, Integer price, Long categoryId, List<String> gallery, String thumbnail, Coordinates map) {
-        Optional<Hotelier> hotelier = this.hotelierRepository.findById(managerId);
+    public Place addPlace(Long managerId, Long cityId, String name, String description, String address,
+                          String telephoneNumber, Integer price, Long categoryId, List<Image> gallery,
+                          Image thumbnail, Coordinates map) {
+        Optional<User> hotelier = this.userService.findById(managerId);
 
         if(hotelier.isPresent()){
-            Place place = this.placeService.save(managerId, cityId, name, description, address, telephoneNumber,
-                    price, categoryId, gallery, thumbnail, map);
-            hotelier.get().getManagedPlaces().add(place.getPlaceId());
+            City city = this.cityService.findById(cityId).
+                    orElseThrow(() -> new CityNotFoundException(cityId));
 
-            return place;
+            Category category = this.categoryService.findById(categoryId)
+                    .orElseThrow(() -> new CategoryNotFoundException(categoryId));
+
+            //return this.placeService.save(hotelier, city, name, description, address, telephoneNumber,
+            //        price, category, gallery, thumbnail, map);
+            //TODO: Finish when place service changes are pushed
+            return null;
         } else {
             throw new HotelierNotFoundException(managerId);
         }
@@ -88,20 +86,21 @@ public class HotelierServiceImpl implements HotelierService {
     @Override
     public Place updatePlace(Long placeId, Long managerId, Long cityId, String name, String description,
                                        String address, String telephoneNumber, Integer price, Long categoryId,
-                                       List<String> gallery, String thumbnail, Coordinates map) {
+                                       List<Image> gallery, Image thumbnail, Coordinates map) {
 
-        Optional<Hotelier> hotelier = this.hotelierRepository.findById(managerId);
+        Optional<User> hotelier = this.userService.findById(managerId);
 
         if(hotelier.isPresent()){
-            Place managedPlace = this.findPlace(managerId, placeId).orElseThrow(() -> new PlaceNotFoundException(placeId));
+            Place managedPlace = this.findPlace(managerId, placeId)
+                    .orElseThrow(() -> new PlaceNotFoundException(placeId));
 
-            this.categoryService
+            Category category = this.categoryService
                     .findById(categoryId).orElseThrow(() -> new CategoryNotFoundException(categoryId));
-            managedPlace.setCategoryId(categoryId);
+            managedPlace.setCategory(category);
 
-            this.cityService
+            City city = this.cityService
                     .findById(cityId).orElseThrow(() -> new CityNotFoundException(cityId));
-            managedPlace.setCityId(cityId);
+            managedPlace.setCity(city);
 
             managedPlace.setName(name);
             managedPlace.setDescription(description);
