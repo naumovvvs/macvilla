@@ -14,17 +14,19 @@ public class Hotelier extends User{
     @OneToMany
     private List<Place> managedPlaces;
 
-    // list of request made by the manager
+    // list of requests made by the manager
     @OneToMany
-    private List<Hotelier> requestsMade;
+    private List<Hotelier> madeRequests;
 
     public Hotelier(){
         super();
         this.managedPlaces = new ArrayList<>();
+        this.madeRequests = new ArrayList<>();
     }
 
     public Hotelier(String username, String password, String name, String surname, String email, String avatarURL){
         super(username, password, name, surname, email, avatarURL);
         this.managedPlaces = new ArrayList<>();
+        this.madeRequests = new ArrayList<>();
     }
 }

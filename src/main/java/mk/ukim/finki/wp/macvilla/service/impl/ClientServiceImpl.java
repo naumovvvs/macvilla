@@ -18,12 +18,6 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Place> listFavoritePlaces(Client client) {
-        //TODO: moze samo da se povika getFavorites koga vekje go predavame clientot
-        return null;
-    }
-
-    @Override
     public Optional<Place> removeFromFavoritePlaces(Client client, Place place) {
         List<Place> favorites = client.getFavoritePlaces();
         favorites.remove(place);

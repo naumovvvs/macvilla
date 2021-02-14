@@ -74,4 +74,11 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findById(Long userId) {
         return this.userRepository.findById(userId);
     }
+
+    @Override
+    public boolean checkIfUsernameExists(String username) {
+        Optional<User> user = this.userRepository.findByUsername(username);
+        //if user is not present, the username is valid
+        return user.isPresent();
+    }
 }

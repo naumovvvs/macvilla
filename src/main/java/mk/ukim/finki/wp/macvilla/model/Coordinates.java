@@ -16,6 +16,9 @@ public class Coordinates {
     @OneToOne
     private Place place;
 
+    public Coordinates() {
+    }
+
     public Coordinates(Float latitude, Float longitude, Place place){
         this.latitude = latitude;
         this.longitude = longitude;

@@ -3,27 +3,28 @@ package mk.ukim.finki.wp.macvilla.model;
 import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
-public class Administrator extends User{
+public class Administrator extends User {
     // list of pending requests that the admin needs to review
-    @OneToMany
+    @Transient
     private List<Request> pendingRequests;
 
     // list of requests that the admin approved for publishing
-    @OneToMany
+    @Transient
     private List<Request> approvedRequests;
 
     // list of requests that the admin denied from publishing due to some reasons
-    @OneToMany
+    @Transient
     private List<Request> deniedRequests;
 
     // list of users that the admin blocked for certain reasons
-    @OneToMany
-    private List<Request> blockedUsers;
+    @Transient
+    private List<User> blockedUsers;
 
     public Administrator(){
         super();

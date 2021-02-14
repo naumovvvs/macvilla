@@ -22,6 +22,8 @@ public class Image {
 
     public Image(String imageURL, String description){
         this.imageURL = imageURL;
+
+        //if description is null, set it to empty string
         if(description==null){
             description = "";
         }

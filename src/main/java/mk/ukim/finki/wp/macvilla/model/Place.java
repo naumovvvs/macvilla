@@ -58,6 +58,5 @@ public class Place {
         this.map = map;
         this.visits = 0;
         this.rating = 0.0F;
-        this.gallery = new ArrayList<>();
     }
 }

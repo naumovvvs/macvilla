@@ -35,8 +35,9 @@ public class Request {
     }
 
     public Request(Place place) {
-        // TODO: get current time
-        this.requestTime = new Date();
+        //requestTime contains current date and time, when the request was made
+        long millis = System.currentTimeMillis();
+        this.requestTime = new Date(millis);
         this.place = place;
         this.requestStatus = RequestStatus.PENDING;
     }
