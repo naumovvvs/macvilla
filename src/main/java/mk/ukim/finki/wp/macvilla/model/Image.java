@@ -8,24 +8,23 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class Category {
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long categoryId;
-    private String name;
+    private Long imageId;
+    private String imageURL;
     private String description;
 
-    public Category(){
-
-    }
-
-    public Category(String name) {
-        this.name = name;
+    public Image(){
+        this.imageURL = "";
         this.description = "";
     }
 
-    public Category(String name, String description) {
-        this.name = name;
+    public Image(String imageURL, String description){
+        this.imageURL = imageURL;
+        if(description==null){
+            description = "";
+        }
         this.description = description;
     }
 }

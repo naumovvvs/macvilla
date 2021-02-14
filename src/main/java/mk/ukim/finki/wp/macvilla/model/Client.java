@@ -11,7 +11,7 @@ public class Client extends User{
     // address of the client (city is important for filtering reasons)
     private String address;
     // list of favorite places
-    private List<Long> favoritePlaces;
+    private List<Place> favoritePlaces;
 
 
     public Client(){

@@ -1,15 +1,21 @@
 package mk.ukim.finki.wp.macvilla.model;
 
 import lombok.Data;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Entity
 public class City {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cityId;
     private String name;
     private String description;
-    // list of places IDs in a specific city
+    // list of places in a specific city
+    @OneToMany
     private List<Place> listPlaces;
 
     public City(){

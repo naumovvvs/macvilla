@@ -1,13 +1,22 @@
 package mk.ukim.finki.wp.macvilla.model;
 
 import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Entity
 public class Hotelier extends User{
     // list of places that the manager manages
-    private List<Long> managedPlaces;
+    @OneToMany
+    private List<Place> managedPlaces;
+
+    // list of request made by the manager
+    @OneToMany
+    private List<Hotelier> requestsMade;
 
     public Hotelier(){
         super();
