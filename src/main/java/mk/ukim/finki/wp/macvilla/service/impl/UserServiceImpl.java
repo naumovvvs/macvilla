@@ -8,6 +8,7 @@ import mk.ukim.finki.wp.macvilla.service.UserService;
 import org.apache.logging.log4j.util.Supplier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -80,5 +81,10 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = this.userRepository.findByUsername(username);
         //if user is not present, the username is valid
         return user.isPresent();
+    }
+
+    @Override
+    public List<User> findAllBlockedUsers() {
+        return this.userRepository.findAllByBlockedTrue();
     }
 }
