@@ -5,6 +5,7 @@ import mk.ukim.finki.wp.macvilla.model.exceptions.CategoryNotFoundException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.CityNotFoundException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.HotelierNotFoundException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.PlaceNotFoundException;
+import mk.ukim.finki.wp.macvilla.repository.HotelierRepository;
 import mk.ukim.finki.wp.macvilla.service.*;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -14,13 +15,15 @@ import java.util.stream.Collectors;
 @Service
 public class HotelierServiceImpl implements HotelierService {
 
+    private final HotelierRepository hotelierRepository;
     private final UserService userService;
     private final PlaceService placeService;
     private final CityService cityService;
     private final CategoryService categoryService;
 
-    public HotelierServiceImpl(UserService userService, PlaceService placeService,
+    public HotelierServiceImpl(HotelierRepository hotelierRepository, UserService userService, PlaceService placeService,
                                CityService cityService, CategoryService categoryService) {
+        this.hotelierRepository = hotelierRepository;
         this.userService = userService;
         this.placeService = placeService;
         this.cityService = cityService;
@@ -44,6 +47,11 @@ public class HotelierServiceImpl implements HotelierService {
         } else {
             throw new HotelierNotFoundException(managerId);
         }
+    }
+
+    @Override
+    public Optional<User> findById(Long managerId) {
+        return this.hotelierRepository.findById(managerId);
     }
 
     @Override
