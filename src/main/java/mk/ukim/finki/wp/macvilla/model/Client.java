@@ -1,18 +1,21 @@
 package mk.ukim.finki.wp.macvilla.model;
 
 import lombok.Data;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
+@Entity
 public class Client extends User{
     private Date birthDate;
     // address of the client (city is important for filtering reasons)
     private String address;
     // list of favorite places
+    @ManyToMany
     private List<Place> favoritePlaces;
-
 
     public Client(){
         super();

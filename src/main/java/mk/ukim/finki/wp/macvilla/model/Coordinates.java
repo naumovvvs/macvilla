@@ -1,16 +1,16 @@
 package mk.ukim.finki.wp.macvilla.model;
 
 import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+
+import javax.persistence.*;
 
 @Data
 @Entity
 public class Coordinates {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long coordinatesId;
     private Float latitude;
-    @Id
     private Float longitude;
     // FK to the place for which the coordinates are for
     @OneToOne

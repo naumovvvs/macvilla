@@ -27,9 +27,24 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
+    public List<Request> listAllPendingRequests() {
+        return this.requestRepository.findAllByRequestStatus(RequestStatus.PENDING);
+    }
+
+    @Override
+    public List<Request> listAllApprovedRequests() {
+        return this.requestRepository.findAllByRequestStatus(RequestStatus.APPROVED);
+    }
+
+    @Override
+    public List<Request> listAllDeniedRequests() {
+        return this.requestRepository.findAllByRequestStatus(RequestStatus.DENIED);
+    }
+
+    /*@Override
     public List<User> listAllBlockedUsers() {
         return this.userRepository.findAllByBlockedIsTrue();
-    }
+    }*/
 
     @Override
     public Optional<Request> removeFrom(String category, Request request) {

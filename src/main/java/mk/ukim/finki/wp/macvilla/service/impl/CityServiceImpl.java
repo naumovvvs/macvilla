@@ -45,7 +45,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<City> findByDescriptionLike(String descriptionLike) {
+    public List<City> findAllByDescriptionLike(String descriptionLike) {
         return this.cityRepository.findAllByDescriptionLike(descriptionLike);
     }
 }

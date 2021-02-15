@@ -1,13 +1,14 @@
 package mk.ukim.finki.wp.macvilla.service.impl;
 
-import mk.ukim.finki.wp.macvilla.model.Coordinates;
-import mk.ukim.finki.wp.macvilla.model.Place;
+import mk.ukim.finki.wp.macvilla.model.*;
 import mk.ukim.finki.wp.macvilla.model.exceptions.CategoryNotFoundException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.CityNotFoundException;
+import mk.ukim.finki.wp.macvilla.model.exceptions.HotelierNotFoundException;
 import mk.ukim.finki.wp.macvilla.repository.PlaceRepository;
 import mk.ukim.finki.wp.macvilla.service.CategoryService;
 import mk.ukim.finki.wp.macvilla.service.CityService;
 import mk.ukim.finki.wp.macvilla.service.PlaceService;
+import mk.ukim.finki.wp.macvilla.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -21,11 +22,13 @@ public class PlaceServiceImpl implements PlaceService {
     private final PlaceRepository placeRepository;
     private final CityService cityService;
     private final CategoryService categoryService;
+    private final UserService userService;
 
-    public PlaceServiceImpl(PlaceRepository placeRepository, CityService cityService, CategoryService categoryService) {
+    public PlaceServiceImpl(PlaceRepository placeRepository, CityService cityService, CategoryService categoryService, UserService userService) {
         this.placeRepository = placeRepository;
         this.cityService = cityService;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @Override
@@ -39,18 +42,21 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public Place save(Long managerId, Long cityId, String name, String description, String address, String telephoneNumber, Integer price, Long categoryId, List<String> gallery, String thumbnail, Coordinates map) {
-        //this.userService.findById(managerId).orElseThrow(() -> new UserNotFoundException(managerId));
-        //TODO: After user service is created
+    public Place save(Long managerId, Long cityId, String name, String description, String address,
+                      String telephoneNumber, Integer price, Long categoryId, List<Image> gallery,
+                      Image thumbnail, Coordinates map) {
 
-        this.categoryService
+        Hotelier hotelier = (Hotelier) this.userService.findById(managerId)
+                .orElseThrow(() -> new HotelierNotFoundException(managerId));
+
+        Category category = this.categoryService
                 .findById(categoryId).orElseThrow(() -> new CategoryNotFoundException(categoryId));
 
-        this.cityService
+        City city = this.cityService
                 .findById(cityId).orElseThrow(() -> new CityNotFoundException(cityId));
 
-        return this.placeRepository.save(new Place(managerId, cityId, name, description, address, telephoneNumber,
-                price, categoryId, gallery, thumbnail, map));
+        return this.placeRepository.save(new Place(hotelier, city, name, description, address, telephoneNumber,
+                price, category, gallery, thumbnail, map));
     }
 
     @Override
