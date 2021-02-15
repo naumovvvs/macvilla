@@ -17,4 +17,5 @@ public interface PlaceService {
     List<Place> listAllByManagerId(Long managerId);
     // if ascending = false, then we return places in descending order
     List<Place> listAllByRatingGreaterThan(Float rating, boolean ascending);
+    Place removeById(Long placeId);
 }

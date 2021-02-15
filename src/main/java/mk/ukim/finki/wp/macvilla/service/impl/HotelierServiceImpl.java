@@ -52,10 +52,12 @@ public class HotelierServiceImpl implements HotelierService {
 
         if(hotelier.isPresent()){
             Optional<Place> managedPlace = this.findPlace(managerId, placeId);
-            //managedPlace.ifPresent(place -> this.placeService.removeById(managedPlace.get().getPlaceId()));
-            //TODO: Finish when place service changes are pushed
 
-            return managedPlace;
+            if(managedPlace.isPresent()){
+                return Optional.of(this.placeService.removeById(managedPlace.get().getPlaceId()));
+            } else {
+                throw new PlaceNotFoundException(placeId);
+            }
         } else {
             throw new HotelierNotFoundException(managerId);
         }
@@ -68,16 +70,14 @@ public class HotelierServiceImpl implements HotelierService {
         Optional<User> hotelier = this.userService.findById(managerId);
 
         if(hotelier.isPresent()){
-            City city = this.cityService.findById(cityId).
+            this.cityService.findById(cityId).
                     orElseThrow(() -> new CityNotFoundException(cityId));
 
-            Category category = this.categoryService.findById(categoryId)
+            this.categoryService.findById(categoryId)
                     .orElseThrow(() -> new CategoryNotFoundException(categoryId));
 
-            //return this.placeService.save(hotelier, city, name, description, address, telephoneNumber,
-            //        price, category, gallery, thumbnail, map);
-            //TODO: Finish when place service changes are pushed
-            return null;
+            return this.placeService.save(managerId, cityId, name, description, address, telephoneNumber,
+                    price, categoryId, gallery, thumbnail, map);
         } else {
             throw new HotelierNotFoundException(managerId);
         }

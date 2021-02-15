@@ -87,4 +87,12 @@ public class PlaceServiceImpl implements PlaceService {
                     .sorted(Comparator.comparing(Place::getRating).reversed()).collect(Collectors.toList());
         }
     }
+
+    @Override
+    public Place removeById(Long placeId) {
+        Place place = this.findById(placeId)
+                .orElseThrow(() -> new PlaceNotFoundException(placeId));
+        this.placeRepository.delete(place);
+        return place;
+    }
 }
