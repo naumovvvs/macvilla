@@ -3,10 +3,7 @@ package mk.ukim.finki.wp.macvilla.service.impl;
 import mk.ukim.finki.wp.macvilla.model.*;
 import mk.ukim.finki.wp.macvilla.model.exceptions.*;
 import mk.ukim.finki.wp.macvilla.repository.PlaceRepository;
-import mk.ukim.finki.wp.macvilla.service.CategoryService;
-import mk.ukim.finki.wp.macvilla.service.CityService;
-import mk.ukim.finki.wp.macvilla.service.PlaceService;
-import mk.ukim.finki.wp.macvilla.service.UserService;
+import mk.ukim.finki.wp.macvilla.service.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -21,12 +18,14 @@ public class PlaceServiceImpl implements PlaceService {
     private final CityService cityService;
     private final CategoryService categoryService;
     private final UserService userService;
+    private final HotelierService hotelierService;
 
-    public PlaceServiceImpl(PlaceRepository placeRepository, CityService cityService, CategoryService categoryService, UserService userService) {
+    public PlaceServiceImpl(PlaceRepository placeRepository, CityService cityService, CategoryService categoryService, UserService userService, HotelierService hotelierService) {
         this.placeRepository = placeRepository;
         this.cityService = cityService;
         this.categoryService = categoryService;
         this.userService = userService;
+        this.hotelierService = hotelierService;
     }
 
     @Override
@@ -55,6 +54,31 @@ public class PlaceServiceImpl implements PlaceService {
 
         return this.placeRepository.save(new Place(hotelier, city, name, description, address, telephoneNumber,
                 price, category, gallery, thumbnail, map));
+    }
+
+    @Override
+    public Place update(Long placeId, Long cityId, String name, String description, String address, String telephoneNumber,
+                        Integer price, Long categoryId, List<Image> gallery, Image thumbnail, Coordinates map) {
+
+        Place place = this.placeRepository.findById(placeId).orElseThrow(() -> new PlaceNotFoundException(placeId));
+
+        City city = this.cityService.findById(cityId).orElseThrow(() -> new CityNotFoundException(cityId));
+        place.setCity(city);
+
+        place.setName(name);
+        place.setDescription(description);
+        place.setAddress(address);
+        place.setTelephoneNumber(telephoneNumber);
+        place.setPrice(price);
+
+        Category category = this.categoryService.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException(categoryId));
+        place.setCategory(category);
+
+        place.setGallery(gallery);
+        place.setThumbnail(thumbnail);
+        place.setMap(map);
+
+        return this.placeRepository.save(place);
     }
 
     @Override
