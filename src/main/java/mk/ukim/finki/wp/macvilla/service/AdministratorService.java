@@ -10,7 +10,7 @@ public interface AdministratorService {
     List<Request> listAllPendingRequests();
     List<Request> listAllApprovedRequests();
     List<Request> listAllDeniedRequests();
-    List<User> listAllBlockedUsers();
+    //List<User> listAllBlockedUsers();
     // removes request from a category
     Optional<Request> removeFrom(String category, Request request);
     // adds a request to a category

@@ -41,10 +41,10 @@ public class AdministratorServiceImpl implements AdministratorService {
         return this.requestRepository.findAllByRequestStatus(RequestStatus.DENIED);
     }
 
-    @Override
+    /*@Override
     public List<User> listAllBlockedUsers() {
         return this.userRepository.findAllByBlockedIsTrue();
-    }
+    }*/
 
     @Override
     public Optional<Request> removeFrom(String category, Request request) {

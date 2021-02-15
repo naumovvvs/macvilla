@@ -1,7 +1,6 @@
 package mk.ukim.finki.wp.macvilla.model;
 
 import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
