@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface ClientRepository extends UserRepository {
-    List<Place> findAllFavoritePlaces();
     Optional<Client> findByAddress(String address);
     Optional<Client> findByAddressLike(String address);
 }

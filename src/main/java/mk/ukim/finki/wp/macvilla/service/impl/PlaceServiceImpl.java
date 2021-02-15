@@ -1,9 +1,7 @@
 package mk.ukim.finki.wp.macvilla.service.impl;
 
 import mk.ukim.finki.wp.macvilla.model.*;
-import mk.ukim.finki.wp.macvilla.model.exceptions.CategoryNotFoundException;
-import mk.ukim.finki.wp.macvilla.model.exceptions.CityNotFoundException;
-import mk.ukim.finki.wp.macvilla.model.exceptions.HotelierNotFoundException;
+import mk.ukim.finki.wp.macvilla.model.exceptions.*;
 import mk.ukim.finki.wp.macvilla.repository.PlaceRepository;
 import mk.ukim.finki.wp.macvilla.service.CategoryService;
 import mk.ukim.finki.wp.macvilla.service.CityService;
@@ -61,17 +59,20 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public List<Place> listAllByCityId(Long cityId) {
-        return this.placeRepository.findAllByCityId(cityId);
+        return this.placeRepository.
+                findAllByCity(this.cityService.findById(cityId).orElseThrow(() -> new CityNotFoundException(cityId)));
     }
 
     @Override
     public List<Place> listAllByCategoryId(Long categoryId) {
-        return this.placeRepository.findAllByCategoryId(categoryId);
+        return this.placeRepository.
+                findAllByCategory(this.categoryService.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException(categoryId)));
     }
 
     @Override
     public List<Place> listAllByManagerId(Long managerId) {
-        return this.placeRepository.findAllByManagerId(managerId);
+        return this.placeRepository.
+                findAllByManager(this.userService.findById(managerId).orElseThrow(() -> new HotelierNotFoundException(managerId)));
     }
 
     @Override

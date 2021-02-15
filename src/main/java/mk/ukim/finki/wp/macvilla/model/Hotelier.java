@@ -15,7 +15,7 @@ public class Hotelier extends User{
 
     // list of requests made by the manager
     @OneToMany
-    private List<Hotelier> madeRequests;
+    private List<Request> madeRequests;
 
     public Hotelier(){
         super();

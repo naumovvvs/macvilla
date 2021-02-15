@@ -47,26 +47,28 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public Optional<Request> removeFrom(String category, Request request) {
         if(category.toLowerCase(Locale.ROOT).equals("pending")){
-
-        }else if(category.toLowerCase(Locale.ROOT).equals("approved"){
-
-        }else if(category.toLowerCase(Locale.ROOT).equals("denied"){
-
+            return null;
+        }else if(category.toLowerCase(Locale.ROOT).equals("approved")){
+            return null;
+        }else if(category.toLowerCase(Locale.ROOT).equals("denied")){
+            return null;
         }else{
-
+            return null;
         }
     }
 
     @Override
     public Optional<Request> addTo(String category, Request request) {
         if(category.toLowerCase(Locale.ROOT).equals("pending")){
-
-        }else if(category.toLowerCase(Locale.ROOT).equals("approved"){
-
-        }else if(category.toLowerCase(Locale.ROOT).equals("denied"){
-
+            return null;
+        }else if(category.toLowerCase(Locale.ROOT).equals("approved")){
+            return null;
+        }else if(category.toLowerCase(Locale.ROOT).equals("denied")){
+            return null;
         }else{
-
+            return null;
         }
     }
+
+
 }
