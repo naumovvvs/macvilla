@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wizard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mb-5">
+    <h1>Wizard stepper</h1>
+    <div class="row">
+        <div class="col-md-12 mt-5">
+            <h2>Linear stepper</h2>
+            <div id="stepper1" class="bs-stepper">
+                <div class="bs-stepper-header">
+                    <div class="step" data-target="#test-l-1">
+                        <button type="button" class="btn step-trigger">
+                            <span class="bs-stepper-circle">1</span>
+                            <span class="bs-stepper-label">Прв чекор</span>
+                        </button>
+                    </div>
+                    <div class="line"></div>
+                    <div class="step" data-target="#test-l-2">
+                        <button type="button" class="btn step-trigger">
+                            <span class="bs-stepper-circle">2</span>
+                            <span class="bs-stepper-label">Втор чекор</span>
+                        </button>
+                    </div>
+                    <div class="line"></div>
+                    <div class="step" data-target="#test-l-3">
+                        <button type="button" class="btn step-trigger">
+                            <span class="bs-stepper-circle">3</span>
+                            <span class="bs-stepper-label">Трет чекор</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="bs-stepper-content">
+                    <div id="test-l-1" class="content">
+                        <p class="text-center">Избор на град</p>
+                        <button class="btn btn-primary" onclick="stepper1.next()">Следно</button>
+                    </div>
+                    <div id="test-l-2" class="content">
+                        <p class="text-center">Избор на категорија на места</p>
+                        <button class="btn btn-primary" onclick="stepper1.next()">Следно</button>
+                    </div>
+                    <div id="test-l-3" class="content">
+                        <p class="text-center">Резултати</p>
+                        <button class="btn btn-primary" onclick="stepper1.next()">Следно</button>
+                        <button class="btn btn-primary" onclick="stepper1.reset()">Повторно</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mt-5">
+            <h2>Vertical stepper</h2>
+            <div id="stepper3" class="bs-stepper vertical">
+                <div class="bs-stepper-header">
+                    <div class="step" data-target="#test-lv-1">
+                        <button type="button" class="btn step-trigger">
+                            <span class="bs-stepper-circle">1</span>
+                            <span class="bs-stepper-label">Прв чекор</span>
+                        </button>
+                    </div>
+                    <div class="line"></div>
+                    <div class="step" data-target="#test-lv-2">
+                        <button type="button" class="btn step-trigger">
+                            <span class="bs-stepper-circle">2</span>
+                            <span class="bs-stepper-label">Втор чекор</span>
+                        </button>
+                    </div>
+                    <div class="line"></div>
+                    <div class="step" data-target="#test-lv-3">
+                        <button type="button" class="btn step-trigger">
+                            <span class="bs-stepper-circle">3</span>
+                            <span class="bs-stepper-label">Трет чекор</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="bs-stepper-content">
+                    <div id="test-lv-1" class="content">
+                        <p class="text-center">Избор на град</p>
+                        <button class="btn btn-primary" onclick="stepper3.next()">Следно</button>
+                    </div>
+                    <div id="test-lv-2" class="content">
+                        <p class="text-center">Избор на категорија на места</p>
+                        <button class="btn btn-primary" onclick="stepper3.next()">Следно</button>
+                        <button class="btn btn-primary" onclick="stepper3.previous()">Претходно</button>
+                    </div>
+                    <div id="test-lv-3" class="content">
+                        <p class="text-center">Резултати</p>
+                        <button class="btn btn-primary" onclick="stepper3.previous()">Претходно</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
+
+<script>
+    var stepper1 = new Stepper(document.querySelector('#stepper1'), {
+        animation: true
+    });
+
+    var stepper3 = new Stepper(document.querySelector('#stepper3'), {
+        animation: true
+    });
+</script>
+</body>
+</html>
