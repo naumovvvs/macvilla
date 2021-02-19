@@ -1,0 +1,274 @@
+/* body{
+    background: linear-gradient(-100deg, white 50%, deeppink 50%);
+    height: 70vh;
+    font-family: poppins;
+} */
+.navbar {
+    z-index: 10;
+}
+
+#carouselExample {
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+
+#navbarNav .navbar-nav .nav-item .nav-link {
+    color: white;
+    font-size: 16pt;
+    padding: 20px 20px 0 20px;
+    font-weight: lighter;
+}
+
+.my-nav .container .navbar-brand {
+    color: white;
+    font-size: 16pt;
+    padding: 20px 20px 0 20px;
+}
+
+#navbarNav .navbar-nav .nav-item .nav-link:hover {
+    color: lightgray;
+    font-size: 16pt;
+}
+
+#personalize {
+    position: relative;
+    left: 400px;
+}
+
+#personalize li {
+    display: inline;
+}
+
+footer {
+    display: block;
+    position: absolute;
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+.links a {
+    text-decoration: none;
+    color: white;
+}
+
+.links a:hover {
+    color: lightgray;
+
+}
+
+.footer-copyright {
+    background-color: #0275d8;
+}
+
+.footer-copyright a {
+    text-decoration: none;
+    color: white;
+}
+
+.footer-copyright a:hover {
+    color: lightgray;
+}
+
+hr {
+    background-color: #0275d8;
+    width: 65px;
+    opacity: 1;
+}
+
+h6 {
+    font-weight: bold;
+}
+
+.icons {
+    display: block;
+}
+
+.icons .icon {
+    text-decoration: none;
+    padding-right: 20px;
+}
+
+body {
+    background-color: white;
+}
+.slider a {
+    text-decoration:none;
+}
+.box {
+    width:300px;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 25px;
+}
+.slide-img {
+    height: 450px;
+    position:relative;
+}
+.slide-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    box-sizing: border-box;
+}
+.detail-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    font-family: calibri, sans-serif;
+    background-color:white;
+}
+.type {
+    display: flex;
+    flex-direction: column;
+}
+.type a {
+    color:#222222;
+    margin: 5px 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding-right: 8px;
+}
+.type span {
+    color:rgba(26,26,26,0.5);
+}
+.info {
+    color: #333333;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: poppins, sans-serif;
+    letter-spacing: 0.5px;
+}
+.overlay {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width:100%;
+    height: 100%;
+    background-color: rgba(92,95,236,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.more-btn {
+    width:160px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    color:#252525;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: calibri, sans-serif;
+    border-radius: 20px;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.2);
+}
+.more-btn:hover {
+    color:#FFFFFF;
+    background-color: #0275d8;
+    transition: all ease 0.3s;
+}
+.overlay {
+    visibility: hidden;
+}
+.slide-img:hover .overlay {
+    visibility: visible;
+    animation:fade 0.5s;
+}
+
+@keyframes fade{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.slider {
+    width:100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#reviews {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.img-text{
+    width: 100%;
+    height: 300px;
+    display: block;
+    text-align: center;
+    padding: 40% 5%;
+    background: #302e2e;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.img-text h2{
+    font-size: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.img-text p{
+    font-size: 14px;
+}
+
+.single-box{
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.img-area{
+    position: absolute;
+    /* width: 100px;
+    height: 100px; */
+    width: 25%;
+    height: 30%;
+    border: 5px solid rgb(3, 75, 184);
+    overflow: hidden;
+    /* top: 20px;
+    left: 155px; */
+    top: 10%;
+    left: 40%;
+    border-radius: 50%;
+}
+
+.img-area img{
+    /*height: 90px;*/
+    /*min-width: 90px;*/
+    min-height: 100%;
+    min-width: 100%;
+}
+
+#reviews .carousel-indicators{
+    left: 0;
+    top: auto;
+    bottom: -50px;
+}
+
+#reviews .carousel-indicators button{
+    background: rgb(61, 61, 61);
+    border-radius: 50%;
+    width: 30px;
+    height: 10px;
+}
+
+#reviews .carousel-indicators :not(.active){
+    background: rgb(61, 61, 61);
+}
+
+#reviews .carousel-indicators .active{
+    background: rgb(61, 61, 61);
+}
