@@ -19,10 +19,10 @@ public class User {
     // URL for avatar profile picture
     private String avatarURL;
     // Status of the user
-    private boolean isBlocked;
+    private boolean blocked;
 
     public User(){
-        this.isBlocked = false;
+        this.blocked = false;
     }
 
     public User(String username, String password, String name, String surname, String email, String avatarURL){
@@ -31,7 +31,7 @@ public class User {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.isBlocked = false;
+        this.blocked = false;
 
         if(avatarURL!=null && !avatarURL.isEmpty()) {
             this.avatarURL = avatarURL;

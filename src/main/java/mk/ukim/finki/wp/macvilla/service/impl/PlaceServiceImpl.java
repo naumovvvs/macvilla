@@ -19,7 +19,7 @@ public class PlaceServiceImpl implements PlaceService {
     private final CategoryService categoryService;
     private final UserService userService;
 
-    public PlaceServiceImpl(PlaceRepository placeRepository, CityService cityService, CategoryService categoryService, UserService userService, HotelierService hotelierService) {
+    public PlaceServiceImpl(PlaceRepository placeRepository, CityService cityService, CategoryService categoryService, UserService userService) {
         this.placeRepository = placeRepository;
         this.cityService = cityService;
         this.categoryService = categoryService;
