@@ -26,6 +26,8 @@ public class LoginController {
         model.addAttribute("headTitle", "Login");
         model.addAttribute("bodyContent", "login");
         model.addAttribute("style1", "login.css");
+        model.addAttribute("style2", "navbar.css");
+        model.addAttribute("style3", "footer.css");
 
         return "master-template";
     }
@@ -40,6 +42,8 @@ public class LoginController {
             model.addAttribute("error", ex.getMessage());
             model.addAttribute("headTitle", "Login");
             model.addAttribute("style1", "login.css");
+            model.addAttribute("style2", "navbar.css");
+            model.addAttribute("style3", "footer.css");
             model.addAttribute("bodyContent", "login");
 
             return "master-template";
