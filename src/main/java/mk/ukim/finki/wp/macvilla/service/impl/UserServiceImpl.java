@@ -1,13 +1,16 @@
 package mk.ukim.finki.wp.macvilla.service.impl;
 
+import mk.ukim.finki.wp.macvilla.model.Client;
 import mk.ukim.finki.wp.macvilla.model.User;
 import mk.ukim.finki.wp.macvilla.model.exceptions.InvalidUserIdException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.InvalidUsernameOrPasswordException;
+import mk.ukim.finki.wp.macvilla.model.exceptions.UsernameTakenException;
 import mk.ukim.finki.wp.macvilla.repository.UserRepository;
 import mk.ukim.finki.wp.macvilla.service.UserService;
 import org.apache.logging.log4j.util.Supplier;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,14 +31,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> register(String username, String password, String name, String surname, String email, String avatarURL) {
+    public Optional<User> register(String username, String password, String name, String surname, String email,
+                                   String avatarURL, String birthday, String address, String role) {
         // we don't check if params are provided, because we require them to be provided
         // required in controller, and required in HTML
         // we check only for avatarURL, because it is not required
         if(avatarURL==null || avatarURL.isEmpty()){
             avatarURL = "";
         }
-        return Optional.of(this.userRepository.save(new User(username, password, name, surname, email, avatarURL)));
+
+        // check if username exists first, no duplicate usernames allowed
+        if(this.userRepository.findByUsername(username).isPresent()){
+            throw new UsernameTakenException();
+        }
+
+        if(!role.isEmpty() && role.equals("ROLE_CLIENT")){
+            return Optional.of(this.userRepository.save(new Client(username, password, name, surname, email,
+                    avatarURL, new Date(birthday), address)));
+        }else {
+            return Optional.of(this.userRepository.save(new User(username, password, name, surname, email, avatarURL)));
+        }
     }
 
     @Override

@@ -1,0 +1,69 @@
+#place_pic {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-image: url("../img/place-1.jpg");
+}
+
+#place_pic #heart_icon {
+  position: absolute;
+  left: 90%;
+}
+
+#place_pic #heart_icon:hover {
+  color: crimson;
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+}
+
+#place_pic #title {
+  /* width: 50%;  */
+  height: 15%;
+  /* background-color: red; */
+  position: absolute;
+  top: 70%;
+  font-size: 50px;
+  color: white;
+}
+
+#place_pic #row_desc_rating {
+  position: relative;
+  top: 85%;
+}
+
+#place_pic #desc {
+  height: 10%;
+  /* background-color: blue; */
+  font-size: 30px;
+  color: white;
+}
+
+#place_pic #rating {
+  height: 10%;
+  /* background-color: green; */
+  font-size: 30px;
+  color: white;
+  text-align: end;
+}
+
+#place_main {
+  min-height: 27vh;
+  width: 100%;
+  /* background-color: gray; */
+  border: 1px solid gray;
+}
+
+#place_main .column p {
+  color: black;
+  font-size: 2rem;
+}
+
+#place_main #map {
+  text-align: end;
+  position: relative;
+  top: 5%;
+}
+/*# sourceMappingURL=place.css.map */
