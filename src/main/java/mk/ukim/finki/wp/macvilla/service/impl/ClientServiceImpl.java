@@ -2,6 +2,8 @@ package mk.ukim.finki.wp.macvilla.service.impl;
 
 import mk.ukim.finki.wp.macvilla.model.Client;
 import mk.ukim.finki.wp.macvilla.model.Place;
+import mk.ukim.finki.wp.macvilla.model.User;
+import mk.ukim.finki.wp.macvilla.model.exceptions.ClientNotFoundException;
 import mk.ukim.finki.wp.macvilla.repository.ClientRepository;
 import mk.ukim.finki.wp.macvilla.service.ClientService;
 import org.springframework.stereotype.Service;
@@ -49,5 +51,10 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Optional<Client> findByAddressLike(String address) {
         return this.clientRepository.findByAddressLike(address);
+    }
+
+    @Override
+    public User findById(Long id) {
+        return this.clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(id));
     }
 }

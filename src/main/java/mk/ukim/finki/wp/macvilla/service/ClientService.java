@@ -2,7 +2,8 @@ package mk.ukim.finki.wp.macvilla.service;
 
 import mk.ukim.finki.wp.macvilla.model.Client;
 import mk.ukim.finki.wp.macvilla.model.Place;
-import java.util.List;
+import mk.ukim.finki.wp.macvilla.model.User;
+
 import java.util.Optional;
 
 public interface ClientService {
@@ -10,4 +11,5 @@ public interface ClientService {
     Optional<Place> addToFavoritePlaces(Client client, Place place);
     Optional<Client> findByAddress(String address);
     Optional<Client> findByAddressLike(String address);
+    User findById(Long id);
 }

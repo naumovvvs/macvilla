@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,13 +45,13 @@ public class MacvillaApplication {
 //        CoordinatesRepository coordinatesRepository =
 //                configurableApplicationContext.getBean(CoordinatesRepository.class);
 
-        User user = new User("sn", "pas1", "Strasho", "Naumov", "strase10naumov@outlook.com", "#URL");
+        User user = new User("sn", "pas1", "Strasho", "Naumov", "strase10naumov@outlook.com", "~/img/straso_naumov");
 
-        User client = new Client("sn", "pas1", "Strasho", "Naumov", "strase10naumov@outlook.com", "#URL", null,"Vano Gunev");
+        User client = new Client("sn", "pas1", "Strasho", "Naumov", "strase10naumov@outlook.com", "~/img/straso_naumov", null,"Vano Gunev");
 
-        User hotelier = new Hotelier("sn", "pas1", "Strasho", "Naumov", "strase10naumov@outlook.com", "#URL");
+        User hotelier = new Hotelier("sn", "pas1", "Strasho", "Naumov", "strase10naumov@outlook.com", "~/img/straso_naumov");
 
-        User administrator = new Administrator("sn", "pas1", "Strasho", "Naumov", "strase10naumov@outlook.com", "#URL");
+        User administrator = new Administrator("sn", "pas1", "Strasho", "Naumov", "strase10naumov@outlook.com", "~/img/straso_naumov");
 
 
         userRepository.save(user);
@@ -127,6 +128,18 @@ public class MacvillaApplication {
         placeRepository.save(place2);
         placeRepository.save(place3);
         placeRepository.save(place4);
+
+//        List<Place> placeList = new ArrayList<>();
+//        placeList.add(new Place((Hotelier) hotelier, city1, "Place1 Name", "Place Description", "Adresa 1",
+//                "076/742-222", 599, category, images1,
+//                image1));
+//        placeList.add(new Place((Hotelier) hotelier, city1, "Place2 Name", "Place2 Description", "Adresa 2",
+//                "076/742-222", 799, category, images2,
+//                image2));
+//        User clientWithPlaces = new Client("sn", "pas1", "Strasho", "Naumov", "strase10naumov@outlook.com",
+//                "#URL", null,"Vano Gunev", placeList);
+//
+//        clientRepository.save(clientWithPlaces);
     }
 
 //    @Bean

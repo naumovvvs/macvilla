@@ -20,6 +20,26 @@ public class HomeController {
         return "master-template";
     }
 
+    @GetMapping(value = {"/about-us"})
+    public String getAboutUsPage(Model model){
+        model.addAttribute("headTitle", "About Us");
+        model.addAttribute("style1", "navbar.css");
+        model.addAttribute("style2", "about-us.css");
+        model.addAttribute("style3", "footer.css");
+        model.addAttribute("bodyContent", "about-us");
+        return "master-template";
+    }
+
+    @GetMapping(value = {"/contact"})
+    public String getContactPage(Model model){
+        model.addAttribute("headTitle", "Contact");
+        model.addAttribute("style1", "navbar.css");
+        model.addAttribute("style2", "contact.css");
+        model.addAttribute("style3", "footer.css");
+        model.addAttribute("bodyContent", "contact");
+        return "master-template";
+    }
+
     @GetMapping("access_denied")
     public String getAccessDeniedPage(Model model){
         // TODO: make access_denied page
