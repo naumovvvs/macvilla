@@ -2,20 +2,24 @@ package mk.ukim.finki.wp.macvilla.service.impl;
 
 import mk.ukim.finki.wp.macvilla.model.City;
 import mk.ukim.finki.wp.macvilla.model.Place;
-import mk.ukim.finki.wp.macvilla.model.exceptions.CityNotFoundException;
 import mk.ukim.finki.wp.macvilla.repository.CityRepository;
+import mk.ukim.finki.wp.macvilla.repository.PlaceRepository;
 import mk.ukim.finki.wp.macvilla.service.CityService;
+import mk.ukim.finki.wp.macvilla.service.PlaceService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
+    private final PlaceRepository placeRepository;
 
-    public CityServiceImpl(CityRepository cityRepository) {
+    public CityServiceImpl(CityRepository cityRepository, PlaceRepository placeRepository) {
         this.cityRepository = cityRepository;
+        this.placeRepository = placeRepository;
     }
 
     @Override
@@ -35,8 +39,7 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public List<Place> listAllPlacesInCity(Long cityId) {
-        City city = this.cityRepository.findById(cityId).orElseThrow(() -> new CityNotFoundException(cityId));
-        return city.getListPlaces();
+        return this.placeRepository.findAll().stream().filter(x-> x.getCity().getCityId().equals(cityId)).collect(Collectors.toList());
     }
 
     @Override

@@ -14,17 +14,17 @@ public class City {
     private Long cityId;
     private String name;
     private String description;
-    // list of places in a specific city
-    @OneToMany(mappedBy = "city", fetch = FetchType.EAGER)
-    private List<Place> listPlaces;
+//    // list of places in a specific city
+//    @OneToMany(mappedBy = "city", fetch = FetchType.EAGER)
+//    private List<Place> listPlaces;
 
     public City(){
-        this.listPlaces = new ArrayList<>();
+        //this.listPlaces = new ArrayList<>();
     }
 
     public City(String name, String description) {
         this.name = name;
         this.description = description;
-        this.listPlaces = new ArrayList<>();
+        //this.listPlaces = new ArrayList<>();
     }
 }

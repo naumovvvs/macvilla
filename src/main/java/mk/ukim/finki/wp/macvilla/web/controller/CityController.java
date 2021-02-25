@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = {"/city"})
+@RequestMapping("/city")
 public class CityController {
     private final CityService cityService;
 
@@ -18,12 +18,12 @@ public class CityController {
         this.cityService = cityService;
     }
 
-    @GetMapping(value = {""})
-    public String getCityPage(Model model){
+    @GetMapping("/{id}")
+    public String getCityPage(@PathVariable Long id, Model model){
         //List<Place> listPlaces = this.cityService.listAllPlacesInCity(id);
 
         //model.addAttribute("headTitle", this.cityService.findById(id).get().getName());
-        model.addAttribute("headTitle", "TITLE");
+        model.addAttribute("headTitle", "City");
         model.addAttribute("bodyContent", "city");
         model.addAttribute("style1", "city.css");
         model.addAttribute("style2", "navbar.css");

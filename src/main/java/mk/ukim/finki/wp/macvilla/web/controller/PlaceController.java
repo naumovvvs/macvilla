@@ -18,7 +18,7 @@ public class PlaceController {
         this.placeService = placeService;
     }
 
-    @GetMapping(value = {"/place/{id}"})
+    @GetMapping(value = {"/{id}"})
     public String getPlacePage(@PathVariable Long id, Model model){
         model.addAttribute("style1", "place.css");
         model.addAttribute("style2", "navbar.css");
@@ -26,9 +26,6 @@ public class PlaceController {
 
         model.addAttribute("headTitle", "Place");
         model.addAttribute("bodyContent", "place");
-
-        Optional<Place> place = this.placeService.findById(id);
-
 
         return "master-template";
     }
