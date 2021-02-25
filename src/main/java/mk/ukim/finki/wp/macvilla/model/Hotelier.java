@@ -2,6 +2,7 @@ package mk.ukim.finki.wp.macvilla.model;
 
 import lombok.Data;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +11,11 @@ import java.util.List;
 @Entity
 public class Hotelier extends User{
     // list of places that the manager manages
-    @OneToMany
+    @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER)
     private List<Place> managedPlaces;
 
     // list of requests made by the manager
-    @OneToMany
+    @OneToMany(mappedBy = "requestAuthor", fetch = FetchType.EAGER)
     private List<Request> madeRequests;
 
     public Hotelier(){

@@ -15,7 +15,7 @@ public class City {
     private String name;
     private String description;
     // list of places in a specific city
-    @OneToMany
+    @OneToMany(mappedBy = "city", fetch = FetchType.EAGER)
     private List<Place> listPlaces;
 
     public City(){
