@@ -1,7 +1,6 @@
 package mk.ukim.finki.wp.macvilla.service;
 
 import mk.ukim.finki.wp.macvilla.model.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,5 +19,8 @@ public interface HotelierService {
     Place updatePlace(Long placeId, Long managerId, Long cityId, String name, String description,
                                 String address, String telephoneNumber, Integer price, Long categoryId,
                                 List<Image> gallery, Image thumbnail);
-    Optional<User> findById(Long managerId);
+
+    User findById(Long managerId);
+
+    User save(Long id, String username, String password, String name, String surname, String email, String avatarURL);
 }

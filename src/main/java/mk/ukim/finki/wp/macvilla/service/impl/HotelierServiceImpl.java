@@ -8,7 +8,12 @@ import mk.ukim.finki.wp.macvilla.model.exceptions.PlaceNotFoundException;
 import mk.ukim.finki.wp.macvilla.repository.HotelierRepository;
 import mk.ukim.finki.wp.macvilla.service.*;
 import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -50,8 +55,16 @@ public class HotelierServiceImpl implements HotelierService {
     }
 
     @Override
-    public Optional<User> findById(Long managerId) {
-        return this.hotelierRepository.findById(managerId);
+    public User findById(Long managerId) {
+        return this.hotelierRepository.findById(managerId).orElseThrow(() -> new HotelierNotFoundException(managerId));
+    }
+
+    @Override
+    public User save(Long id, String username, String password, String name, String surname,
+                     String email, String avatarURL) {
+        this.hotelierRepository.deleteById(id);
+        User hotelier = new Hotelier(username, password, name, surname, email, avatarURL);
+        return this.hotelierRepository.save(hotelier);
     }
 
     @Override

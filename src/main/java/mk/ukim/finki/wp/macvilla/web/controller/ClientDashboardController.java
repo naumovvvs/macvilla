@@ -7,10 +7,7 @@ import mk.ukim.finki.wp.macvilla.service.ClientService;
 import mk.ukim.finki.wp.macvilla.service.PlaceService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,5 +61,17 @@ public class ClientDashboardController {
         } else {
             return "redirect:/dashboard/client?error=No place found with the given id to remove!";
         }
+    }
+
+    @PostMapping("/client/{id}/edit")
+    public String updateClient(
+            @PathVariable Long id,
+            @RequestParam String name, @RequestParam String surname,
+            @RequestParam String username,  @RequestParam String password,
+            @RequestParam String city, @RequestParam String email,
+            @RequestParam String thumbnail, @RequestParam String birthDate) {
+
+        this.clientService.save(id, username, password, name, surname, email, thumbnail, birthDate, city);
+        return "redirect:/home";
     }
 }

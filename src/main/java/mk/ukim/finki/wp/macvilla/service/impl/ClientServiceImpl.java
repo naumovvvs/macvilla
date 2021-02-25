@@ -8,8 +8,13 @@ import mk.ukim.finki.wp.macvilla.repository.ClientRepository;
 import mk.ukim.finki.wp.macvilla.service.ClientService;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -56,5 +61,25 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public User findById(Long id) {
         return this.clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(id));
+    }
+
+    @Override
+    public List<User> findAllBlockedUsers() {
+        return this.clientRepository.findAll().stream().filter(User::isBlocked).collect(Collectors.toList());
+    }
+
+    @Override
+    public User save(Long id, String username, String password, String name, String surname, String email,
+                     String avatarURL, String birthDate, String address) {
+        this.clientRepository.deleteById(id);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date date = null;
+        try {
+            date = formatter.parse(birthDate);
+        } catch (ParseException exception) {
+//            TODO:
+        }
+        User client = new Client(username, password, name, surname, email, avatarURL, date, address);
+        return this.clientRepository.save(client);
     }
 }

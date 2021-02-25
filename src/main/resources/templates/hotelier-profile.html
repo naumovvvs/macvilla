@@ -1,17 +1,4 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
-<!--    <title>Hotelier profile</title>-->
-
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"-->
-<!--          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
-<!--    <link rel="stylesheet" href="styles/hotelier-profile.css">-->
-<!--</head>-->
-<!--<body>-->
-
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <div class="row gutters">
         <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
@@ -19,15 +6,11 @@
                     <div class="account-settings">
                         <div class="user-profile">
                             <div class="user-avatar">
-                                <img src="https://webstockreview.net/images/robot-clipart-robot-head-2.jpg" alt="User picture">
+                                <img th:src="@{ ${hotelier.avatarURL} }"
+                                     alt="User picture">
                             </div>
-                            <h5 class="user-name">Jelena Ognjanoska</h5>
-                            <h6 class="user-email">jelena.ognjanoska@domain.com</h6>
-                        </div>
-                        <div class="about">
-                            <h5>About me</h5>
-                            <p>Full Stack Designer I enjoy creating user-centric, delightful and human
-                                experiences.</p>
+                            <h5 class="user-name" th:text="${hotelier.name} + ' ' + ${hotelier.surname}"></h5>
+                            <h6 class="user-email" th:text="${hotelier.email}"></h6>
                         </div>
                     </div>
                 </div>
@@ -35,88 +18,127 @@
         </div>
         <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
-                <div class="card-body">
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h6 class="mb-2 text-primary">Personal details</h6>
-                            <hr/>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="fullName">Full name</label>
-                                <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                <form th:method="POST" th:action="@{'/dashboard/hotelier/{id}/edit' (id=${hotelier.userId})}">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mb-2 text-primary">Personal details</h6>
+                                <hr/>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="name"
+                                            name="name"
+                                            placeholder="Enter name"
+                                            th:value="${hotelier.name}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="username"
+                                            name="username"
+                                            placeholder="Enter username"
+                                            th:value="${hotelier.username}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="surname">Surname</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="surname"
+                                            name="surname"
+                                            placeholder="Enter surname"
+                                            th:value="${hotelier.surname}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email"
+                                           class="form-control"
+                                           id="email"
+                                           name="email"
+                                           placeholder="Enter email"
+                                           th:value="${hotelier.email}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input
+                                            type="password"
+                                            class="form-control"
+                                            id="password"
+                                            name="password"
+                                            placeholder="Enter password"
+                                            th:value="${hotelier.password}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="thumbnail">Thumbnail</label>
+                                    <input type="file"
+                                           class="form-control-file"
+                                           id="thumbnail"
+                                           name="thumbnail"
+                                           aria-describedby="fileHelp">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" placeholder="Enter username">
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mt-3 mb-3 text-primary">Managed places</h6>
+                                <hr/>
                             </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="eMail">Email</label>
-                                <input type="email" class="form-control" id="eMail" placeholder="Enter email">
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="text" class="form-control" id="password" placeholder="Enter password">
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="thumbnail">Thumbnail</label>
-                                <input type="file" class="form-control-file" id="thumbnail" aria-describedby="fileHelp">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h6 class="mt-3 mb-3 text-primary">Managed places</h6>
-                            <hr/>
-                        </div>
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-1">List group item heading</h6>
-                                        <button class="btn btn-outline-danger btn-sm">Remove</button>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="list-group" th:if="${hotelier.managedPlaces.size() > 0}">
+
+                                    <div th:each="place: ${hotelier.managedPlaces}"
+                                       th:href="@{'/place/{id}' ( id=${place.placeId} ) }"
+                                       class="list-group-item list-group-item-action"
+                                       aria-current="true">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1" th:text="${place.name}"></h6>
+
+                                            <a th:href="@{'/dashboard/hotelier/{id}/remove-place/{placeId}' ( id=${hotelier.userId}, placeId=${place.placeId} ) }"
+                                               class="btn btn-outline-danger btn-sm">
+                                                Remove
+                                            </a>
+
+                                        </div>
+                                        <p class="mb-1">
+                                            <th:block th:text="${place.rating}"/>
+                                            | <small>Number of visits:
+                                            <th:block th:text="${place.visits}"/>
+                                        </small></p>
                                     </div>
-                                    <p class="mb-1">Rating | <small>Number of visits:</small> </p>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-1">List group item heading</h6>
-                                        <button class="btn btn-outline-danger btn-sm">Remove</button>
-                                    </div>
-                                    <p class="mb-1">Rating | <small>Number of visits:</small> </p>
-                                </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-0">
+                                <div class="text-right">
+                                    <a type="button" class="btn btn-secondary" th:href="@{ '/home' }">Cancel</a>
+                                    <button class="btn btn-primary" type="submit">
+                                        Update
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-0">
-                            <div class="text-right">
-                                <button type="button" name="submit" class="btn btn-secondary">Cancel</button>
-                                <button type="button" name="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
-<!--&lt;!&ndash; Optional JavaScript &ndash;&gt;-->
-<!--&lt;!&ndash; jQuery first, then Bootstrap JS &ndash;&gt;-->
-<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"-->
-<!--        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"-->
-<!--        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--</body>-->
-<!--</html>-->
