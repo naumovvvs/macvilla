@@ -74,7 +74,7 @@ public class HotelierServiceImpl implements HotelierService {
     @Override
     public Place addPlace(Long managerId, Long cityId, String name, String description, String address,
                           String telephoneNumber, Integer price, Long categoryId, List<Image> gallery,
-                          Image thumbnail, Coordinates map) {
+                          Image thumbnail) {
         Optional<User> hotelier = this.userService.findById(managerId);
 
         if(hotelier.isPresent()){
@@ -85,7 +85,7 @@ public class HotelierServiceImpl implements HotelierService {
                     .orElseThrow(() -> new CategoryNotFoundException(categoryId));
 
             return this.placeService.save(managerId, cityId, name, description, address, telephoneNumber,
-                    price, categoryId, gallery, thumbnail, map);
+                    price, categoryId, gallery, thumbnail);
         } else {
             throw new HotelierNotFoundException(managerId);
         }
@@ -94,7 +94,7 @@ public class HotelierServiceImpl implements HotelierService {
     @Override
     public Place updatePlace(Long placeId, Long managerId, Long cityId, String name, String description,
                                        String address, String telephoneNumber, Integer price, Long categoryId,
-                                       List<Image> gallery, Image thumbnail, Coordinates map) {
+                                       List<Image> gallery, Image thumbnail) {
 
         Optional<User> hotelier = this.userService.findById(managerId);
 
@@ -117,7 +117,7 @@ public class HotelierServiceImpl implements HotelierService {
             managedPlace.setPrice(price);
             managedPlace.setGallery(gallery);
             managedPlace.setThumbnail(thumbnail);
-            managedPlace.setMap(map);
+//            managedPlace.setMap(map);
 
             return managedPlace;
         } else {

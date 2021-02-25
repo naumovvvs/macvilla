@@ -39,7 +39,7 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public Place save(Long managerId, Long cityId, String name, String description, String address,
                       String telephoneNumber, Integer price, Long categoryId, List<Image> gallery,
-                      Image thumbnail, Coordinates map) {
+                      Image thumbnail) {
 
         Hotelier hotelier = (Hotelier) this.userService.findById(managerId)
                 .orElseThrow(() -> new HotelierNotFoundException(managerId));
@@ -51,12 +51,12 @@ public class PlaceServiceImpl implements PlaceService {
                 .findById(cityId).orElseThrow(() -> new CityNotFoundException(cityId));
 
         return this.placeRepository.save(new Place(hotelier, city, name, description, address, telephoneNumber,
-                price, category, gallery, thumbnail, map));
+                price, category, gallery, thumbnail));
     }
 
     @Override
     public Place update(Long placeId, Long cityId, String name, String description, String address, String telephoneNumber,
-                        Integer price, Long categoryId, List<Image> gallery, Image thumbnail, Coordinates map) {
+                        Integer price, Long categoryId, List<Image> gallery, Image thumbnail) {
 
         Place place = this.placeRepository.findById(placeId).orElseThrow(() -> new PlaceNotFoundException(placeId));
 
@@ -74,7 +74,7 @@ public class PlaceServiceImpl implements PlaceService {
 
         place.setGallery(gallery);
         place.setThumbnail(thumbnail);
-        place.setMap(map);
+//        place.setMap(map);
 
         return this.placeRepository.save(place);
     }

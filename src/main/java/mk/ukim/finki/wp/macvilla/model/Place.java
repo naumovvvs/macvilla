@@ -34,7 +34,7 @@ public class Place {
     private Image thumbnail;
     // number of clicks
     private Integer visits;
-    // coordinates of place
+//    // coordinates of place
     @OneToOne
     private Coordinates map;
 
@@ -44,7 +44,7 @@ public class Place {
 
     public Place(Hotelier manager, City city, String name, String description, String address,
                  String telephoneNumber, Integer price, Category category,
-                 List<Image> gallery, Image thumbnail, Coordinates map) {
+                 List<Image> gallery, Image thumbnail) {
         this.manager = manager;
         this.city = city;
         this.name = name;
@@ -55,7 +55,7 @@ public class Place {
         this.category = category;
         this.gallery = gallery;
         this.thumbnail = thumbnail;
-        this.map = map;
+//        this.map = map;
         this.visits = 0;
         this.rating = 0.0F;
     }

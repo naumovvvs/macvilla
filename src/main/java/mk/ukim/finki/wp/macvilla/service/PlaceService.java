@@ -1,6 +1,5 @@
 package mk.ukim.finki.wp.macvilla.service;
 
-import mk.ukim.finki.wp.macvilla.model.Coordinates;
 import mk.ukim.finki.wp.macvilla.model.Image;
 import mk.ukim.finki.wp.macvilla.model.Place;
 import java.util.List;
@@ -20,8 +19,8 @@ public interface PlaceService {
 
     Place save(Long managerId, Long cityId, String name, String description, String address,
                String telephoneNumber, Integer price, Long categoryId, List<Image> gallery,
-               Image thumbnail, Coordinates map);
+               Image thumbnail);
 
     Place update(Long placeId, Long cityId, String name, String description, String address, String telephoneNumber,
-                 Integer price, Long categoryId, List<Image> gallery, Image thumbnail, Coordinates map);
+                 Integer price, Long categoryId, List<Image> gallery, Image thumbnail);
 }

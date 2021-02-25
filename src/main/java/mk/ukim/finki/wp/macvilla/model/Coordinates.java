@@ -12,16 +12,15 @@ public class Coordinates {
     private Long coordinatesId;
     private Float latitude;
     private Float longitude;
-    // FK to the place for which the coordinates are for
-    @OneToOne
-    private Place place;
+//    // FK to the place for which the coordinates are for
+//    @OneToOne
+//    private Place place;
 
     public Coordinates() {
     }
 
-    public Coordinates(Float latitude, Float longitude, Place place){
+    public Coordinates(Float latitude, Float longitude){
         this.latitude = latitude;
         this.longitude = longitude;
-        this.place = place;
     }
 }
