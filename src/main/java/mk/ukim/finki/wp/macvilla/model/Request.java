@@ -10,7 +10,7 @@ import java.util.Date;
 @Entity
 public class Request {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long requestId;
 
     // author of the request (manager)

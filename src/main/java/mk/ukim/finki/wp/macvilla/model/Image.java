@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Entity
 public class Image {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
     private String imageURL;
     private String description;

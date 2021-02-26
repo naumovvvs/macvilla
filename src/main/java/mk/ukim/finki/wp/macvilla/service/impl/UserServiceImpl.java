@@ -1,25 +1,37 @@
 package mk.ukim.finki.wp.macvilla.service.impl;
 
 import mk.ukim.finki.wp.macvilla.model.Client;
+import mk.ukim.finki.wp.macvilla.model.Hotelier;
 import mk.ukim.finki.wp.macvilla.model.User;
 import mk.ukim.finki.wp.macvilla.model.exceptions.InvalidUserIdException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.InvalidUsernameOrPasswordException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.UsernameTakenException;
+import mk.ukim.finki.wp.macvilla.repository.ClientRepository;
+import mk.ukim.finki.wp.macvilla.repository.HotelierRepository;
 import mk.ukim.finki.wp.macvilla.repository.UserRepository;
 import mk.ukim.finki.wp.macvilla.service.UserService;
-import org.apache.logging.log4j.util.Supplier;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final ClientRepository clientRepository;
+    private final HotelierRepository hotelierRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, ClientRepository clientRepository, HotelierRepository hotelierRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.clientRepository = clientRepository;
+        this.hotelierRepository = hotelierRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -46,10 +58,12 @@ public class UserServiceImpl implements UserService {
         }
 
         if(!role.isEmpty() && role.equals("ROLE_CLIENT")){
-            return Optional.of(this.userRepository.save(new Client(username, password, name, surname, email,
-                    avatarURL, new Date(birthday), address)));
+            LocalDate date = LocalDate.parse(birthday);
+            return Optional.of(this.clientRepository.save(new Client(username, passwordEncoder.encode(password), name, surname, email,
+                    avatarURL, date, address)));
         }else {
-            return Optional.of(this.userRepository.save(new User(username, password, name, surname, email, avatarURL)));
+            return Optional.of(this.hotelierRepository.save(
+                    new Hotelier(username, passwordEncoder.encode(password), name, surname, email, avatarURL)));
         }
     }
 
@@ -74,8 +88,13 @@ public class UserServiceImpl implements UserService {
 
         User user = this.userRepository.findById(userId).orElseThrow(() -> new InvalidUserIdException(userId));
 
+        //UserDetails userDetails = this.loadUserByUsername(username);
+
+        if(!passwordEncoder.matches(password, user.getPassword())){
+            user.setPassword(passwordEncoder.encode(password));
+        }
+
         user.setUsername(username);
-        user.setPassword(password);
         user.setName(name);
         user.setSurname(surname);
         user.setEmail(email);
@@ -101,5 +120,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllBlockedUsers() {
         return this.userRepository.findAllByBlockedTrue();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return userRepository.findByUsername(s).orElseThrow(() -> new UsernameNotFoundException(s));
+    }
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }

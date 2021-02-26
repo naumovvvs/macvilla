@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
@@ -32,9 +33,11 @@ public class LoginController {
         return "master-template";
     }
 
-    @PostMapping
-    public String login(HttpServletRequest request, Model model){
+    @PostMapping("")
+    public String login(@RequestParam String username, @RequestParam String password, HttpServletRequest request, Model model){
         Optional<User> user = Optional.empty();
+
+        System.out.println("VLEGUVA");
 
         try {
             user = this.userService.login(request.getParameter("username"), request.getParameter("password"));

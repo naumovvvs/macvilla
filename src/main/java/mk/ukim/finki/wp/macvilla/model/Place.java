@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 public class Place {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long placeId;
     // FK to the manager that registered the place
     @ManyToOne
