@@ -35,10 +35,10 @@ public class RegisterController {
     @PostMapping
     public String register(@RequestParam String username, @RequestParam String password, @RequestParam String name,
                            @RequestParam String surname, @RequestParam String email, @RequestParam String address,
-                           @RequestParam String bdate){
+                           @RequestParam String bdate, @RequestParam String role){
 
         try {
-            this.userService.register(username, password, name, surname, email, "/", bdate, address, "ROLE_CLIENT");
+            this.userService.register(username, password, name, surname, email, "/", bdate, address, role);
         }catch (Exception ex){
             System.out.println(ex.getMessage());
             return "redirect:/register?error="+ex.getMessage();

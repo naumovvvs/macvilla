@@ -101,7 +101,7 @@
                                 <hr/>
                             </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="list-group" th:if="${hotelier.managedPlaces.size() > 0}">
+                                <div class="list-group" th:if="${managedPlaces.size() > 0}">
 
                                     <div th:each="place: ${hotelier.managedPlaces}"
                                        th:href="@{'/place/{id}' ( id=${place.placeId} ) }"

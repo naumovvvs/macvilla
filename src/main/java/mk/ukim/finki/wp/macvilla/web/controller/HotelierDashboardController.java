@@ -39,6 +39,7 @@ public class HotelierDashboardController {
             return "redirect:/dashboard/hotelier?error=" + exception.getMessage();
         }
 
+
         List<Place> managedPlaces = this.placeService.listAllPlaces()
                 .stream().filter(p -> p.getManager().getUserId().equals(id)).collect(Collectors.toList());
         model.addAttribute("hotelier", hotelier);

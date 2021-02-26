@@ -1,15 +1,11 @@
 package mk.ukim.finki.wp.macvilla;
 
-import mk.ukim.finki.wp.macvilla.model.*;
-import mk.ukim.finki.wp.macvilla.repository.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class MacvillaApplication {
@@ -142,9 +138,9 @@ public class MacvillaApplication {
 ////        clientRepository.save(clientWithPlaces);
     }
 
-//    @Bean
-//    PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder(10);
-//    }
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10);
+    }
 
 }

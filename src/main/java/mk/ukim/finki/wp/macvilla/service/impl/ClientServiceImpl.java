@@ -6,22 +6,22 @@ import mk.ukim.finki.wp.macvilla.model.User;
 import mk.ukim.finki.wp.macvilla.model.exceptions.ClientNotFoundException;
 import mk.ukim.finki.wp.macvilla.repository.ClientRepository;
 import mk.ukim.finki.wp.macvilla.service.ClientService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public ClientServiceImpl(ClientRepository clientRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository, PasswordEncoder passwordEncoder) {
         this.clientRepository = clientRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -72,14 +72,9 @@ public class ClientServiceImpl implements ClientService {
     public User save(Long id, String username, String password, String name, String surname, String email,
                      String avatarURL, String birthDate, String address) {
         this.clientRepository.deleteById(id);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        Date date = null;
-        try {
-            date = formatter.parse(birthDate);
-        } catch (ParseException exception) {
-//            TODO:
-        }
-        User client = new Client(username, password, name, surname, email, avatarURL, date, address);
+
+        LocalDate birthday = LocalDate.parse(birthDate);
+        User client = new Client(username, passwordEncoder.encode(password), name, surname, email, avatarURL, birthday, address);
         return this.clientRepository.save(client);
     }
 }
