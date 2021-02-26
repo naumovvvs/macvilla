@@ -203,13 +203,13 @@
                             <div v-bind:id="'placeCarousel' + place.placeId" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <img v-bind:src="'/' + place.thumbnail.imageURL" class="d-block w-100" alt="...">
+                                        <img v-bind:src="'' + place.thumbnail.imageURL" class="d-block w-100" alt="...">
                                     </div>
                                     <div class="carousel-item">
-                                        <img v-bind:src="'/' + place.gallery[0].imageURL" class="d-block w-100" alt="...">
+                                        <img v-bind:src="'' + place.gallery[0].imageURL" class="d-block w-100" alt="...">
                                     </div>
                                     <div class="carousel-item">
-                                        <img v-bind:src="'/' + place.gallery[0].imageURL" class="d-block w-100" alt="...">
+                                        <img v-bind:src="'' + place.gallery[0].imageURL" class="d-block w-100" alt="...">
                                     </div>
                                 </div>
                                 <button class="carousel-control-prev" type="button" v-bind:data-bs-target="'placeCarousel' + place.placeId"  data-bs-slide="prev">
@@ -222,7 +222,7 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- End of carousel -->
+<!--                         End of carousel-->
                     </div>
                 </div>
                 <!-- End of card -->
@@ -236,9 +236,25 @@
 </div>
 
 <script>
-    const apiURL1 = "http://localhost:8080/api/city/6/info";
-    const apiURL2 = "http://localhost:8080/api/city/6/places";
-    new Vue({
+    let path = window.location.pathname;
+    let pom = "";
+
+    for(var i=path.length-1; i>=0; i--){
+        if(path[i]==="/")
+            break;
+
+        pom = pom + path[i];
+    }
+
+    var split = pom.split("");
+    var reverse = split.reverse();
+    var id = reverse.join("");
+
+
+    const apiURL1 = "http://localhost:8080/api/city/" + id + "/info";
+    const apiURL2 = "http://localhost:8080/api/city/" + id + "/places";
+
+    var vm = new Vue({
         el: "#app",
         data(){
             return{

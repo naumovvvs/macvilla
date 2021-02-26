@@ -10,8 +10,9 @@ import java.util.List;
 @Entity
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cityId;
+
     private String name;
     private String description;
 //    // list of places in a specific city

@@ -7,9 +7,10 @@ import javax.persistence.*;
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String username;
     private String password;

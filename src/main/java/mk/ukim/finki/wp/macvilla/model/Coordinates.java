@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class Coordinates {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long coordinatesId;
     private Float latitude;
     private Float longitude;
