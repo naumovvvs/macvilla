@@ -3,6 +3,7 @@ package mk.ukim.finki.wp.macvilla.service.impl;
 import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.model.Request;
 import mk.ukim.finki.wp.macvilla.model.enums.RequestStatus;
+import mk.ukim.finki.wp.macvilla.model.exceptions.RequestNotFoundException;
 import mk.ukim.finki.wp.macvilla.repository.RequestRepository;
 import mk.ukim.finki.wp.macvilla.service.RequestService;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,10 @@ public class RequestServiceImpl implements RequestService {
     public Optional<Request> addTo(Request request) {
         this.requestRepository.save(request);
         return Optional.of(request);
+    }
+
+    @Override
+    public Request findById(Long id) {
+        return this.requestRepository.findById(id).orElseThrow(() -> new RequestNotFoundException(id));
     }
 }

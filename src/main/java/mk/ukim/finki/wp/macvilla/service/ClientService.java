@@ -3,7 +3,6 @@ package mk.ukim.finki.wp.macvilla.service;
 import mk.ukim.finki.wp.macvilla.model.Client;
 import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.model.User;
-
 import java.util.List;
 import java.util.Optional;
 

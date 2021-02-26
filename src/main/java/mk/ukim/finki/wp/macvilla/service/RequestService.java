@@ -15,4 +15,5 @@ public interface RequestService {
     Optional<Request> removeFrom(Request request);
     // adds a request
     Optional<Request> addTo(Request request);
+    Request findById(Long id);
 }
