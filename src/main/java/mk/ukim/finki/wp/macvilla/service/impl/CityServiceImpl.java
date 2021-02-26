@@ -1,6 +1,7 @@
 package mk.ukim.finki.wp.macvilla.service.impl;
 
 import mk.ukim.finki.wp.macvilla.model.City;
+import mk.ukim.finki.wp.macvilla.model.Image;
 import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.repository.CityRepository;
 import mk.ukim.finki.wp.macvilla.repository.PlaceRepository;
@@ -28,8 +29,8 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City save(String name, String description) {
-        return this.cityRepository.save(new City(name, description));
+    public City save(String name, String description, Image image) {
+        return this.cityRepository.save(new City(name, description, image));
     }
 
     @Override

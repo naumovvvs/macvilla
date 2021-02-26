@@ -5,7 +5,6 @@ import mk.ukim.finki.wp.macvilla.model.exceptions.*;
 import mk.ukim.finki.wp.macvilla.repository.PlaceRepository;
 import mk.ukim.finki.wp.macvilla.service.*;
 import org.springframework.stereotype.Service;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +37,7 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public Place save(Long managerId, Long cityId, String name, String description, String address,
-                      String telephoneNumber, Integer price, Long categoryId, List<Image> gallery,
+                      String telephoneNumber, Long categoryId, List<Image> gallery,
                       Image thumbnail) {
 
         Hotelier hotelier = (Hotelier) this.userService.findById(managerId)
@@ -51,12 +50,12 @@ public class PlaceServiceImpl implements PlaceService {
                 .findById(cityId).orElseThrow(() -> new CityNotFoundException(cityId));
 
         return this.placeRepository.save(new Place(hotelier, city, name, description, address, telephoneNumber,
-                price, category, gallery, thumbnail));
+                category, gallery, thumbnail));
     }
 
     @Override
     public Place update(Long placeId, Long cityId, String name, String description, String address, String telephoneNumber,
-                        Integer price, Long categoryId, List<Image> gallery, Image thumbnail) {
+                        Long categoryId, List<Image> gallery, Image thumbnail) {
 
         Place place = this.placeRepository.findById(placeId).orElseThrow(() -> new PlaceNotFoundException(placeId));
 
@@ -67,7 +66,6 @@ public class PlaceServiceImpl implements PlaceService {
         place.setDescription(description);
         place.setAddress(address);
         place.setTelephoneNumber(telephoneNumber);
-        place.setPrice(price);
 
         Category category = this.categoryService.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException(categoryId));
         place.setCategory(category);

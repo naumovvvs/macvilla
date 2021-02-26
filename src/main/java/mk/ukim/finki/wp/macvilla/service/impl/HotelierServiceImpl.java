@@ -98,7 +98,7 @@ public class HotelierServiceImpl implements HotelierService {
                     .orElseThrow(() -> new CategoryNotFoundException(categoryId));
 
             return this.placeService.save(managerId, cityId, name, description, address, telephoneNumber,
-                    price, categoryId, gallery, thumbnail);
+                    categoryId, gallery, thumbnail);
         } else {
             throw new HotelierNotFoundException(managerId);
         }
@@ -127,7 +127,6 @@ public class HotelierServiceImpl implements HotelierService {
             managedPlace.setDescription(description);
             managedPlace.setAddress(address);
             managedPlace.setTelephoneNumber(telephoneNumber);
-            managedPlace.setPrice(price);
             managedPlace.setGallery(gallery);
             managedPlace.setThumbnail(thumbnail);
 //            managedPlace.setMap(map);

@@ -15,6 +15,9 @@ public class City {
 
     private String name;
     private String description;
+
+    @OneToOne
+    private Image thumbnail;
 //    // list of places in a specific city
 //    @OneToMany(mappedBy = "city", fetch = FetchType.EAGER)
 //    private List<Place> listPlaces;
@@ -23,9 +26,10 @@ public class City {
         //this.listPlaces = new ArrayList<>();
     }
 
-    public City(String name, String description) {
+    public City(String name, String description, Image image) {
         this.name = name;
         this.description = description;
+        this.thumbnail = image;
         //this.listPlaces = new ArrayList<>();
     }
 }

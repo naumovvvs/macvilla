@@ -22,7 +22,7 @@ public class Place {
     private String description;
     private String address;
     private String telephoneNumber;
-    private Integer price;
+
     @ManyToOne
     private Category category;
     private Float rating;
@@ -43,7 +43,7 @@ public class Place {
     }
 
     public Place(Hotelier manager, City city, String name, String description, String address,
-                 String telephoneNumber, Integer price, Category category,
+                 String telephoneNumber, Category category,
                  List<Image> gallery, Image thumbnail) {
         this.manager = manager;
         this.city = city;
@@ -51,11 +51,10 @@ public class Place {
         this.description = description;
         this.address = address;
         this.telephoneNumber = telephoneNumber;
-        this.price = price;
         this.category = category;
         this.gallery = gallery;
         this.thumbnail = thumbnail;
-//        this.map = map;
+//      this.map = map;
         this.visits = 0;
         this.rating = 0.0F;
     }

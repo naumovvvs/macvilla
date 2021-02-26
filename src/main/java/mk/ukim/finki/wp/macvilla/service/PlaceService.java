@@ -18,9 +18,9 @@ public interface PlaceService {
     Place removeById(Long placeId);
 
     Place save(Long managerId, Long cityId, String name, String description, String address,
-               String telephoneNumber, Integer price, Long categoryId, List<Image> gallery,
+               String telephoneNumber, Long categoryId, List<Image> gallery,
                Image thumbnail);
 
     Place update(Long placeId, Long cityId, String name, String description, String address, String telephoneNumber,
-                 Integer price, Long categoryId, List<Image> gallery, Image thumbnail);
+                 Long categoryId, List<Image> gallery, Image thumbnail);
 }
