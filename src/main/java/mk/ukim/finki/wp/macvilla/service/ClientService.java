@@ -12,7 +12,6 @@ public interface ClientService {
     Optional<Client> findByAddress(String address);
     Optional<Client> findByAddressLike(String address);
     User findById(Long id);
-    List<User> findAllBlockedUsers();
-    User save(Long id, String username, String password, String name, String surname, String email,
+    Client update(Long id, String username, String password, String name, String surname, String email,
               String avatarURL, String birthDate, String address);
 }

@@ -22,5 +22,12 @@ public interface HotelierService {
 
     User findById(Long managerId);
 
-    User save(Long id, String username, String password, String name, String surname, String email, String avatarURL);
+    User deleteById(Long managerId);
+
+    User unblock(Long managerId);
+
+    List<User> findAllBlocked();
+
+    Hotelier update(Long id, String username, String password, String name, String surname, String email,
+                    String avatarURL);
 }

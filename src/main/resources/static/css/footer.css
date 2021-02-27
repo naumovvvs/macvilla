@@ -29,14 +29,14 @@ footer {
     color: lightgray;
 }
 
-.hr-line {
+footer .hr-line {
     background-color: #0275d8;
     width: 65px;
     opacity: 1;
     margin-left: 0;
 }
 
-h6 {
+footer h6 {
     font-weight: bold;
 }
 

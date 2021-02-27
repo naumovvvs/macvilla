@@ -8,7 +8,6 @@ import mk.ukim.finki.wp.macvilla.service.PlaceService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -35,11 +34,8 @@ public class ClientDashboardController {
         try {
             client = (Client) this.clientService.findById(id);
         } catch (ClientNotFoundException exception) {
-            return "redirect:/dashboard/client?error=" + exception.getMessage();
+            return "redirect:/dashboard/client/" + id + "?error=" + exception.getMessage();
         }
-
-        List<Place> placeList = this.placeService.listAllPlaces();
-        client.setFavoritePlaces(placeList);
         model.addAttribute("client", client);
 
         return "master-template";
@@ -59,7 +55,7 @@ public class ClientDashboardController {
             this.clientService.removeFromFavoritePlaces(client, place.get());
             return "redirect:/dashboard/client/" + id;
         } else {
-            return "redirect:/dashboard/client?error=No place found with the given id to remove!";
+            return "redirect:/dashboard/client/" + id + "?error=No place found with the given id to remove!";
         }
     }
 
@@ -71,7 +67,7 @@ public class ClientDashboardController {
             @RequestParam String city, @RequestParam String email,
             @RequestParam String thumbnail, @RequestParam String birthDate) {
 
-        this.clientService.save(id, username, password, name, surname, email, thumbnail, birthDate, city);
-        return "redirect:/home";
+        this.clientService.update(id, username, password, name, surname, email, thumbnail, birthDate, city);
+        return "redirect:/dashboard/client/" + id;
     }
 }

@@ -29,4 +29,9 @@ public class Image {
         }
         this.description = description;
     }
+
+    public Image(String imageURL){
+        this.imageURL = imageURL;
+        this.description = "";
+    }
 }
