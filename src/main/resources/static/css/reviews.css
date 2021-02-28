@@ -1,0 +1,71 @@
+#reviews {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+#reviews .img-text {
+    width: 100%;
+    height: 300px;
+    display: block;
+    text-align: center;
+    padding: 40% 5%;
+    background: #302e2e;
+    color: #fff;
+    border-radius: 15px;
+}
+
+#reviews .img-text h2 {
+    font-size: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#reviews .img-text p {
+    font-size: 14px;
+}
+
+#reviews .single-box {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+#reviews .img-area {
+    position: absolute;
+    /* width: 100px;
+    height: 100px; */
+    width: 25%;
+    height: 30%;
+    border: 5px solid rgb(3, 75, 184);
+    overflow: hidden;
+    /* top: 20px;
+    left: 155px; */
+    top: 10%;
+    left: 40%;
+    border-radius: 50%;
+}
+
+#reviews .img-area img {
+    min-height: 90px;
+    min-width: 90px;
+}
+
+#reviews .carousel-indicators {
+    left: 0;
+    top: auto;
+    bottom: -50px;
+}
+
+#reviews .carousel-indicators button {
+    background: rgb(61, 61, 61);
+    border-radius: 50%;
+    width: 30px;
+    height: 10px;
+}
+
+#reviews .carousel-indicators :not(.active) {
+    background: rgb(61, 61, 61);
+}
+
+#reviews .carousel-indicators .active {
+    background: rgb(61, 61, 61);
+}

@@ -1,18 +1,18 @@
-.box {
+#city-slider .box {
     border-radius: 5px;
     width: 100%;
 }
 
-.box .card-body {
+#city-slider .box .card-body {
     text-align: center;
 }
 
-.box .card-title {
+#city-slider .box .card-title {
     margin-top: 2%;
     margin-bottom: 2%;
 }
 
-.box img {
+#city-slider .box img {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     width: 100%;
@@ -20,7 +20,7 @@
     object-fit: cover;
 }
 
-.box .overlay {
+#city-slider .box .overlay {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -33,11 +33,11 @@
     align-items: center;
 }
 
-.box .overlay a {
+#city-slider .box .overlay a {
     text-decoration: none;
 }
 
-.box .more-btn {
+#city-slider .box .more-btn {
     width: 160px;
     height: 40px;
     display: flex;
@@ -52,17 +52,17 @@
     text-decoration: none;
 }
 
-.box .more-btn:hover {
+#city-slider .box .more-btn:hover {
     color: #FFFFFF;
     background-color: #0275d8;
     transition: all ease 0.3s;
 }
 
-.box .overlay {
+#city-slider .box .overlay {
     visibility: hidden;
 }
 
-.box .slide-img:hover .overlay {
+#city-slider .box .slide-img:hover .overlay {
     visibility: visible;
     animation: fade 0.5s;
 }

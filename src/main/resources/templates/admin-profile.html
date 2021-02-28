@@ -116,30 +116,39 @@
                                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
                                              data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <div class="list-group" th:if="${pendingRequests.size() > 0}">
+                                                <div class="list-group" th:if="${pendingPlaces.size() > 0}">
 
                                                     <div class="list-group-item list-group-item-action"
                                                          aria-current="true"
-                                                         th:each="p: ${pendingRequests}">
+                                                         th:each="p: ${pendingPlaces}">
                                                         <div class="d-flex w-100 justify-content-between">
-                                                            <h6 class="mb-1">
-                                                                Author | <th:block th:text="${p.requestAuthor.username}"/>
-                                                            </h6>
-                                                            <p class="mb-1">
-                                                                Place to register | <th:block th:text="${p.place.name}"/>
-                                                            </p>
                                                             <div>
-                                                                <a th:href="@{'/dashboard/admin/{id}/approve/{requestId}' ( id=${admin.userId}, requestId=${p.requestId} ) }"
+                                                                <p class="mb-1" style="display: inline-block;">
+                                                                    <b>Author</b> <th:block th:text="${p.manager.username}"/>
+                                                                </p>
+                                                                &nbsp;|&nbsp;
+                                                                <p class="mb-1" style="display: inline-block;">
+                                                                    <b>Place to register</b> <th:block th:text="${p.name}"/>
+                                                                </p>
+                                                            </div>
+                                                            <div>
+                                                                <a th:href="@{'/dashboard/admin/{id}/approve/{requestId}' ( id=${admin.userId}, requestId=${p.request.requestId} ) }"
                                                                    class="btn btn-outline-success btn-sm">
                                                                     Approve
                                                                 </a>
-                                                                <a th:href="@{'/dashboard/admin/{id}/deny/{requestId}' ( id=${admin.userId}, requestId=${p.requestId} ) }"
+                                                                <a th:href="@{'/dashboard/admin/{id}/deny/{requestId}' ( id=${admin.userId}, requestId=${p.request.requestId} ) }"
                                                                    class="btn btn-outline-danger btn-sm">
                                                                     Deny
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                        <p class="mb-1" th:text="${p.requestTime}"></p>
+                                                        <p class="small mb-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                                                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                                                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                                            </svg>&nbsp;
+                                                            <th:block th:text="${p.request.requestTime}"></th:block>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,26 +167,35 @@
                                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                              data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <div class="list-group" th:if="${approvedRequests.size() > 0}">
+                                                <div class="list-group" th:if="${approvedPlaces.size() > 0}">
 
                                                     <div class="list-group-item list-group-item-action"
                                                          aria-current="true"
-                                                         th:each="a: ${approvedRequests}">
+                                                         th:each="a: ${approvedPlaces}">
                                                         <div class="d-flex w-100 justify-content-between">
-                                                            <h6 class="mb-1">
-                                                                Author | <th:block th:text="${a.requestAuthor.username}"/>
-                                                            </h6>
-                                                            <p class="mb-1">
-                                                                Place | <th:block th:text="${a.place.name}"/>
-                                                            </p>
                                                             <div>
-                                                                <a class="btn btn-outline-danger btn-sm"
-                                                                   th:href="@{'/dashboard/admin/{id}/remove/{requestId}' ( id=${admin.userId}, requestId=${a.requestId} ) }">
-                                                                    Remove
-                                                                </a>
+                                                                <p class="mb-1" style="display: inline-block;">
+                                                                    <b>Author</b> <th:block th:text="${a.manager.username}"/>
+                                                                </p>
+                                                                &nbsp;|&nbsp;
+                                                                <p class="mb-1" style="display: inline-block;">
+                                                                    <b>Place to register</b> <th:block th:text="${a.name}"/>
+                                                                </p>
                                                             </div>
+<!--                                                            <div>-->
+<!--                                                                <a class="btn btn-outline-danger btn-sm"-->
+<!--                                                                   th:href="@{'/dashboard/admin/{id}/remove/{requestId}' ( id=${admin.userId}, requestId=${a.request.requestId} ) }">-->
+<!--                                                                    Remove-->
+<!--                                                                </a>-->
+<!--                                                            </div>-->
                                                         </div>
-                                                        <p class="mb-1" th:text="${a.requestTime}"></p>
+                                                        <p class="small mb-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                                                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                                                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                                            </svg>&nbsp;
+                                                            <th:block th:text="${a.request.requestTime}"></th:block>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -196,26 +214,35 @@
                                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                                              data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <div class="list-group" th:if="${deniedRequests.size() > 0}">
+                                                <div class="list-group" th:if="${deniedPlaces.size() > 0}">
 
                                                     <div class="list-group-item list-group-item-action"
                                                          aria-current="true"
-                                                         th:each="d: ${deniedRequests}">
+                                                         th:each="d: ${deniedPlaces}">
                                                         <div class="d-flex w-100 justify-content-between">
-                                                            <h6 class="mb-1">
-                                                                Author | <th:block th:text="${d.requestAuthor.username}"/>
-                                                            </h6>
-                                                            <p class="mb-1">
-                                                                Place | <th:block th:text="${d.place.name}"/>
-                                                            </p>
                                                             <div>
-                                                                <a class="btn btn-outline-danger btn-sm"
-                                                                   th:href="@{'/dashboard/admin/{id}/remove/{requestId}' ( id=${admin.userId}, requestId=${d.requestId} ) }">
-                                                                    Remove
-                                                                </a>
+                                                                <p class="mb-1" style="display: inline-block;">
+                                                                    <b>Author</b> <th:block th:text="${d.manager.username}"/>
+                                                                </p>
+                                                                &nbsp;|&nbsp;
+                                                                <p class="mb-1" style="display: inline-block;">
+                                                                    <b>Place to register</b> <th:block th:text="${d.name}"/>
+                                                                </p>
                                                             </div>
+<!--                                                            <div>-->
+<!--                                                                <a class="btn btn-outline-danger btn-sm"-->
+<!--                                                                   th:href="@{'/dashboard/admin/{id}/remove/{requestId}' ( id=${admin.userId}, requestId=${d.request.requestId} ) }">-->
+<!--                                                                    Remove-->
+<!--                                                                </a>-->
+<!--                                                            </div>-->
                                                         </div>
-                                                        <p class="mb-1" th:text="${d.requestTime}"></p>
+                                                        <p class="small mb-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                                                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                                                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                                            </svg>&nbsp;
+                                                            <th:block th:text="${d.request.requestTime}"></th:block>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>

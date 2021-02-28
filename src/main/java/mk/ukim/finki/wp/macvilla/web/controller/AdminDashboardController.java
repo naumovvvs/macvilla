@@ -2,16 +2,14 @@ package mk.ukim.finki.wp.macvilla.web.controller;
 
 import mk.ukim.finki.wp.macvilla.model.*;
 import mk.ukim.finki.wp.macvilla.model.enums.RequestStatus;
-import mk.ukim.finki.wp.macvilla.model.enums.Role;
 import mk.ukim.finki.wp.macvilla.model.exceptions.AdministratorNotFoundException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.RequestNotFoundException;
 import mk.ukim.finki.wp.macvilla.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = {"/dashboard"})
@@ -20,13 +18,14 @@ public class AdminDashboardController {
     private final AdministratorService administratorService;
     private final RequestService requestService;
     private final HotelierService hotelierService;
+    private final PlaceService placeService;
 
-    public AdminDashboardController(AdministratorService administratorService,
-                                    RequestService requestService,
-                                    HotelierService hotelierService) {
+    public AdminDashboardController(AdministratorService administratorService, RequestService requestService,
+                                    HotelierService hotelierService, PlaceService placeService) {
         this.administratorService = administratorService;
         this.requestService = requestService;
         this.hotelierService = hotelierService;
+        this.placeService = placeService;
     }
 
     @GetMapping(value = {"/admin/{id}"})
@@ -46,12 +45,19 @@ public class AdminDashboardController {
 
         model.addAttribute("admin", administrator);
 
-        List<Request> pendingRequests = this.requestService.listAllPendingRequests();
-        List<Request> approvedRequests = this.requestService.listAllApprovedRequests();
-        List<Request> deniedRequests = this.requestService.listAllDeniedRequests();
-        model.addAttribute("pendingRequests", pendingRequests);
-        model.addAttribute("approvedRequests", approvedRequests);
-        model.addAttribute("deniedRequests", deniedRequests);
+        List<Place> placeList = this.placeService.listAllPlaces();
+        List<Place> pendingPlaces = placeList.stream()
+                .filter(p -> p.getRequest().getRequestStatus().equals(RequestStatus.PENDING))
+                .collect(Collectors.toList());
+        List<Place> approvedPlaces = placeList.stream()
+                .filter(p -> p.getRequest().getRequestStatus().equals(RequestStatus.APPROVED))
+                .collect(Collectors.toList());
+        List<Place> deniedPlaces = placeList.stream()
+                .filter(p -> p.getRequest().getRequestStatus().equals(RequestStatus.DENIED))
+                .collect(Collectors.toList());
+        model.addAttribute("pendingPlaces", pendingPlaces);
+        model.addAttribute("approvedPlaces", approvedPlaces);
+        model.addAttribute("deniedPlaces", deniedPlaces);
 
         List<User> blockedHoteliers = this.hotelierService.findAllBlocked();
         model.addAttribute("blockedHoteliers", blockedHoteliers);
@@ -84,6 +90,9 @@ public class AdminDashboardController {
         return "redirect:/dashboard/admin/" + id;
     }
 
+    // causing cascade problems (deleting request -> deleting place -> delete from faves)
+    // therefore -> not applicable
+    /*
     @GetMapping(value = {"/admin/{id}/remove/{requestId}"})
     public String removeRequest(@PathVariable Long id, @PathVariable Long requestId) {
 
@@ -96,6 +105,7 @@ public class AdminDashboardController {
         this.requestService.removeFrom(request);
         return "redirect:/dashboard/admin/" + id;
     }
+    */
 
     @PostMapping("/admin/{id}/edit")
     public String updateAdministrator(

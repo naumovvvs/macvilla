@@ -26,7 +26,8 @@ public class HomeController {
         model.addAttribute("headTitle", "Home");
         model.addAttribute("style1", "navbar.css");
         model.addAttribute("style2", "city-slider.css");
-        model.addAttribute("style3", "footer.css");
+        model.addAttribute("style3", "reviews.css");
+        model.addAttribute("style4", "footer.css");
         model.addAttribute("bodyContent", "home-page");
 
         Optional<User> optionalUser = this.userService.findByUsername(request.getRemoteUser());
