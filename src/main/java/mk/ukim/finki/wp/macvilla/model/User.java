@@ -49,6 +49,8 @@ public class User implements UserDetails{
 
         if(avatarURL!=null && !avatarURL.isEmpty()) {
             this.avatarURL = avatarURL;
+        }else{
+            this.avatarURL = "/img/img-1.png";
         }
     }
 

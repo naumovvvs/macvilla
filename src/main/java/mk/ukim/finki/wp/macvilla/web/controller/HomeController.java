@@ -68,7 +68,7 @@ public class HomeController {
         model.addAttribute("headTitle", "Contact");
         model.addAttribute("style1", "navbar.css");
         model.addAttribute("style2", "contact.css");
-        model.addAttribute("style3", "footer.css");
+        model.addAttribute("style3", "footer-light.css");
         model.addAttribute("bodyContent", "contact");
         return "master-template";
     }

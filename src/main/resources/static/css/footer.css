@@ -2,13 +2,13 @@ footer {
     display: block;
     position: absolute;
     width: 100%;
-    background-color: #F4F4F8;
-    color: black;
+    background-color: #495159;
+    color: white;
 }
 
 .links a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .links a:hover {

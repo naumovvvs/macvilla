@@ -3,6 +3,7 @@ package mk.ukim.finki.wp.macvilla.service.impl;
 import mk.ukim.finki.wp.macvilla.model.City;
 import mk.ukim.finki.wp.macvilla.model.Image;
 import mk.ukim.finki.wp.macvilla.model.Place;
+import mk.ukim.finki.wp.macvilla.model.enums.RequestStatus;
 import mk.ukim.finki.wp.macvilla.repository.CityRepository;
 import mk.ukim.finki.wp.macvilla.repository.PlaceRepository;
 import mk.ukim.finki.wp.macvilla.service.CityService;
@@ -40,7 +41,8 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public List<Place> listAllPlacesInCity(Long cityId) {
-        return this.placeRepository.findAll().stream().filter(x-> x.getCity().getCityId().equals(cityId)).collect(Collectors.toList());
+        return this.placeRepository.findAll().stream().filter(x-> x.getCity().getCityId().equals(cityId)
+        && x.getRequest().getRequestStatus().equals(RequestStatus.APPROVED)).collect(Collectors.toList());
     }
 
     @Override

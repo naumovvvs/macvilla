@@ -28,7 +28,7 @@ public class LoginController {
         model.addAttribute("bodyContent", "login");
         model.addAttribute("style1", "login.css");
         model.addAttribute("style2", "navbar.css");
-        model.addAttribute("style3", "footer.css");
+        model.addAttribute("style3", "footer-light.css");
 
         return "master-template";
     }
@@ -46,7 +46,7 @@ public class LoginController {
             model.addAttribute("headTitle", "Login");
             model.addAttribute("style1", "login.css");
             model.addAttribute("style2", "navbar.css");
-            model.addAttribute("style3", "footer.css");
+            model.addAttribute("style3", "footer-light.css");
             model.addAttribute("bodyContent", "login");
 
             return "master-template";
@@ -56,7 +56,7 @@ public class LoginController {
             model.addAttribute("headTitle", "Home");
             model.addAttribute("style1", "navbar.css");
             model.addAttribute("style2", "city-slider.css");
-            model.addAttribute("style3", "footer.css");
+            model.addAttribute("style3", "footer-light.css");
             model.addAttribute("bodyContent", "home-page");
 
             request.getSession().setAttribute("user", user.get());

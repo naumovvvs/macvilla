@@ -25,7 +25,7 @@ public class RegisterController {
 
         model.addAttribute("style1", "register.css");
         model.addAttribute("style2", "navbar.css");
-        model.addAttribute("style3", "footer.css");
+        model.addAttribute("style3", "footer-light.css");
         model.addAttribute("headTitle", "Register");
         model.addAttribute("bodyContent", "register");
 

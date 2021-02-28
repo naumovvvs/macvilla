@@ -51,6 +51,20 @@
 <!--                {{ initMap(place.map) }}-->
 <!--                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1658.9016005261224!2d22.892706740739367!3d41.67297692967391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14aa1159e38f2531%3A0x80b21b24c931199d!2z0JDRg9GA0L7RgNCwINCg0LXRgdC-0YDRgiAmINCh0L_QsA!5e1!3m2!1smk!2smk!4v1614383143220!5m2!1smk!2smk" width="100%" height="120%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>-->
 
+            <div id="app2">
+                <template>
+                    <gmaps-map>
+                        <gmaps-marker :position="{ lat: -27, lng: 153 }" />
+                    </gmaps-map>
+                </template>
+            </div>
+
+
+<!--            <template>-->
+<!--                <div class="text-light p-3 bg-info text-center "> <google-map :center="{ lat: 10, lng: 10 }" :zoom="7" class="mapSty"> </google-map> </div>-->
+<!--            </template>-->
+
+
         </div>
     </div>
 </div>
@@ -82,6 +96,58 @@
     </div>
 
 </div>
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--<script src="/js/jquery.geolocation.edit.js"></script>-->
+
+<!--<script>-->
+<!--    $("#map").geolocate({-->
+<!--        lat: 42.123,-->
+<!--        lng: 23.323-->
+<!--    });-->
+<!--</script>-->
+
+<script>
+    import x5GMaps from 'x5-gmaps'
+    // Option 1: Just your key
+    Vue.use(x5GMaps, 'AIzaSyDj1xwv5mI8puYYGf6HviG8G_x8UXKHqs8')
+
+    // import * as VueGoogleMaps from 'vue2-google-maps';
+    //
+    // Vue.use(VueGoogleMaps, {
+    //     load: {
+    //         key: 'AIzaSyDj1xwv5mI8puYYGf6HviG8G_x8UXKHqs8'
+    //     },
+    //     installComponents: true
+    // });
+    //
+    // Vue.component('google-map', VueGoogleMaps.Map);
+
+
+    var vm2 = new Vue({
+        el: '#app2',
+        render: (h) => h(App),
+    });
+
+    import { gmapsMap, gmapsMarker } from 'x5-gmaps'
+
+    export default {
+        components: { gmapsMap, gmapsMarker },
+    }
+
+    // import { gmapsMap } from 'x5-gmaps'
+    //
+    // export default {
+    //     components: { gmapsMap },
+    //     data: () => ({
+    //         mapOptions: {
+    //             center: { lat: -27.47, lng: 153.025 },
+    //             zoom: 12,
+    //         },
+    //     }),
+    // }
+</script>
+
 <script>
     let path = window.location.pathname;
     let pom = "";
@@ -99,7 +165,20 @@
 
     const apiURL = "http://localhost:8080/api/place/" + id;
 
-    let map;
+    // $.ajax({
+    //     url: apiURL
+    // }).then(function(data) {
+    //     setParameters(data);
+    // });
+    //
+    // function setParameters(data){
+    //     latitude = data.location.latitude;
+    //     longitude = data.location.longitude;
+    // }
+
+
+
+
 
     var vm = new Vue({
         el: "#app",
@@ -129,6 +208,9 @@
         }
     });
 </script>
+
+
+
 
 <!--<script>-->
 <!--    function initMap() {-->
