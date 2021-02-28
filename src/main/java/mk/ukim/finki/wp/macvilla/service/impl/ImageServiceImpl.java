@@ -4,7 +4,6 @@ import mk.ukim.finki.wp.macvilla.model.Image;
 import mk.ukim.finki.wp.macvilla.repository.ImageRepository;
 import mk.ukim.finki.wp.macvilla.service.ImageService;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
@@ -29,5 +28,10 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public Optional<Image> findByDescription(String description) {
         return this.imageRepository.findByDescription(description);
+    }
+
+    @Override
+    public Image save(String imageURL) {
+        return this.imageRepository.save(new Image(imageURL));
     }
 }

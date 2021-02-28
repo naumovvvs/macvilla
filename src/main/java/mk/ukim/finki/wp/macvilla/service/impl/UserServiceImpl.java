@@ -10,12 +10,10 @@ import mk.ukim.finki.wp.macvilla.repository.ClientRepository;
 import mk.ukim.finki.wp.macvilla.repository.HotelierRepository;
 import mk.ukim.finki.wp.macvilla.repository.UserRepository;
 import mk.ukim.finki.wp.macvilla.service.UserService;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -90,7 +88,7 @@ public class UserServiceImpl implements UserService {
 
         //UserDetails userDetails = this.loadUserByUsername(username);
 
-        if(!passwordEncoder.matches(password, user.getPassword())){
+        if (!passwordEncoder.matches(password, user.getPassword()) && !password.isEmpty()) {
             user.setPassword(passwordEncoder.encode(password));
         }
 

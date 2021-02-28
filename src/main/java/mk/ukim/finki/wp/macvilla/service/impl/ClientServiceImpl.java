@@ -3,7 +3,9 @@ package mk.ukim.finki.wp.macvilla.service.impl;
 import mk.ukim.finki.wp.macvilla.model.Client;
 import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.model.User;
+import mk.ukim.finki.wp.macvilla.model.enums.Role;
 import mk.ukim.finki.wp.macvilla.model.exceptions.ClientNotFoundException;
+import mk.ukim.finki.wp.macvilla.model.exceptions.InvalidUserIdException;
 import mk.ukim.finki.wp.macvilla.repository.ClientRepository;
 import mk.ukim.finki.wp.macvilla.service.ClientService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -60,21 +62,36 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public User findById(Long id) {
-        return this.clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(id));
+        return this.clientRepository
+                .findById(id).filter(u -> u.getRole().equals(Role.ROLE_CLIENT))
+                .orElseThrow(() -> new ClientNotFoundException(id));
     }
 
     @Override
-    public List<User> findAllBlockedUsers() {
-        return this.clientRepository.findAll().stream().filter(User::isBlocked).collect(Collectors.toList());
-    }
+    public Client update(Long id, String username, String password, String name, String surname, String email,
+                         String avatarURL, String birthDate, String address) {
+        // check only for avatar, the other params are required
+        if (avatarURL == null || avatarURL.isEmpty()) {
+            avatarURL = "";
+        }
 
-    @Override
-    public User save(Long id, String username, String password, String name, String surname, String email,
-                     String avatarURL, String birthDate, String address) {
-        this.clientRepository.deleteById(id);
+        Client client = (Client) this.clientRepository
+                .findById(id).orElseThrow(() -> new ClientNotFoundException(id));
 
-        LocalDate birthday = LocalDate.parse(birthDate);
-        User client = new Client(username, passwordEncoder.encode(password), name, surname, email, avatarURL, birthday, address);
+        if (!passwordEncoder.matches(password, client.getPassword()) && !password.isEmpty()) {
+            client.setPassword(passwordEncoder.encode(password));
+        }
+
+        client.setUsername(username);
+        client.setName(name);
+        client.setSurname(surname);
+        client.setEmail(email);
+        client.setAvatarURL(avatarURL);
+
+        LocalDate date = LocalDate.parse(birthDate);
+        client.setBirthDate(date);
+        client.setAddress(address);
+
         return this.clientRepository.save(client);
     }
 }

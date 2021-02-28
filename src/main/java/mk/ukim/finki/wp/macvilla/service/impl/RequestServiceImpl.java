@@ -58,6 +58,12 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    public Request changeStatus(Request request, RequestStatus requestStatus) {
+        request.setRequestStatus(requestStatus);
+        return this.requestRepository.save(request);
+    }
+
+    @Override
     public Request findById(Long id) {
         return this.requestRepository.findById(id).orElseThrow(() -> new RequestNotFoundException(id));
     }

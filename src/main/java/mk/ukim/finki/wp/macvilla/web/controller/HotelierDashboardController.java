@@ -36,12 +36,11 @@ public class HotelierDashboardController {
         try {
             hotelier = (Hotelier) this.hotelierService.findById(id);
         } catch (HotelierNotFoundException exception) {
-            return "redirect:/dashboard/hotelier?error=" + exception.getMessage();
+            return "redirect:/dashboard/hotelier/" + id + "?error=" + exception.getMessage();
         }
-
-
         List<Place> managedPlaces = this.placeService.listAllPlaces()
                 .stream().filter(p -> p.getManager().getUserId().equals(id)).collect(Collectors.toList());
+
         model.addAttribute("hotelier", hotelier);
         model.addAttribute("managedPlaces", managedPlaces);
         return "master-template";
@@ -53,7 +52,7 @@ public class HotelierDashboardController {
         try {
             hotelier = (Hotelier) this.hotelierService.findById(id);
         } catch (HotelierNotFoundException exception) {
-            return "redirect:/dashboard/hotelier?error=" + exception.getMessage();
+            return "redirect:/dashboard/hotelier/" + id + "?error=" + exception.getMessage();
         }
 
         Optional<Place> place = this.placeService.findById(placeId);
@@ -61,7 +60,7 @@ public class HotelierDashboardController {
             this.hotelierService.deletePlace(id, placeId);
             return "redirect:/dashboard/hotelier/" + id;
         } else {
-            return "redirect:/dashboard/hotelier?error=No place found with the given id to remove!";
+            return "redirect:/dashboard/hotelier/" + id + "?error=No place found with the given id to remove!";
         }
     }
 
@@ -72,7 +71,7 @@ public class HotelierDashboardController {
             @RequestParam String username, @RequestParam String password,
             @RequestParam String email, @RequestParam String thumbnail) {
 
-        this.hotelierService.save(id, username, password, name, surname, email, thumbnail);
-        return "redirect:/home";
+        this.hotelierService.update(id, username, password, name, surname, email, thumbnail);
+        return "redirect:/dashboard/hotelier/" + id;
     }
 }

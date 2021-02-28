@@ -1,4 +1,4 @@
-<div class="container" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div class="container hotelier" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <div class="row gutters">
         <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
@@ -80,18 +80,18 @@
                                             class="form-control"
                                             id="password"
                                             name="password"
-                                            placeholder="Enter password"
-                                            th:value="${hotelier.password}">
+                                            placeholder="Enter password">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="thumbnail">Thumbnail</label>
-                                    <input type="file"
-                                           class="form-control-file"
+                                    <input type="text"
+                                           class="form-control"
                                            id="thumbnail"
                                            name="thumbnail"
-                                           aria-describedby="fileHelp">
+                                           placeholder="Enter thumbnail URL"
+                                           th:value="${hotelier.avatarURL}">
                                 </div>
                             </div>
                         </div>
