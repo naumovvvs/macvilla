@@ -10,5 +10,4 @@ import java.util.List;
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long> {
     List<Request> findAllByRequestStatus(RequestStatus requestStatus);
-    List<Request> findAllByPlace(Place place);
 }

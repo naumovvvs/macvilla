@@ -24,16 +24,19 @@ public class PlaceController {
     private final UserService userService;
     private final HotelierService hotelierService;
     private final ImageService imageService;
+    private final RequestService requestService;
 
     public PlaceController(PlaceService placeService, CityService cityService,
                            CategoryService categoryService, UserService userService,
-                           HotelierService hotelierService, ImageService imageService) {
+                           HotelierService hotelierService, ImageService imageService,
+                           RequestService requestService) {
         this.placeService = placeService;
         this.cityService = cityService;
         this.categoryService = categoryService;
         this.userService = userService;
         this.hotelierService = hotelierService;
         this.imageService = imageService;
+        this.requestService = requestService;
     }
 
     @GetMapping(value = {"/{id}"})
@@ -89,8 +92,11 @@ public class PlaceController {
                 galleryList.add(this.imageService.save(galleryImage));
             }
 
+            Request req = new Request();
+            this.requestService.addTo(req);
+
             this.placeService.save(manager.getUserId(), cityId, name, description, address, telephoneNumber,
-                    categoryId, galleryList, thumbnailImage);
+                    categoryId, galleryList, thumbnailImage, req);
 
         } else {
             //error

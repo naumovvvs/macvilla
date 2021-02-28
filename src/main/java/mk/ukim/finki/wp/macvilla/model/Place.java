@@ -15,6 +15,11 @@ public class Place {
     // FK to the manager that registered the place
     @ManyToOne
     private Hotelier manager;
+
+    // FK to the made request
+    @OneToOne
+    private Request request;
+
     // FK to the City in which the place is situated
     @ManyToOne
     private City city;
@@ -51,7 +56,7 @@ public class Place {
 
     public Place(Hotelier manager, City city, String name, String description, String address,
                  String telephoneNumber, Category category,
-                 List<Image> gallery, Image thumbnail) {
+                 List<Image> gallery, Image thumbnail, Request request) {
         this.manager = manager;
         this.city = city;
         this.name = name;
@@ -66,5 +71,6 @@ public class Place {
         this.rating = 1.0F;
         this.ratingInteger = 1;
         //this.ratingInteger = (int) Math.ceil(this.rating);
+        this.request = request;
     }
 }

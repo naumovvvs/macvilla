@@ -14,7 +14,7 @@ public interface HotelierService {
 
     Place addPlace(Long managerId, Long cityId, String name, String description, String address,
                    String telephoneNumber, Integer price, Long categoryId, List<Image> gallery,
-                   Image thumbnail);
+                   Image thumbnail, Request request);
 
     Place updatePlace(Long placeId, Long managerId, Long cityId, String name, String description,
                                 String address, String telephoneNumber, Integer price, Long categoryId,

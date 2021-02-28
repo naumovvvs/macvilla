@@ -7,6 +7,11 @@ body {
   background-image: url("../img/login-bg.jpg");
 }
 
+#login_container {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
 #login_container .login_social {
   position: relative;
   bottom: 2%;

@@ -5,7 +5,6 @@ import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.service.CityService;
 import mk.ukim.finki.wp.macvilla.service.PlaceService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +19,11 @@ public class CityRestController {
     public CityRestController(CityService cityService, PlaceService placeService) {
         this.cityService = cityService;
         this.placeService = placeService;
+    }
+
+    @GetMapping()
+    public List<City> getAllCities() {
+        return this.cityService.listAllCities();
     }
 
     @GetMapping("/{id}/info")

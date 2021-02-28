@@ -8,6 +8,12 @@ body {
 
 #login_container {
   /* height: 1222 px; */
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+#login_container .role-radios {
+  margin-top: 18px;
 }
 
 #login_container .user_card {

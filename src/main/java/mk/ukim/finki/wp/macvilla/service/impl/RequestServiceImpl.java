@@ -22,7 +22,7 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public List<Request> listAllRequestsByPlaceId(Place place) {
-        return this.requestRepository.findAllByPlace(place);
+        return null;
     }
 
     @Override

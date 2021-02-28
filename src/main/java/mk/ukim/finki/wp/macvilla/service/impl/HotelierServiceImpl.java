@@ -117,7 +117,7 @@ public class HotelierServiceImpl implements HotelierService {
     @Override
     public Place addPlace(Long managerId, Long cityId, String name, String description, String address,
                           String telephoneNumber, Integer price, Long categoryId, List<Image> gallery,
-                          Image thumbnail) {
+                          Image thumbnail, Request request) {
         this.hotelierRepository
                 .findById(managerId).orElseThrow(() -> new HotelierNotFoundException(managerId));
 
@@ -128,7 +128,7 @@ public class HotelierServiceImpl implements HotelierService {
                 .orElseThrow(() -> new CategoryNotFoundException(categoryId));
 
         return this.placeService.save(managerId, cityId, name, description, address, telephoneNumber,
-                categoryId, gallery, thumbnail);
+                categoryId, gallery, thumbnail, request);
     }
 
     @Override

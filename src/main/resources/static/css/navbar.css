@@ -3,7 +3,7 @@
 }
 
 .dropdown-menu {
-    min-width: 15px !important;
+    min-width: 7rem;
 }
 
 .dropdown-toggle-split {
@@ -16,4 +16,13 @@
 
 .navbar-nav .nav-item {
     padding-right: 15px;
+}
+
+#login-link {
+    color: white;
+    text-decoration: none;
+}
+
+#login-link:hover {
+    text-decoration: none;
 }

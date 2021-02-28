@@ -38,7 +38,7 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public Place save(Long managerId, Long cityId, String name, String description, String address,
                       String telephoneNumber, Long categoryId, List<Image> gallery,
-                      Image thumbnail) {
+                      Image thumbnail, Request request) {
 
         Hotelier hotelier = (Hotelier) this.userService.findById(managerId)
                 .orElseThrow(() -> new HotelierNotFoundException(managerId));
@@ -50,7 +50,7 @@ public class PlaceServiceImpl implements PlaceService {
                 .findById(cityId).orElseThrow(() -> new CityNotFoundException(cityId));
 
         return this.placeRepository.save(new Place(hotelier, city, name, description, address, telephoneNumber,
-                category, gallery, thumbnail));
+                category, gallery, thumbnail, request));
     }
 
     @Override

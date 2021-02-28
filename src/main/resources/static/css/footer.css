@@ -2,22 +2,22 @@ footer {
     display: block;
     position: absolute;
     width: 100%;
-    background-color: #333;
-    color: white;
+    background-color: #F4F4F8;
+    color: black;
 }
 
 .links a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .links a:hover {
-    color: lightgray;
-
+    color: #495159;
 }
 
 .footer-copyright {
     background-color: #0275d8;
+    color: white;
 }
 
 .footer-copyright a {
@@ -26,7 +26,7 @@ footer {
 }
 
 .footer-copyright a:hover {
-    color: lightgray;
+    color: #F4F4F8;
 }
 
 footer .hr-line {
