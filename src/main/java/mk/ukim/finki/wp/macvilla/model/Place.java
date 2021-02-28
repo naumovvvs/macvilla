@@ -26,6 +26,13 @@ public class Place {
     @ManyToOne
     private Category category;
     private Float rating;
+
+    @Transient
+    private int ratingInteger;
+
+    @Transient
+    private boolean show = true; // used in frontend for showing based on rating
+
     // list of pictures
     @OneToMany
     private List<Image> gallery;
@@ -36,7 +43,7 @@ public class Place {
     private Integer visits;
 //    // coordinates of place
     @OneToOne
-    private Coordinates map;
+    private Coordinates location;
 
     public Place(){
         this.gallery = new ArrayList<>();
@@ -56,6 +63,8 @@ public class Place {
         this.thumbnail = thumbnail;
 //      this.map = map;
         this.visits = 0;
-        this.rating = 0.0F;
+        this.rating = 1.0F;
+        this.ratingInteger = 1;
+        //this.ratingInteger = (int) Math.ceil(this.rating);
     }
 }

@@ -3,10 +3,7 @@ package mk.ukim.finki.wp.macvilla.web.rest;
 import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.model.exceptions.PlaceNotFoundException;
 import mk.ukim.finki.wp.macvilla.service.PlaceService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/place")

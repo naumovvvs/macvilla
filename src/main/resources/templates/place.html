@@ -1,4 +1,5 @@
 <div id="app">
+
 <div class="container-fluid" id="place_pic">
     <svg id="heart_icon" v-bind:class="mt-5" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
         <path d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
@@ -44,11 +45,12 @@
                 </p>
             </div>
         </div>
-        <div class="col-6 mt-4" id="map">
-            <div style="width: 100%">
-                <iframe width="100%" height="auto" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
-                </iframe>
-            </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-4" id="map" style="width: 500px; height: 200px;">
+
+<!--                {{ initMap(place.map) }}-->
+<!--                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1658.9016005261224!2d22.892706740739367!3d41.67297692967391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14aa1159e38f2531%3A0x80b21b24c931199d!2z0JDRg9GA0L7RgNCwINCg0LXRgdC-0YDRgiAmINCh0L_QsA!5e1!3m2!1smk!2smk!4v1614383143220!5m2!1smk!2smk" width="100%" height="120%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>-->
+
         </div>
     </div>
 </div>
@@ -97,6 +99,8 @@
 
     const apiURL = "http://localhost:8080/api/place/" + id;
 
+    let map;
+
     var vm = new Vue({
         el: "#app",
         data(){
@@ -112,6 +116,42 @@
                 .then(place => {
                     this.place = place
                 })
+        },
+        methods: {
+            // initMap: function(placeMap){
+            //     // console.log(placeMap);
+            //     //
+            //     // this.map = new google.maps.Map(document.getElementById("map"), {
+            //     //     center: { lat: placeMap.latitude, lng: placeMap.longitude },
+            //     //     zoom: 8,
+            //     // });
+            // }
         }
     });
 </script>
+
+<!--<script>-->
+<!--    function initMap() {-->
+<!--        let longitude = place.location.longitude;-->
+<!--        let latitude = place.location.latitude;-->
+
+<!--        let location = {lat: latitude, lng: longitude};-->
+
+<!--        let map = new google.maps.Map(document.getElementById("map"), {-->
+<!--            zoom: 8,-->
+<!--            center: location-->
+<!--        });-->
+
+<!--        let marker = new google.maps.Marker({-->
+<!--            position: location,-->
+<!--            map: map-->
+<!--        });-->
+<!--    }-->
+
+<!--    initMap();-->
+<!--</script>-->
+
+<!--<script async-->
+<!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1xwv5mI8puYYGf6HviG8G_x8UXKHqs8&callback=initMap">-->
+<!--</script>-->
+
