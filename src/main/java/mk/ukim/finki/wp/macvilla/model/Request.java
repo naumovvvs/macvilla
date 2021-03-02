@@ -1,8 +1,8 @@
 package mk.ukim.finki.wp.macvilla.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import mk.ukim.finki.wp.macvilla.model.enums.RequestStatus;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,6 +14,7 @@ public class Request {
     private Long requestId;
 
     // author of the request (manager)
+    @JsonBackReference
     @ManyToOne
     private Hotelier requestAuthor;
 
@@ -29,9 +30,16 @@ public class Request {
     private RequestStatus requestStatus;
 
     public Request(){
+        long millis = System.currentTimeMillis();
+        this.requestTime = new Date(millis);
+        this.requestStatus = RequestStatus.PENDING;
+    }
+
+    public Request(Hotelier author){
         //requestTime contains current date and time, when the request was made
         long millis = System.currentTimeMillis();
         this.requestTime = new Date(millis);
         this.requestStatus = RequestStatus.PENDING;
+        this.requestAuthor = author;
     }
 }

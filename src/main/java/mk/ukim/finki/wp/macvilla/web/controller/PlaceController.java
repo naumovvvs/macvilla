@@ -47,6 +47,7 @@ public class PlaceController {
 
         model.addAttribute("headTitle", "Place");
         model.addAttribute("bodyContent", "place");
+        model.addAttribute("placeId", this.placeService.findById(id).get().getPlaceId());
 
         return "master-template";
     }
@@ -92,7 +93,7 @@ public class PlaceController {
                 galleryList.add(this.imageService.save(galleryImage));
             }
 
-            Request req = new Request();
+            Request req = new Request(manager);
             this.requestService.addTo(req);
 
             this.placeService.save(manager.getUserId(), cityId, name, description, address, telephoneNumber,

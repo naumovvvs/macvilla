@@ -1,6 +1,7 @@
 package mk.ukim.finki.wp.macvilla.web.controller;
 
 import mk.ukim.finki.wp.macvilla.model.User;
+import mk.ukim.finki.wp.macvilla.service.ReviewService;
 import mk.ukim.finki.wp.macvilla.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +16,11 @@ import java.util.Optional;
 public class HomeController {
 
     private final UserService userService;
+    private final ReviewService reviewService;
 
-    public HomeController(UserService userService) {
+    public HomeController(UserService userService, ReviewService reviewService) {
         this.userService = userService;
+        this.reviewService = reviewService;
     }
 
     @GetMapping(value = {"/", "/home"})
@@ -29,6 +32,8 @@ public class HomeController {
         model.addAttribute("style3", "reviews.css");
         model.addAttribute("style4", "footer.css");
         model.addAttribute("bodyContent", "home-page");
+        // latest 6 reviews for showing in carousel
+        model.addAttribute("reviews", this.reviewService.getLatestReviews());
 
         Optional<User> optionalUser = this.userService.findByUsername(request.getRemoteUser());
 

@@ -1,5 +1,6 @@
 package mk.ukim.finki.wp.macvilla.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import mk.ukim.finki.wp.macvilla.model.enums.Role;
 
@@ -17,6 +18,7 @@ public class Hotelier extends User{
 //    private List<Place> managedPlaces;
 
     // list of requests made by the manager
+    @JsonManagedReference
     @OneToMany(mappedBy = "requestAuthor", fetch = FetchType.EAGER)
     private List<Request> madeRequests;
 

@@ -5,6 +5,7 @@ import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.model.exceptions.HotelierNotFoundException;
 import mk.ukim.finki.wp.macvilla.service.HotelierService;
 import mk.ukim.finki.wp.macvilla.service.PlaceService;
+import mk.ukim.finki.wp.macvilla.service.ReviewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +19,12 @@ public class HotelierDashboardController {
 
     private final PlaceService placeService;
     private final HotelierService hotelierService;
+    private final ReviewService reviewService;
 
-    public HotelierDashboardController(PlaceService placeService, HotelierService hotelierService) {
+    public HotelierDashboardController(PlaceService placeService, HotelierService hotelierService, ReviewService reviewService) {
         this.placeService = placeService;
         this.hotelierService = hotelierService;
+        this.reviewService = reviewService;
     }
 
     @GetMapping(value = {"/hotelier/{id}"})
@@ -56,7 +59,9 @@ public class HotelierDashboardController {
         }
 
         Optional<Place> place = this.placeService.findById(placeId);
+
         if(place.isPresent()){
+            this.reviewService.removeAllWithPlace(place.get());
             this.hotelierService.deletePlace(id, placeId);
             return "redirect:/dashboard/hotelier/" + id;
         } else {

@@ -2,6 +2,7 @@ package mk.ukim.finki.wp.macvilla.model;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -11,6 +12,9 @@ public class Review {
     private Long reviewId;
     private String content;
     private Float rating;
+    // date when the user posted the review
+    private Date reviewDate;
+
     // FK to the author
     @ManyToOne
     private Client author;
@@ -28,5 +32,7 @@ public class Review {
         this.rating = rating;
         this.author = author;
         this.place = place;
+        long millis = System.currentTimeMillis();
+        this.reviewDate = new Date(millis);
     }
 }

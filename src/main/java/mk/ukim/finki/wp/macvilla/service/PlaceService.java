@@ -23,5 +23,6 @@ public interface PlaceService {
                Image thumbnail, Request request);
 
     Place update(Long placeId, Long cityId, String name, String description, String address, String telephoneNumber,
-                 Long categoryId, List<Image> gallery, Image thumbnail);
+                 Long categoryId, List<Image> gallery, Image thumbnail,
+                 Float ratingSum, int ratingCount);
 }

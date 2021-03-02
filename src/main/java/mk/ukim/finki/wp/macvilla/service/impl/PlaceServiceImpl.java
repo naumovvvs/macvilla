@@ -55,7 +55,7 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public Place update(Long placeId, Long cityId, String name, String description, String address, String telephoneNumber,
-                        Long categoryId, List<Image> gallery, Image thumbnail) {
+                        Long categoryId, List<Image> gallery, Image thumbnail, Float ratingSum, int ratingCount) {
 
         Place place = this.placeRepository.findById(placeId).orElseThrow(() -> new PlaceNotFoundException(placeId));
 
@@ -66,6 +66,7 @@ public class PlaceServiceImpl implements PlaceService {
         place.setDescription(description);
         place.setAddress(address);
         place.setTelephoneNumber(telephoneNumber);
+        place.setRating(ratingSum/ratingCount);
 
         Category category = this.categoryService.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException(categoryId));
         place.setCategory(category);

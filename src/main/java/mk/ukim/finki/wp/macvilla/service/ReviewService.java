@@ -14,4 +14,8 @@ public interface ReviewService {
 
     // if ascending = false, then we return places in descending order
     List<Review> listAllReviewsByRating(Float rating, boolean ascending);
+
+    List<Review> getLatestReviews();
+
+    void removeAllWithPlace(Place place);
 }

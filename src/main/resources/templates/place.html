@@ -1,4 +1,4 @@
-<div id="app">
+<div id="app" xmlns:th="http://www.thymeleaf.org">
 
 <div class="container-fluid" id="place_pic">
     <svg id="heart_icon" v-bind:class="mt-5" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
@@ -51,13 +51,13 @@
 <!--                {{ initMap(place.map) }}-->
 <!--                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1658.9016005261224!2d22.892706740739367!3d41.67297692967391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14aa1159e38f2531%3A0x80b21b24c931199d!2z0JDRg9GA0L7RgNCwINCg0LXRgdC-0YDRgiAmINCh0L_QsA!5e1!3m2!1smk!2smk!4v1614383143220!5m2!1smk!2smk" width="100%" height="120%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>-->
 
-            <div id="app2">
-                <template>
-                    <gmaps-map>
-                        <gmaps-marker :position="{ lat: -27, lng: 153 }" />
-                    </gmaps-map>
-                </template>
-            </div>
+<!--            <div id="app2">-->
+<!--                <template>-->
+<!--                    <gmaps-map>-->
+<!--                        <gmaps-marker :position="{ lat: -27, lng: 153 }" />-->
+<!--                    </gmaps-map>-->
+<!--                </template>-->
+<!--            </div>-->
 
 
 <!--            <template>-->
@@ -87,7 +87,7 @@
 
         <div class="col-lg-3 col-md-4 col-6" v-for="image in place.gallery">
             <a href="" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" v-bind:src="'/' + image.imageURL" alt="image.description">
+<!--                <img class="img-fluid img-thumbnail" v-bind:src="'/' + image.imageURL" alt="image.description">-->
             </a>
         </div>
 
@@ -95,145 +95,67 @@
 
     </div>
 
+
+    <!--TODO-->
+    <!--Form for entering review-->
+    <div class="container" id="review_container">
+        <th:block sec:authorize="!isAuthenticated()">
+            <h4>Мора да бидете логирани за да коментирате</h4>
+        </th:block>
+
+        <th:block sec:authorize="isAuthenticated()">
+            <form th:method="POST" th:action="@{'/api/place/'+${placeId}+'/reviews/new'}">
+                <h5 class="form-label">Оценете го местото</h5>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ratingStars" id="inlineRadio1" value="one_star">
+                    <label class="form-check-label" for="inlineRadio1">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ratingStars" id="inlineRadio2" value="two_stars">
+                    <label class="form-check-label" for="inlineRadio2">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ratingStars" id="inlineRadio3" value="three_stars">
+                    <label class="form-check-label" for="inlineRadio1">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ratingStars" id="inlineRadio4" value="four_stars">
+                    <label class="form-check-label" for="inlineRadio2">4</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ratingStars" id="inlineRadio5" value="five_stars">
+                    <label class="form-check-label" for="inlineRadio1">5</label>
+                </div>
+
+                <div class="mb-3">
+                    <label for="reviewContent" class="form-label">Внесете го вашиот коментар</label>
+                    <textarea class="form-control" id="reviewContent" rows="3" name="reviewContent"></textarea>
+                </div>
+
+                <button class="btn btn-outline-primary btn-primary" type="submit">Внеси</button>
+            </form>
+        </th:block>
+    </div>
+
+
+    <!--TODO-->
+    <!--All reviews listed-->
+    <div id="allReviews" class="container">
+        <div v-for="review in reviews" class="card-body" style="border: 2px solid gray; padding: 15px; margin-bottom: 15px;">
+            <h3>{{ review.author.name }}</h3>
+            <h5>{{ review.content }}</h5>
+            <h6>{{ review.reviewDate }}</h6>
+        </div>
+    </div>
+
+
 </div>
 
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<!--<script src="/js/jquery.geolocation.edit.js"></script>-->
-
-<!--<script>-->
-<!--    $("#map").geolocate({-->
-<!--        lat: 42.123,-->
-<!--        lng: 23.323-->
-<!--    });-->
-<!--</script>-->
-
-<script>
-    import x5GMaps from 'x5-gmaps'
-    // Option 1: Just your key
-    Vue.use(x5GMaps, 'AIzaSyDj1xwv5mI8puYYGf6HviG8G_x8UXKHqs8')
-
-    // import * as VueGoogleMaps from 'vue2-google-maps';
-    //
-    // Vue.use(VueGoogleMaps, {
-    //     load: {
-    //         key: 'AIzaSyDj1xwv5mI8puYYGf6HviG8G_x8UXKHqs8'
-    //     },
-    //     installComponents: true
-    // });
-    //
-    // Vue.component('google-map', VueGoogleMaps.Map);
 
 
-    var vm2 = new Vue({
-        el: '#app2',
-        render: (h) => h(App),
-    });
-
-    import { gmapsMap, gmapsMarker } from 'x5-gmaps'
-
-    export default {
-        components: { gmapsMap, gmapsMarker },
-    }
-
-    // import { gmapsMap } from 'x5-gmaps'
-    //
-    // export default {
-    //     components: { gmapsMap },
-    //     data: () => ({
-    //         mapOptions: {
-    //             center: { lat: -27.47, lng: 153.025 },
-    //             zoom: 12,
-    //         },
-    //     }),
-    // }
-</script>
-
-<script>
-    let path = window.location.pathname;
-    let pom = "";
-
-    for(var i=path.length-1; i>=0; i--){
-        if(path[i]==="/")
-            break;
-
-        pom = pom + path[i];
-    }
-
-    var split = pom.split("");
-    var reverse = split.reverse();
-    var id = reverse.join("");
-
-    const apiURL = "http://localhost:8080/api/place/" + id;
-
-    // $.ajax({
-    //     url: apiURL
-    // }).then(function(data) {
-    //     setParameters(data);
-    // });
-    //
-    // function setParameters(data){
-    //     latitude = data.location.latitude;
-    //     longitude = data.location.longitude;
-    // }
+<script src="/js/place.js"></script>
 
 
 
-
-
-    var vm = new Vue({
-        el: "#app",
-        data(){
-            return{
-                place: {}
-            }
-        },
-        created(){
-            fetch(apiURL)
-                .then(response => {
-                    return response.json()
-                })
-                .then(place => {
-                    this.place = place
-                })
-        },
-        methods: {
-            // initMap: function(placeMap){
-            //     // console.log(placeMap);
-            //     //
-            //     // this.map = new google.maps.Map(document.getElementById("map"), {
-            //     //     center: { lat: placeMap.latitude, lng: placeMap.longitude },
-            //     //     zoom: 8,
-            //     // });
-            // }
-        }
-    });
-</script>
-
-
-
-
-<!--<script>-->
-<!--    function initMap() {-->
-<!--        let longitude = place.location.longitude;-->
-<!--        let latitude = place.location.latitude;-->
-
-<!--        let location = {lat: latitude, lng: longitude};-->
-
-<!--        let map = new google.maps.Map(document.getElementById("map"), {-->
-<!--            zoom: 8,-->
-<!--            center: location-->
-<!--        });-->
-
-<!--        let marker = new google.maps.Marker({-->
-<!--            position: location,-->
-<!--            map: map-->
-<!--        });-->
-<!--    }-->
-
-<!--    initMap();-->
-<!--</script>-->
-
-<!--<script async-->
-<!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1xwv5mI8puYYGf6HviG8G_x8UXKHqs8&callback=initMap">-->
-<!--</script>-->
 

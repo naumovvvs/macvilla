@@ -5,6 +5,7 @@
     "vue2-google-maps": "^0.10.7"
   },
   "devDependencies": {
+    "axios": "^0.21.1",
     "x5-gmaps": "^1.0.0-alpha.3"
   }
 }

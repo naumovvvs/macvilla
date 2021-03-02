@@ -5,6 +5,7 @@ import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.model.Review;
 import mk.ukim.finki.wp.macvilla.model.exceptions.ClientNotFoundException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.PlaceNotFoundException;
+import mk.ukim.finki.wp.macvilla.repository.PlaceRepository;
 import mk.ukim.finki.wp.macvilla.repository.ReviewRepository;
 import mk.ukim.finki.wp.macvilla.service.PlaceService;
 import mk.ukim.finki.wp.macvilla.service.ReviewService;
@@ -29,13 +30,21 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Review create(String content, Float rating, Client author, Place place) {
-        this.placeService.findById(place.getPlaceId())
+        Place tempPlace = this.placeService.findById(place.getPlaceId())
                 .orElseThrow(() -> new PlaceNotFoundException(place.getPlaceId()));
 
         this.userService.findById(author.getUserId())
                 .orElseThrow(() -> new ClientNotFoundException(author.getUserId()));
 
-        return this.reviewRepository.save(new Review(content, rating, author, place));
+        tempPlace.setRatingSum(tempPlace.getRatingSum()+rating);
+        tempPlace.setRatingCount(tempPlace.getRatingCount()+1);
+
+        this.placeService.update(tempPlace.getPlaceId(), tempPlace.getCity().getCityId(), tempPlace.getName(),
+                tempPlace.getDescription(), tempPlace.getAddress(), tempPlace.getTelephoneNumber(),
+                tempPlace.getCategory().getCategoryId(), tempPlace.getGallery(), tempPlace.getThumbnail(),
+                tempPlace.getRatingSum(), tempPlace.getRatingCount());
+
+        return this.reviewRepository.save(new Review(content, rating, author, tempPlace));
     }
 
     @Override
@@ -66,5 +75,17 @@ public class ReviewServiceImpl implements ReviewService {
             return this.reviewRepository.findAllByRatingGreaterThanEqual(rating).stream()
                     .sorted(Comparator.comparing(Review::getRating).reversed()).collect(Collectors.toList());
         }
+    }
+
+    @Override
+    public void removeAllWithPlace(Place place) {
+        this.reviewRepository.deleteReviewsByPlace(place);
+    }
+
+    @Override
+    public List<Review> getLatestReviews() {
+        // returns latest six reviews
+        return this.reviewRepository.findAll().stream()
+                .sorted(Comparator.comparing(Review::getReviewDate)).limit(6).collect(Collectors.toList());
     }
 }

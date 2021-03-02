@@ -32,8 +32,8 @@ public class Place {
     private Category category;
     private Float rating;
 
-    @Transient
-    private int ratingInteger;
+    private float ratingSum;
+    private int ratingCount;
 
     @Transient
     private boolean show = true; // used in frontend for showing based on rating
@@ -68,9 +68,11 @@ public class Place {
         this.thumbnail = thumbnail;
 //      this.map = map;
         this.visits = 0;
-        this.rating = 1.0F;
-        this.ratingInteger = 1;
-        //this.ratingInteger = (int) Math.ceil(this.rating);
+
+        this.ratingSum = 0.0f;
+        this.ratingCount = 0;
+        this.rating = 5.0F;
+
         this.request = request;
     }
 }
