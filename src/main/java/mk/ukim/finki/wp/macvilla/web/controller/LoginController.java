@@ -23,7 +23,11 @@ public class LoginController {
     }
 
     @GetMapping
-    public String getLoginPage(Model model){
+    public String getLoginPage(@RequestParam(required = false)String error, Model model){
+        if(error!=null && !error.isEmpty()){
+            model.addAttribute("error", error);
+        }
+
         model.addAttribute("headTitle", "Login");
         model.addAttribute("bodyContent", "login");
         model.addAttribute("style1", "login.css");
@@ -36,8 +40,6 @@ public class LoginController {
     @PostMapping("")
     public String login(@RequestParam String username, @RequestParam String password, HttpServletRequest request, Model model){
         Optional<User> user = Optional.empty();
-
-        System.out.println("VLEGUVA");
 
         try {
             user = this.userService.login(request.getParameter("username"), request.getParameter("password"));
