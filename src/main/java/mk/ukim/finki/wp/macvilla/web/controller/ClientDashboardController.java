@@ -23,12 +23,13 @@ public class ClientDashboardController {
     }
 
     @GetMapping(value = {"/client/{id}"})
-    public String getClientDashboardPage(@PathVariable(name = "id", required = false) Long id, Model model) {
+    public String getClientDashboardPage(@PathVariable(name = "id") Long id, Model model) {
         model.addAttribute("headTitle", "Client dashboard");
         model.addAttribute("style1", "navbar.css");
         model.addAttribute("style2", "client-profile.css");
         model.addAttribute("style3", "footer.css");
         model.addAttribute("bodyContent", "client-profile");
+        model.addAttribute("userId", "/dashboard/client/"+id);
 
         Client client = null;
         try {

@@ -12,6 +12,9 @@
     background: #302e2e;
     color: #fff;
     border-radius: 15px;
+
+    position: relative;
+    top: 20px;
 }
 
 #reviews .img-text h2 {
@@ -33,21 +36,142 @@
     position: absolute;
     /* width: 100px;
     height: 100px; */
-    width: 25%;
-    height: 30%;
+    width: 30%;
+    height: 35%;
     border: 5px solid rgb(3, 75, 184);
     overflow: hidden;
     /* top: 20px;
     left: 155px; */
-    top: 10%;
-    left: 40%;
+    top: 12%;
+    left: 35%;
+    z-index: 1;
     border-radius: 50%;
 }
 
 #reviews .img-area img {
-    min-height: 90px;
-    min-width: 90px;
+    /*min-height: 90px;
+    min-width: 90px;*/
+    height: 95px;
+    width: 95px;
 }
+
+
+@media only screen and (max-width: 1200px) {
+    #reviews .img-area{
+        width: 35%;
+        height: 35%;
+        position: absolute;
+        top: 15%;
+        left: 30%;
+    }
+
+    #reviews .img-text {
+        position: relative;
+        top: 30px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    #reviews .img-area{
+        width: 40%;
+        height: 25%;
+        position: absolute;
+        top:70px;
+        left: 30%;
+    }
+
+    #reviews .img-text {
+        position: relative;
+        top: 70px;
+        height: auto;
+    }
+
+    #reviews .img-text h2 {
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    #reviews .img-text p {
+        font-size: 12px;
+    }
+
+    #reviews .img-area img {
+        /*min-height: 90px;
+        min-width: 90px;*/
+        height: 75px;
+        width: 75px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #reviews .img-area{
+        width: 40%;
+        height: 35%;
+        position: absolute;
+        top:100px;
+        left: 30%;
+    }
+
+    #reviews .img-text {
+        position: relative;
+        top: 100px;
+        height: auto;
+    }
+
+    #reviews .img-text h2 {
+        font-size: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    #reviews .img-text p {
+        font-size: 18px;
+    }
+
+    #reviews .img-area img {
+        /*min-height: 90px;
+        min-width: 90px;*/
+        height: 195px;
+        width: 195px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    #reviews .img-area{
+        width: 50%;
+        height: 32%;
+        position: absolute;
+        top:100px;
+        left: 25%;
+    }
+
+    #reviews .img-text {
+        position: relative;
+        top: 100px;
+        height: auto;
+        padding-top: 200px;
+    }
+
+    #reviews .img-text h2 {
+        font-size: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    #reviews .img-text p {
+        font-size: 18px;
+    }
+
+    #reviews .img-area img {
+        /*min-height: 90px;
+        min-width: 90px;*/
+        height: 180px;
+        width: 180px;
+    }
+}
+
+
 
 #reviews .carousel-indicators {
     left: 0;

@@ -1,16 +1,28 @@
 #city_pic {
   width: 100%;
-  height: 80vh;
+  max-height: 80vh;
+  min-height: auto;
   overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  background-image: url("../img/ohrid.jpg");
 }
 
-#city_title{
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#city_pic img {
+  width: 100%;
+  object-fit: fill;
   position: relative;
-  top: 80%;
+  top:-20%;
+}
+
+#city_title {
+  position: relative;
+  top: 50%;
   color: white;
+  padding: 10px;
+  z-index: 1;
 }
 
 #icons_container {
