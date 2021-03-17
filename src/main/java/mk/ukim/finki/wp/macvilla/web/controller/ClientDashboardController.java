@@ -35,7 +35,7 @@ public class ClientDashboardController {
         try {
             client = (Client) this.clientService.findById(id);
         } catch (ClientNotFoundException exception) {
-            return "redirect:/dashboard/client/" + id + "?error=" + exception.getMessage();
+            return "redirect:/not-found";
         }
         model.addAttribute("client", client);
 
@@ -48,7 +48,7 @@ public class ClientDashboardController {
         try {
             client = (Client) this.clientService.findById(id);
         } catch (ClientNotFoundException exception) {
-            return "redirect:/dashboard/client?error=" + exception.getMessage();
+            return "redirect:/not-found";
         }
 
         Optional<Place> place = this.placeService.findById(placeId);
@@ -56,7 +56,7 @@ public class ClientDashboardController {
             this.clientService.removeFromFavoritePlaces(client, place.get());
             return "redirect:/dashboard/client/" + id;
         } else {
-            return "redirect:/dashboard/client/" + id + "?error=No place found with the given id to remove!";
+            return "redirect:/not-found";
         }
     }
 

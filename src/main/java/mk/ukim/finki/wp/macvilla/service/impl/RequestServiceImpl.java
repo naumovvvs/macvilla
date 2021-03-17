@@ -67,4 +67,9 @@ public class RequestServiceImpl implements RequestService {
     public Request findById(Long id) {
         return this.requestRepository.findById(id).orElseThrow(() -> new RequestNotFoundException(id));
     }
+
+    @Override
+    public void removeById(Long id) {
+        this.requestRepository.deleteById(id);
+    }
 }

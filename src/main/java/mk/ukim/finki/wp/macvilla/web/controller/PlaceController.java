@@ -78,7 +78,6 @@ public class PlaceController {
     public String placeRegister(@RequestParam String name, @RequestParam String description,
                                 @RequestParam String telephoneNumber, @RequestParam String address,
                                 @RequestParam Long categoryId, @RequestParam Long cityId,
-                                @RequestParam String latitude, @RequestParam String longitude,
                                 @RequestParam String gallery, @RequestParam String thumbnail,
                                 HttpServletRequest request){
 
@@ -102,7 +101,7 @@ public class PlaceController {
                     categoryId, galleryList, thumbnailImage, req);
 
         } else {
-            //error
+            return "redirect:/not-found";
         }
         assert false;
         return "redirect:/dashboard/hotelier/" + manager.getUserId();

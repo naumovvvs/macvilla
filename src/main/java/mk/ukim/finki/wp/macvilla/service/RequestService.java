@@ -18,4 +18,5 @@ public interface RequestService {
     Optional<Request> addTo(Request request);
     Request changeStatus(Request request, RequestStatus requestStatus);
     Request findById(Long id);
+    void removeById(Long id);
 }

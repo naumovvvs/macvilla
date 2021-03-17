@@ -22,82 +22,86 @@
                     <div class="card-body">
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <h6 class="mb-3 text-primary">Personal details</h6>
+                                <h6 class="mb-3 text-primary">Лични информации</h6>
                                 <hr/>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="name">Name</label>
+                                    <label for="name">Име</label>
                                     <input
                                             type="text"
                                             class="form-control"
                                             id="name"
                                             name="name"
-                                            placeholder="Enter name"
-                                            th:value="${admin.name}">
+                                            placeholder="Внеси име"
+                                            th:value="${admin.name}"
+                                            required>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="username">Username</label>
+                                    <label for="username">Корисничко име</label>
                                     <input
                                             type="text"
                                             class="form-control"
                                             id="username"
                                             name="username"
-                                            placeholder="Enter username"
-                                            th:value="${admin.username}">
+                                            placeholder="Внеси корисничко име"
+                                            th:value="${admin.username}"
+                                            required>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="surname">Surname</label>
+                                    <label for="surname">Презиме</label>
                                     <input
                                             type="text"
                                             class="form-control"
                                             id="surname"
                                             name="surname"
-                                            placeholder="Enter surname"
-                                            th:value="${admin.surname}">
+                                            placeholder="Внеси презиме"
+                                            th:value="${admin.surname}"
+                                            required>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="email">Email</label>
+                                    <label for="email">E-mail адреса</label>
                                     <input type="email"
                                            class="form-control"
                                            id="email"
                                            name="email"
-                                           placeholder="Enter email"
-                                           th:value="${admin.email}">
+                                           placeholder="Внеси e-mail адреса"
+                                           th:value="${admin.email}"
+                                           required>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="password">Password</label>
+                                    <label for="password">Лозинка</label>
                                     <input
                                             type="password"
                                             class="form-control"
                                             id="password"
                                             name="password"
-                                            placeholder="Enter password">
+                                            placeholder="Внеси нова лозинка">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="thumbnail">Thumbnail</label>
+                                    <label for="thumbnail">Профилна слика</label>
                                     <input type="text"
                                            class="form-control"
                                            id="thumbnail"
                                            name="thumbnail"
-                                           placeholder="Enter thumbnail URL"
+                                           placeholder="Внеси URL на профилна слика"
                                            th:value="${admin.avatarURL}">
                                 </div>
                             </div>
                         </div>
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <h6 class="mt-3 text-primary">Managed requests</h6>
+                                <h6 class="mt-3 text-primary">Менаџирани барања за регистрација</h6>
                                 <hr/>
                             </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -108,7 +112,7 @@
                                                 <button class="btn btn-warning collapsed" type="button"
                                                         data-toggle="collapse" data-target="#collapseOne"
                                                         aria-expanded="true" aria-controls="collapseOne">
-                                                    Pending requests
+                                                    Неодлучени барања
                                                 </button>
                                             </h2>
                                         </div>
@@ -124,21 +128,21 @@
                                                         <div class="d-flex w-100 justify-content-between">
                                                             <div>
                                                                 <p class="mb-1" style="display: inline-block;">
-                                                                    Author <b><th:block th:text="${p.manager.username}"/></b>
+                                                                    Автор <b><th:block th:text="${p.manager.username}"/></b>
                                                                 </p>
                                                                 &nbsp;|&nbsp;
                                                                 <p class="mb-1" style="display: inline-block;">
-                                                                    Place <b><th:block th:text="${p.name}"/></b>
+                                                                    Место <b><th:block th:text="${p.name}"/></b>
                                                                 </p>
                                                             </div>
                                                             <div>
                                                                 <a th:href="@{'/dashboard/admin/{id}/approve/{requestId}' ( id=${admin.userId}, requestId=${p.request.requestId} ) }"
                                                                    class="btn btn-outline-success btn-sm">
-                                                                    Approve
+                                                                    Одобри
                                                                 </a>
                                                                 <a th:href="@{'/dashboard/admin/{id}/deny/{requestId}' ( id=${admin.userId}, requestId=${p.request.requestId} ) }"
                                                                    class="btn btn-outline-danger btn-sm">
-                                                                    Deny
+                                                                    Одбиј
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -160,7 +164,7 @@
                                                 <button class="btn btn-success collapsed" type="button"
                                                         data-toggle="collapse" data-target="#collapseTwo"
                                                         aria-expanded="false" aria-controls="collapseTwo">
-                                                    Approved requests
+                                                    Одобрени барања
                                                 </button>
                                             </h2>
                                         </div>
@@ -175,11 +179,11 @@
                                                         <div class="d-flex w-100 justify-content-between">
                                                             <div>
                                                                 <p class="mb-1" style="display: inline-block;">
-                                                                    Author <b><th:block th:text="${a.manager.username}"/></b>
+                                                                    Автор <b><th:block th:text="${a.manager.username}"/></b>
                                                                 </p>
                                                                 &nbsp;|&nbsp;
                                                                 <p class="mb-1" style="display: inline-block;">
-                                                                    Place <b><th:block th:text="${a.name}"/></b>
+                                                                    Место <b><th:block th:text="${a.name}"/></b>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -201,7 +205,7 @@
                                                 <button class="btn btn-danger collapsed" type="button"
                                                         data-toggle="collapse" data-target="#collapseThree"
                                                         aria-expanded="false" aria-controls="collapseThree">
-                                                    Denied requests
+                                                    Одбиени барања
                                                 </button>
                                             </h2>
                                         </div>
@@ -216,11 +220,11 @@
                                                         <div class="d-flex w-100 justify-content-between">
                                                             <div>
                                                                 <p class="mb-1" style="display: inline-block;">
-                                                                    Author <b><th:block th:text="${d.manager.username}"/></b>
+                                                                    Автор <b><th:block th:text="${d.manager.username}"/></b>
                                                                 </p>
                                                                 &nbsp;|&nbsp;
                                                                 <p class="mb-1" style="display: inline-block;">
-                                                                    Place <b><th:block th:text="${d.name}"/></b>
+                                                                    Место <b><th:block th:text="${d.name}"/></b>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -241,7 +245,7 @@
                         </div>
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <h6 class="mt-3 text-primary">Blocked hoteliers</h6>
+                                <h6 class="mt-3 text-primary">Блокирани хотелиери</h6>
                                 <hr/>
                             </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-0">
@@ -255,11 +259,11 @@
                                             <div class="text-right">
                                                 <a class="btn btn-outline-danger btn-sm"
                                                    th:href="@{'/dashboard/admin/{id}/remove-user/{userId}' ( id=${admin.userId}, userId=${b.userId} ) }">
-                                                    Remove
+                                                    Отстрани
                                                 </a>
                                                 <a class="btn btn-outline-secondary btn-sm"
                                                    th:href="@{'/dashboard/admin/{id}/unblock-user/{userId}' ( id=${admin.userId}, userId=${b.userId} ) }">
-                                                    Unblock
+                                                    Деблокирај
                                                 </a>
                                             </div>
                                         </div>
@@ -272,9 +276,9 @@
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-0">
                                 <div class="text-right">
-                                    <a type="button" class="btn btn-secondary" th:href="@{ '/home' }">Cancel</a>
+                                    <a type="button" class="btn btn-secondary" th:href="@{ '/home' }">Назад</a>
                                     <button class="btn btn-primary" type="submit">
-                                        Update
+                                        Измени
                                     </button>
                                 </div>
                             </div>

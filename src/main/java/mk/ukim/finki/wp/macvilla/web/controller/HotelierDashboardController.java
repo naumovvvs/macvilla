@@ -3,9 +3,7 @@ package mk.ukim.finki.wp.macvilla.web.controller;
 import mk.ukim.finki.wp.macvilla.model.Hotelier;
 import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.model.exceptions.HotelierNotFoundException;
-import mk.ukim.finki.wp.macvilla.service.HotelierService;
-import mk.ukim.finki.wp.macvilla.service.PlaceService;
-import mk.ukim.finki.wp.macvilla.service.ReviewService;
+import mk.ukim.finki.wp.macvilla.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +18,15 @@ public class HotelierDashboardController {
     private final PlaceService placeService;
     private final HotelierService hotelierService;
     private final ReviewService reviewService;
+    private final RequestService requestService;
+    private final ImageService imageService;
 
-    public HotelierDashboardController(PlaceService placeService, HotelierService hotelierService, ReviewService reviewService) {
+    public HotelierDashboardController(PlaceService placeService, HotelierService hotelierService, ReviewService reviewService, RequestService requestService, ImageService imageService) {
         this.placeService = placeService;
         this.hotelierService = hotelierService;
         this.reviewService = reviewService;
+        this.requestService = requestService;
+        this.imageService = imageService;
     }
 
     @GetMapping(value = {"/hotelier/{id}"})
@@ -39,7 +41,7 @@ public class HotelierDashboardController {
         try {
             hotelier = (Hotelier) this.hotelierService.findById(id);
         } catch (HotelierNotFoundException exception) {
-            return "redirect:/dashboard/hotelier/" + id + "?error=" + exception.getMessage();
+            return "redirect:/not-found";
         }
         List<Place> managedPlaces = this.placeService.listAllPlaces()
                 .stream().filter(p -> p.getManager().getUserId().equals(id)).collect(Collectors.toList());
@@ -55,7 +57,7 @@ public class HotelierDashboardController {
         try {
             hotelier = (Hotelier) this.hotelierService.findById(id);
         } catch (HotelierNotFoundException exception) {
-            return "redirect:/dashboard/hotelier/" + id + "?error=" + exception.getMessage();
+            return "redirect:/not-found";
         }
 
         Optional<Place> place = this.placeService.findById(placeId);
@@ -63,9 +65,11 @@ public class HotelierDashboardController {
         if(place.isPresent()){
             this.reviewService.removeAllWithPlace(place.get());
             this.hotelierService.deletePlace(id, placeId);
+            this.requestService.removeById(place.get().getRequest().getRequestId());
+            this.imageService.removeById(place.get().getThumbnail().getImageId());
             return "redirect:/dashboard/hotelier/" + id;
         } else {
-            return "redirect:/dashboard/hotelier/" + id + "?error=No place found with the given id to remove!";
+            return "redirect:/not-found";
         }
     }
 

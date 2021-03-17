@@ -46,9 +46,6 @@ public class Place {
     private Image thumbnail;
     // number of clicks
     private Integer visits;
-//    // coordinates of place
-    @OneToOne
-    private Coordinates location;
 
     public Place(){
         this.gallery = new ArrayList<>();
@@ -66,7 +63,6 @@ public class Place {
         this.category = category;
         this.gallery = gallery;
         this.thumbnail = thumbnail;
-//      this.map = map;
         this.visits = 0;
 
         this.ratingSum = 0.0f;

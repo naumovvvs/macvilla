@@ -50,7 +50,7 @@
             <div class="container">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="true" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                    <span>Filter</span>
+                    <span>Филтер</span>
                 </button>
 
             </div>
@@ -189,7 +189,7 @@
                         <form class="d-flex" @submit.prevent="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                                 v-model="searchText">
-                            <button class="btn btn-outline-success" type="submit" >Search</button>
+                            <button class="btn btn-outline-success" type="submit" >Пребарај</button>
                         </form>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
                                         <!--{{ roundRating(place.rating) }}-->
                                     </p>
                                 </div>
-                                <a v-bind:href="'/place/' + place.placeId" class="mt-auto btn btn-primary  ">Read More</a>
+                                <a v-bind:href="'/place/' + place.placeId" class="mt-auto btn btn-primary  ">Прочитај повеќе</a>
                             </div>
                         </div>
                         <!-- Carousel start -->
@@ -240,11 +240,11 @@
                                 </div>
                                 <button class="carousel-control-prev" type="button" v-bind:data-bs-target="'placeCarousel' + place.placeId"  data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
+                                    <span class="visually-hidden">Претходно</span>
                                 </button>
                                 <button class="carousel-control-next" type="button" v-bind:data-bs-target="'placeCarousel' + place.placeId"  data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
+                                    <span class="visually-hidden">Следно</span>
                                 </button>
                             </div>
                         </div>

@@ -34,4 +34,9 @@ public class ImageServiceImpl implements ImageService {
     public Image save(String imageURL) {
         return this.imageRepository.save(new Image(imageURL));
     }
+
+    @Override
+    public void removeById(Long id) {
+        this.imageRepository.deleteById(id);
+    }
 }

@@ -40,7 +40,7 @@ public class AdminDashboardController {
         try {
             administrator = (Administrator) this.administratorService.findById(id);
         } catch (AdministratorNotFoundException exception) {
-            return "redirect:/dashboard/admin/" + id + "?error=" + exception.getMessage();
+            return "redirect:/not-found";
         }
 
         model.addAttribute("admin", administrator);
@@ -71,7 +71,7 @@ public class AdminDashboardController {
         try {
             request = this.requestService.findById(requestId);
         } catch (RequestNotFoundException exception) {
-            return "redirect:/dashboard/admin/" + id + "?error=No request found with the given id!";
+            return "redirect:/not-found";
         }
         this.requestService.changeStatus(request, RequestStatus.APPROVED);
         return "redirect:/dashboard/admin/" + id;
@@ -84,7 +84,7 @@ public class AdminDashboardController {
         try {
             request = this.requestService.findById(requestId);
         } catch (RequestNotFoundException exception) {
-            return "redirect:/dashboard/admin/" + id + "?error=No request found with the given id!";
+            return "redirect:/not-found";
         }
         this.requestService.changeStatus(request, RequestStatus.DENIED);
         return "redirect:/dashboard/admin/" + id;
