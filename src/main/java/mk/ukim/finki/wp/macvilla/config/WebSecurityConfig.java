@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("macvilla-cookie")
                 .logoutSuccessUrl("/home")
                 .and()
-                .exceptionHandling().accessDeniedPage("/access_denied");
+                .exceptionHandling().accessDeniedPage("/access-denied");
     }
 
     @Override

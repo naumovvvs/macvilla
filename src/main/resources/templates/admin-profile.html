@@ -124,11 +124,11 @@
                                                         <div class="d-flex w-100 justify-content-between">
                                                             <div>
                                                                 <p class="mb-1" style="display: inline-block;">
-                                                                    <b>Author:</b> <th:block th:text="${p.manager.username}"/>
+                                                                    Author <b><th:block th:text="${p.manager.username}"/></b>
                                                                 </p>
                                                                 &nbsp;|&nbsp;
                                                                 <p class="mb-1" style="display: inline-block;">
-                                                                    <b>Place:</b> <th:block th:text="${p.name}"/>
+                                                                    Place <b><th:block th:text="${p.name}"/></b>
                                                                 </p>
                                                             </div>
                                                             <div>
@@ -175,19 +175,13 @@
                                                         <div class="d-flex w-100 justify-content-between">
                                                             <div>
                                                                 <p class="mb-1" style="display: inline-block;">
-                                                                    <b>Author - </b> <th:block th:text="${a.manager.username}"/>
+                                                                    Author <b><th:block th:text="${a.manager.username}"/></b>
                                                                 </p>
                                                                 &nbsp;|&nbsp;
                                                                 <p class="mb-1" style="display: inline-block;">
-                                                                    <b>Place - </b> <th:block th:text="${a.name}"/>
+                                                                    Place <b><th:block th:text="${a.name}"/></b>
                                                                 </p>
                                                             </div>
-<!--                                                            <div>-->
-<!--                                                                <a class="btn btn-outline-danger btn-sm"-->
-<!--                                                                   th:href="@{'/dashboard/admin/{id}/remove/{requestId}' ( id=${admin.userId}, requestId=${a.request.requestId} ) }">-->
-<!--                                                                    Remove-->
-<!--                                                                </a>-->
-<!--                                                            </div>-->
                                                         </div>
                                                         <p class="small mb-1">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
@@ -222,19 +216,13 @@
                                                         <div class="d-flex w-100 justify-content-between">
                                                             <div>
                                                                 <p class="mb-1" style="display: inline-block;">
-                                                                    <b>Author</b> <th:block th:text="${d.manager.username}"/>
+                                                                    Author <b><th:block th:text="${d.manager.username}"/></b>
                                                                 </p>
                                                                 &nbsp;|&nbsp;
                                                                 <p class="mb-1" style="display: inline-block;">
-                                                                    <b>Place to register</b> <th:block th:text="${d.name}"/>
+                                                                    Place <b><th:block th:text="${d.name}"/></b>
                                                                 </p>
                                                             </div>
-<!--                                                            <div>-->
-<!--                                                                <a class="btn btn-outline-danger btn-sm"-->
-<!--                                                                   th:href="@{'/dashboard/admin/{id}/remove/{requestId}' ( id=${admin.userId}, requestId=${d.request.requestId} ) }">-->
-<!--                                                                    Remove-->
-<!--                                                                </a>-->
-<!--                                                            </div>-->
                                                         </div>
                                                         <p class="small mb-1">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">

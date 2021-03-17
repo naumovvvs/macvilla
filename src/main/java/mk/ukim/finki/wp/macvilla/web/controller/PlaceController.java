@@ -2,6 +2,7 @@ package mk.ukim.finki.wp.macvilla.web.controller;
 
 import mk.ukim.finki.wp.macvilla.model.*;
 import mk.ukim.finki.wp.macvilla.service.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,6 +73,7 @@ public class PlaceController {
         return "master-template";
     }
 
+    @PreAuthorize("hasRole('ROLE_HOTELIER')")
     @PostMapping(value = {"/register"})
     public String placeRegister(@RequestParam String name, @RequestParam String description,
                                 @RequestParam String telephoneNumber, @RequestParam String address,

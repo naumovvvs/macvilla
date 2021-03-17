@@ -90,23 +90,6 @@ public class AdminDashboardController {
         return "redirect:/dashboard/admin/" + id;
     }
 
-    // causing cascade problems (deleting request -> deleting place -> delete from faves)
-    // therefore -> not applicable
-    /*
-    @GetMapping(value = {"/admin/{id}/remove/{requestId}"})
-    public String removeRequest(@PathVariable Long id, @PathVariable Long requestId) {
-
-        Request request = null;
-        try {
-            request = this.requestService.findById(requestId);
-        } catch (RequestNotFoundException exception) {
-            return "redirect:/dashboard/admin/" + id + "?error=No request found with the given id!";
-        }
-        this.requestService.removeFrom(request);
-        return "redirect:/dashboard/admin/" + id;
-    }
-    */
-
     @PostMapping("/admin/{id}/edit")
     public String updateAdministrator(
             @PathVariable Long id,
