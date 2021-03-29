@@ -1,4 +1,6 @@
-<img src="/images/macVillaLogo.jpg" alt="Logo" width="200" height="auto"/>
+<p align="center"> 
+  <img src="/images/macVillaLogo.jpg" align="end" alt="Logo" width="225" height="auto"/>
+</p>
 
 # MacVilla
 *Travel guide for tourists in Macedonia, looking for villas, hotels, restaurants or
@@ -33,17 +35,27 @@ ___
     * jelena.ognjanoska@students.finki.ukim.mk
 
 ## Sample Images
+*Login page*
 ![alt text](images/login.png "Login page")
+*Register page*
 ![alt text](images/register.png "Register page")
+*Admin dashboard*
 ![alt text](images/admin.png "Admin dashboard")
+*Hotelier dashboard*
 ![alt text](images/hotelier.png "Hotelier dashboard")
+*User dashboard*
 ![alt text](images/user.png "User dashboard")
+*Home page*
 ![alt text](images/home1.png "Home page 1")
 ![alt text](images/home2.png "Home page 2")
 ![alt text](images/home3.png "Home page 3")
 ![alt text](images/home4.png "Home page 4")
+*Contact us page*
 ![alt text](images/contact.png "Contact us page")
+*About us page*
 ![alt text](images/aboutUs1.png "About us 1")
 ![alt text](images/aboutUs2.png "About us 2")
+*403 Forbidden page*
 ![alt text](images/403.png "Forbidden page")
+*404 Not found page*
 ![alt text](images/404.png "Not found page")
