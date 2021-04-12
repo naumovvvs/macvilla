@@ -19,13 +19,16 @@ public class AdminDashboardController {
     private final RequestService requestService;
     private final HotelierService hotelierService;
     private final PlaceService placeService;
+    private final MessageService messageService;
 
     public AdminDashboardController(AdministratorService administratorService, RequestService requestService,
-                                    HotelierService hotelierService, PlaceService placeService) {
+                                    HotelierService hotelierService, PlaceService placeService,
+                                    MessageService messageService) {
         this.administratorService = administratorService;
         this.requestService = requestService;
         this.hotelierService = hotelierService;
         this.placeService = placeService;
+        this.messageService = messageService;
     }
 
     @GetMapping(value = {"/admin/{id}"})
@@ -58,6 +61,9 @@ public class AdminDashboardController {
         model.addAttribute("pendingPlaces", pendingPlaces);
         model.addAttribute("approvedPlaces", approvedPlaces);
         model.addAttribute("deniedPlaces", deniedPlaces);
+
+        List<Message> messageList = this.messageService.findAll();
+        model.addAttribute("messages", messageList);
 
         List<User> blockedHoteliers = this.hotelierService.findAllBlocked();
         model.addAttribute("blockedHoteliers", blockedHoteliers);

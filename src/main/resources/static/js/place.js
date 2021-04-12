@@ -16,6 +16,7 @@ var reverse = split.reverse();
 var id = reverse.join("");
 
 const apiURL = "http://localhost:8080/api/place/" + id;
+const reviewsApiURL = "http://localhost:8080/api/reviews/" + id;
 
 
 var vm = new Vue({
@@ -36,7 +37,7 @@ var vm = new Vue({
             this.place = place
         });
 
-        fetch(apiURL+"/reviews")
+        fetch(reviewsApiURL)
         .then(response => {
             return response.json()
         })

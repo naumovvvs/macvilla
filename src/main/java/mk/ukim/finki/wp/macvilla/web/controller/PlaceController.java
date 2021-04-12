@@ -1,6 +1,7 @@
 package mk.ukim.finki.wp.macvilla.web.controller;
 
 import mk.ukim.finki.wp.macvilla.model.*;
+import mk.ukim.finki.wp.macvilla.model.exceptions.PlaceNotFoundException;
 import mk.ukim.finki.wp.macvilla.service.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,11 +28,12 @@ public class PlaceController {
     private final HotelierService hotelierService;
     private final ImageService imageService;
     private final RequestService requestService;
+    private final ReviewService reviewService;
 
     public PlaceController(PlaceService placeService, CityService cityService,
                            CategoryService categoryService, UserService userService,
                            HotelierService hotelierService, ImageService imageService,
-                           RequestService requestService) {
+                           RequestService requestService, ReviewService reviewService) {
         this.placeService = placeService;
         this.cityService = cityService;
         this.categoryService = categoryService;
@@ -38,6 +41,7 @@ public class PlaceController {
         this.hotelierService = hotelierService;
         this.imageService = imageService;
         this.requestService = requestService;
+        this.reviewService = reviewService;
     }
 
     @GetMapping(value = {"/{id}"})
@@ -48,11 +52,17 @@ public class PlaceController {
 
         model.addAttribute("headTitle", "Place");
         model.addAttribute("bodyContent", "place");
-        model.addAttribute("placeId", this.placeService.findById(id).get().getPlaceId());
 
+        Optional<Place> place = this.placeService.findById(id);
+        if(place.isEmpty())
+            return "redirect:/not-found";
+
+        this.placeService.incrementVisits(place.get());
+        model.addAttribute("placeId", place.get().getPlaceId());
         return "master-template";
     }
 
+    @PreAuthorize("hasRole('ROLE_HOTELIER')")
     @GetMapping(value = {"/register"})
     public String getPlaceRegisterPage(HttpServletRequest request, Model model){
         model.addAttribute("style1", "navbar.css");
@@ -73,7 +83,6 @@ public class PlaceController {
         return "master-template";
     }
 
-    @PreAuthorize("hasRole('ROLE_HOTELIER')")
     @PostMapping(value = {"/register"})
     public String placeRegister(@RequestParam String name, @RequestParam String description,
                                 @RequestParam String telephoneNumber, @RequestParam String address,
@@ -105,5 +114,36 @@ public class PlaceController {
         }
         assert false;
         return "redirect:/dashboard/hotelier/" + manager.getUserId();
+    }
+    @PostMapping("/{id}/add-review")
+    public String postReview(@PathVariable Long id,
+                           @RequestParam String ratingStars, @RequestParam String reviewContent,
+                           HttpServletRequest request, HttpServletResponse response){
+        Place place = this.placeService.findById(id).orElseThrow(() -> new PlaceNotFoundException(id));
+
+        float rating = 1.0f;
+
+        switch (ratingStars) {
+            case "two_stars":
+                rating = 2.0f;
+                break;
+            case "three_stars":
+                rating = 3.0f;
+                break;
+            case "four_stars":
+                rating = 4.0f;
+                break;
+            case "five_stars":
+                rating = 5.0f;
+                break;
+        }
+
+        Optional<User> client = this.userService.findByUsername(request.getRemoteUser());
+
+        // if the user doesn't exist don't post the review
+        if(client.isPresent()) {
+            this.reviewService.create(reviewContent, rating, (Client)client.get(), place);
+        }
+        return "redirect:/place/" + place.getPlaceId();
     }
 }

@@ -79,6 +79,12 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
+    public void incrementVisits(Place place) {
+        place.setVisits(place.getVisits() + 1);
+        this.placeRepository.save(place);
+    }
+
+    @Override
     public List<Place> listAllByCityId(Long cityId) {
         return this.placeRepository.
                 findAllByCity(this.cityService.findById(cityId).orElseThrow(() -> new CityNotFoundException(cityId)));

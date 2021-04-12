@@ -19,10 +19,12 @@
 
 #city_title {
   position: relative;
-  top: 50%;
+  top: 38%;
   color: white;
   padding: 10px;
   z-index: 1;
+  margin-left: 1%;
+  font-weight: bold;
 }
 
 #icons_container {

@@ -46,7 +46,7 @@
                             <div class="carousel-item active">
                                 <div class="row">
 
-                                    <div class="col-md-4 col-sm-12 xol-xs-12 mb-3" v-for="city in activeArray">
+                                    <div class="col-md-4 col-sm-12 xol-xs-12 mb-3" v-for="city in activeCityArray">
                                         <div class="card box">
                                             <div class="img-fluid slide-img">
                                                 <img alt="..." v-bind:src="city.thumbnail.imageURL">
@@ -65,13 +65,13 @@
                                 </div>
                             </div>
 
-                            <div class="carousel-item" v-for="cities in otherArrays">
+                            <div class="carousel-item" v-for="cities in otherCityArrays">
                                 <div class="row">
 
                                     <div class="col-md-4 col-sm-12 xol-xs-12 mb-3" v-for="city in cities">
                                         <div class="card box">
                                             <div class="img-fluid slide-img">
-                                                <img alt="..." v-bind:src="city.thumbnail.imageURL">
+                                                <img alt="..." v-bind:src="city.thumbnail.imageURL"/>
                                                 <div class="overlay">
                                                     <a v-bind:href="'/city/'+ city.cityId" class="more-btn">Повеќе</a>
                                                 </div>
@@ -199,150 +199,103 @@
             </div>
         </div>
     </div>
-</div>
 
-<!-- REVIEWS CAROUSEL -->
-<div class="container" id="reviews">
-    <div class="row">
-        <div class="col-md-12">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                            class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                </div>
+    <!-- REVIEWS CAROUSEL -->
+    <div class="container" id="reviews">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                    </div>
 
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
+                    <div class="carousel-inner">
 
-                            <div class="col-md-4">
-                                <div class="single-box">
-                                    <div class="img-area">
-                                        <img src="img/img-1.png" alt="">
-                                    </div>
-                                    <div class="img-text">
-                                        <h2>Person one</h2>
-                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta dolores eos
-                                            itaque tempore ipsa rerum eius mollitia qui, veniam doloremque at quidem aut
-                                            enim delectus alias obcaecati? Quia, aliquid voluptatem?</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="carousel-item active">
 
-                            <div class="col-md-4">
-                                <div class="single-box">
-                                    <div class="img-area">
-                                        <img src="img/img-2.png" alt="">
-                                    </div>
-                                    <div class="img-text">
-                                        <h2>Person two</h2>
-                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta dolores eos
-                                            itaque tempore ipsa rerum eius mollitia qui, veniam doloremque at quidem aut
-                                            enim delectus alias obcaecati? Quia, aliquid voluptatem?</p>
+                            <div class="row">
+
+                                <div class="col-md-4" v-for="review in activeReviewArray">
+                                    <div class="single-box">
+                                        <div class="img-area">
+                                            <img alt="Author thumbnail" v-bind:src="review.author.avatarURL"/>
+                                        </div>
+                                        <div class="img-text">
+                                            <h3>{{ review.author.username }}</h3>
+                                            <p>{{ review.content }}</p>
+                                            <p>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                                </svg>&nbsp;
+                                                {{ review.reviewDate }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-4">
-                                <div class="single-box">
-                                    <div class="img-area">
-                                        <img src="img/img-3.png" alt="">
-                                    </div>
-                                    <div class="img-text">
-                                        <h2>Person three</h2>
-                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta dolores eos
-                                            itaque tempore ipsa rerum eius mollitia qui, veniam doloremque at quidem aut
-                                            enim delectus alias obcaecati? Quia, aliquid voluptatem?</p>
+                            </div>
+                        </div>
+
+
+                        <div class="carousel-item" v-for="reviews in otherReviewArrays">
+
+                            <div class="row">
+                                <div class="col-md-4" v-for="review in reviews">
+                                    <div class="single-box">
+                                        <div class="img-area">
+                                            <img alt="Author thumbnail" v-bind:src="review.author.avatarURL"/>
+                                        </div>
+                                        <div class="img-text">
+                                            <h2>{{ review.author.username }}</h2>
+                                            <p>{{ review.content }}</p>
+                                            <p>{{ review.reviewDate }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
+
                     </div>
-
-
-                    <div class="carousel-item">
-                        <div class="row">
-
-                            <div class="col-md-4">
-                                <div class="single-box">
-                                    <div class="img-area">
-                                        <img src="img/img-4.png" alt="">
-                                    </div>
-                                    <div class="img-text">
-                                        <h2>Person four</h2>
-                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta dolores eos
-                                            itaque tempore ipsa rerum eius mollitia qui, veniam doloremque at quidem aut
-                                            enim delectus alias obcaecati? Quia, aliquid voluptatem?</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="single-box">
-                                    <div class="img-area">
-                                        <img src="img/img-5.png" alt="">
-                                    </div>
-                                    <div class="img-text">
-                                        <h2>Person five</h2>
-                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta dolores eos
-                                            itaque tempore ipsa rerum eius mollitia qui, veniam doloremque at quidem aut
-                                            enim delectus alias obcaecati? Quia, aliquid voluptatem?</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="single-box">
-                                    <div class="img-area">
-                                        <img src="img/img-6.png" alt="">
-                                    </div>
-                                    <div class="img-text">
-                                        <h2>Person six</h2>
-                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta dolores eos
-                                            itaque tempore ipsa rerum eius mollitia qui, veniam doloremque at quidem aut
-                                            enim delectus alias obcaecati? Quia, aliquid voluptatem?</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
 
                 </div>
-
             </div>
         </div>
     </div>
+
 </div>
 
 <script>
-    const apiURL = "http://localhost:8080/api/city";
+    const cityURL = "http://localhost:8080/api/city";
+    const reviewURL = "http://localhost:8080/api/reviews";
 
     var vm = new Vue({
         el: "#app",
         data() {
             return {
-                otherArrays: [],
-                activeArray: []
+                otherCityArrays: [],
+                activeCityArray: [],
+                otherReviewArrays: [],
+                activeReviewArray: []
             }
         },
         created() {
-            fetch(apiURL)
+            fetch(cityURL)
                 .then(response => {
                     return response.json()
                 })
-                .then(otherArrays => {
-                    this.otherArrays = otherArrays;
+                .then(otherCityArrays => {
+                    this.otherCityArrays = otherCityArrays;
                     let result = [];
 
                     let temp = [];
-                    for (let i = 0; i < Math.ceil(otherArrays.length / 3); i++) {
+                    for (let i = 0; i < Math.ceil(otherCityArrays.length / 3); i++) {
                         for (let j = 0; j < 3; j++) {
-                            temp.push(otherArrays[i * 3 + j]);
+                            temp.push(otherCityArrays[i * 3 + j]);
                         }
                         result.push(temp);
                         temp = [];
@@ -351,8 +304,31 @@
                         result[i] = result[i].filter(r => r !== undefined);
                     }
 
-                    this.activeArray = result[0];
-                    this.otherArrays = result.slice(1);
+                    this.activeCityArray = result[0];
+                    this.otherCityArrays = result.slice(1);
+                });
+            fetch(reviewURL)
+                .then(response => {
+                    return response.json()
+                })
+                .then(otherReviewArrays => {
+                    this.otherReviewArrays = otherReviewArrays;
+                    let result = [];
+
+                    let temp = [];
+                    for (let i = 0; i < Math.ceil(otherReviewArrays.length / 3); i++) {
+                        for (let j = 0; j < 3; j++) {
+                            temp.push(otherReviewArrays[i * 3 + j]);
+                        }
+                        result.push(temp);
+                        temp = [];
+                    }
+                    for(let i = 0; i < result.length; i++){
+                        result[i] = result[i].filter(r => r !== undefined);
+                    }
+
+                    this.activeReviewArray = result[0];
+                    this.otherReviewArrays = result.slice(1);
                 });
         }
     });
