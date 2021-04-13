@@ -5,9 +5,12 @@ import mk.ukim.finki.wp.macvilla.model.enums.RequestStatus;
 import mk.ukim.finki.wp.macvilla.model.exceptions.AdministratorNotFoundException;
 import mk.ukim.finki.wp.macvilla.model.exceptions.RequestNotFoundException;
 import mk.ukim.finki.wp.macvilla.service.*;
+import mk.ukim.finki.wp.macvilla.service.impl.FileService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,14 +24,17 @@ public class AdminDashboardController {
     private final PlaceService placeService;
     private final MessageService messageService;
 
+    private final FileService fileService;
+
     public AdminDashboardController(AdministratorService administratorService, RequestService requestService,
                                     HotelierService hotelierService, PlaceService placeService,
-                                    MessageService messageService) {
+                                    MessageService messageService, FileService fileService) {
         this.administratorService = administratorService;
         this.requestService = requestService;
         this.hotelierService = hotelierService;
         this.placeService = placeService;
         this.messageService = messageService;
+        this.fileService = fileService;
     }
 
     @GetMapping(value = {"/admin/{id}"})
@@ -101,9 +107,11 @@ public class AdminDashboardController {
             @PathVariable Long id,
             @RequestParam String name, @RequestParam String surname,
             @RequestParam String username, @RequestParam String password,
-            @RequestParam String email, @RequestParam String thumbnail) {
+            @RequestParam String email, @RequestParam MultipartFile thumbnail) {
 
-        this.administratorService.update(id, username, password, name, surname, email, thumbnail);
+        this.fileService.uploadFile(thumbnail);
+        this.administratorService.update(id, username, password, name, surname, email,
+                FilepathConstants.IMAGE_DESTINATION_PREFIX + thumbnail.getOriginalFilename());
         return "redirect:/dashboard/admin/" + id;
     }
 

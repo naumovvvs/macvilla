@@ -18,7 +18,7 @@
         </div>
         <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
-                <form th:method="POST" th:action="@{'/dashboard/admin/{id}/edit' (id=${admin.userId})}">
+                <form th:method="POST" th:action="@{'/dashboard/admin/{id}/edit' (id=${admin.userId})}" enctype="multipart/form-data">
                     <div class="card-body">
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -90,11 +90,10 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="thumbnail">Профилна слика</label>
-                                    <input type="text"
+                                    <input type="file"
                                            class="form-control"
                                            id="thumbnail"
                                            name="thumbnail"
-                                           placeholder="Внеси URL на профилна слика"
                                            th:value="${admin.avatarURL}">
                                 </div>
                             </div>
