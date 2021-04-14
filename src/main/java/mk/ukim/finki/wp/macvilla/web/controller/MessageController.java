@@ -5,7 +5,6 @@ import mk.ukim.finki.wp.macvilla.service.MessageService;
 import mk.ukim.finki.wp.macvilla.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
@@ -25,7 +24,7 @@ public class MessageController {
     public String saveMessage(@RequestParam String txtName, @RequestParam String txtSurname,
                               @RequestParam String txtEmail, @RequestParam String txtMsg) {
         this.messageService.save(txtName, txtSurname, txtEmail, txtMsg);
-        return "redirect:/contact";
+        return "redirect:/contact?sentMessage=true";
     }
 
     @GetMapping("/delete/{id}")

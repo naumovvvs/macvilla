@@ -5,6 +5,12 @@
     <form method="post" action="/messages/add">
         <h3>Контактирај не</h3>
         <h6>Ќе ни претставува задоволство да добиеме твој feedback!</h6>
+        <div class="row mb-5 animate__animated animate__fadeInDown animate__delay-0.5s" th:if="${sentMessage}">
+            <div class="alert alert-success" role="alert" >
+                <h4 class="alert-heading">Ви благодариме!</h4>
+                <p>Вашата порака е проследена до админот и ќе биде разгледана во најкус можен рок!</p>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">

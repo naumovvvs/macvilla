@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
@@ -68,12 +70,17 @@ public class HomeController {
     }
 
     @GetMapping(value = {"/contact"})
-    public String getContactPage(Model model){
+    public String getContactPage(@RequestParam(required = false)String sentMessage, Model model){
         model.addAttribute("headTitle", "Contact");
         model.addAttribute("style1", "navbar.css");
         model.addAttribute("style2", "contact.css");
         model.addAttribute("style3", "footer-light.css");
         model.addAttribute("bodyContent", "contact");
+
+        if(sentMessage!=null && !sentMessage.isEmpty()){
+            model.addAttribute("sentMessage", true);
+        }
+
         return "master-template";
     }
 
