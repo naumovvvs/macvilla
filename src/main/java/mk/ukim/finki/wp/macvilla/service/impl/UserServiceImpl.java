@@ -66,6 +66,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<User> registerSocial(User user) {
+        if(this.userRepository.findByUsername(user.getUsername()).isPresent()){
+            throw new UsernameTakenException();
+        }
+
+        String role = user.getRole().name();
+        String username = user.getUsername();
+        String password = user.getPassword();
+        String name = user.getName();
+        String surname = user.getSurname();
+        String email = user.getEmail();
+        String avatarURL = user.getAvatarURL();
+
+        if(!role.isEmpty() && role.equals("ROLE_CLIENT")){
+            LocalDate date = LocalDate.now();
+
+            return Optional.of(this.clientRepository.save(new Client(username, passwordEncoder.encode(password), name, surname, email,
+                    avatarURL, date, "address")));
+        }else {
+            return Optional.of(this.hotelierRepository.save(
+                    new Hotelier(username, passwordEncoder.encode(password), name, surname, email, avatarURL)));
+        }
+    }
+
+    @Override
     public Optional<User> delete(String username) {
         User user = this.userRepository.findByUsername(username).orElse(null);
 

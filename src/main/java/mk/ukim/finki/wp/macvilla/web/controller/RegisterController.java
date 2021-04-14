@@ -1,12 +1,10 @@
 package mk.ukim.finki.wp.macvilla.web.controller;
 
+import mk.ukim.finki.wp.macvilla.model.User;
 import mk.ukim.finki.wp.macvilla.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = {"/register"})
@@ -33,12 +31,22 @@ public class RegisterController {
     }
 
     @PostMapping
-    public String register(@RequestParam String username, @RequestParam String password, @RequestParam String name,
-                           @RequestParam String surname, @RequestParam String email, @RequestParam String address,
-                           @RequestParam String bdate, @RequestParam String role){
+    public String register(@RequestParam String username, @RequestParam String password,
+                           @RequestParam String name, @RequestParam String surname,
+                           @RequestParam String email, @RequestParam(required = false) String address,
+                           @RequestParam(required = false) String bdate, @RequestParam String role,
+                           @RequestParam(required = false) String avatarURL){
+
+        if(avatarURL==null || avatarURL.isEmpty()){
+            avatarURL = "";
+        }
 
         try {
-            this.userService.register(username, password, name, surname, email, "/", bdate, address, role);
+            if(role.equals("ROLE_CLIENT")) {
+                this.userService.register(username, password, name, surname, email, avatarURL, bdate, address, role);
+            }else{
+                this.userService.register(username, password, name, surname, email, avatarURL, "/", "/", role);
+            }
         }catch (Exception ex){
             System.out.println(ex.getMessage());
             return "redirect:/register?error="+ex.getMessage();
@@ -46,4 +54,12 @@ public class RegisterController {
 
         return "redirect:/login";
     }
+
+    @PostMapping("/social/fb")
+    public String registerSocialFB(@RequestBody User user){
+        this.userService.registerSocial(user);
+
+        return "redirect:/login";
+    }
+
 }

@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/", "/home", "/about-us", "/contact", "/register", "/city/**", "/place/**", "/assets/**",
-                        "/css/**", "/img/**", "/video/**", "/api/**", "/svg/**", "/js/**", "https://**").permitAll()
+                        "/css/**", "/img/**", "/video/**", "/api/**", "/svg/**", "/js/**", "https://**", "http://**", "www.facebook.com/**").permitAll()
                 .antMatchers("/dashboard/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()

@@ -1,15 +1,16 @@
+<div id="app">
 <div class="container" id="login_container" xmlns:th="http://www.thymeleaf.org">
     <div class="d-flex justify-content-center">
 
         <div class="user_card">
             <div class="d-flex justify-content-center">
                 <div class="brand_logo_container">
-                    <img src="/img/macVillaLogo.jpg" class="brand_logo" alt="Logo">
+                    <img src="/img/macVillaLogoSquare.jpg" class="brand_logo" alt="Logo">
                 </div>
             </div>
             <div class="d-flex justify-content-center form_container">
 
-                <form method="POST" action="/register">
+                <form method="POST" action="/register" id="registerForm">
 
                     <div class="mb-4" id="create">
                         <h4 style="text-align: center;" class="mb-3">Креирај профил</h4>
@@ -17,7 +18,7 @@
 
                     <div class="row">
                         <div class="login_social">
-                            <button class="btn btn-primary mb-2">
+                            <button class="btn btn-primary mb-2" id="fb_button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
                                     <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
                                 </svg>
@@ -25,7 +26,7 @@
                             </button>
                         </div>
 
-                        <div class="login_social">
+                        <div class="login_social" data-onsuccess="onSignIn" id="g_button">
                             <button class="btn btn-success">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
                                     <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
@@ -49,7 +50,7 @@
                                             </svg>
                                         </span>
                                 </div>
-                                <input type="text" name="username" class="form-control input_user" placeholder="Корисничко име" required>
+                                <input id="username" type="text" name="username" class="form-control input_user" placeholder="Корисничко име" required>
                             </div>
                             <div class="input-group mb-2">
                                 <div class="input-group-append">
@@ -60,7 +61,7 @@
                                             </svg>
                                         </span>
                                 </div>
-                                <input type="password" name="password" class="form-control input_pass" placeholder="Лозинка" required>
+                                <input id="password" type="password" name="password" class="form-control input_pass" placeholder="Лозинка" required>
                             </div>
                             <div class="input-group mb-2">
                                 <div class="input-group-append">
@@ -70,7 +71,7 @@
                                             </svg>
                                         </span>
                                 </div>
-                                <input type="text" name="name" class="form-control input_user" placeholder="Име" required>
+                                <input id="name" type="text" name="name" class="form-control input_user" placeholder="Име" required>
                             </div>
                             <div class="input-group mb-2">
                                 <div class="input-group-append">
@@ -80,7 +81,7 @@
                                             </svg>
                                         </span>
                                 </div>
-                                <input type="text" name="surname" class="form-control input_user" placeholder="Презиме" required>
+                                <input id="surname" type="text" name="surname" class="form-control input_user" placeholder="Презиме" required>
                             </div>
                         </div>
 
@@ -93,8 +94,11 @@
                                             </svg>
                                         </span>
                                 </div>
-                                <input type="email" name="email" class="form-control input_user" placeholder="E-mail адреса" required>
+                                <input id="email" type="email" name="email" class="form-control input_user" placeholder="E-mail адреса" required>
                             </div>
+
+                            <div id="extraLabels" v-if="showExtra">
+
                             <div class="input-group mb-2">
                                 <div class="input-group-append">
                                         <span class="input-group-text">
@@ -104,7 +108,7 @@
                                               </svg>
                                         </span>
                                 </div>
-                                <input type="text" name="address" class="form-control input_user" placeholder="Адреса (град)" required>
+                                <input id="address" type="text" name="address" class="form-control input_user" placeholder="Адреса (град)" required>
                             </div>
                             <div class="input-group mb-2">
                                 <div class="input-group-append">
@@ -115,30 +119,42 @@
                                             </svg>
                                         </span>
                                 </div>
-                                <input type="date" name="bdate" class="form-control input_user" required>
+                                <input id="bdate" type="date" name="bdate" class="form-control input_user" required>
                             </div>
+
+                            </div>
+
                             <div class="input-group role-radios">
+
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="role" type="radio" id="ROLE_CLIENT" value="ROLE_CLIENT">
+                                    <input class="form-check-input" name="role" type="radio" id="ROLE_CLIENT" value="ROLE_CLIENT" v-on:click="showExtraLabels">
                                     <label class="form-check-label" for="ROLE_CLIENT">
                                         Клиент
                                     </label>
                                 </div>
                                 &nbsp;
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="role"  type="radio" id="ROLE_HOTELIER" value="ROLE_HOTELIER">
+                                    <input class="form-check-input" name="role" type="radio" id="ROLE_HOTELIER" value="ROLE_HOTELIER" v-on:click="showExtraLabels">
                                     <label class="form-check-label" for="ROLE_HOTELIER">
                                         Хотелиер
                                     </label>
                                 </div>
 
+                                <!-- This is hidden because it fills automatically when logging in with social -->
+                                <input id="avatarURL" type="text" name="avatarURL" style="display: none">
+
                             </div>
+
+                            <div v-if="hasChosenType" class="text-danger ml-3">
+                                <p>Please choose a type of user first</p>
+                            </div>
+
                         </div>
                     </div>
 
 
                     <div class="d-flex justify-content-center mt-3 login_container" id="registerBtn">
-                        <button type="submit" name="button" class="btn login_btn">Регистрирај се</button>
+                        <button id="submit" type="submit" name="button" class="btn login_btn">Регистрирај се</button>
                     </div>
                     <div th:text="${error}" class="text-danger ml-3">
 
@@ -154,7 +170,236 @@
                 <div class="d-flex justify-content-center links">
                     <a href="/login" class="ml-2 links">Најави се</a>
                 </div>
+                <div style="display: none" class="g-signin2" data-onsuccess="onSignIn" id="googleSignInBtn"></div>
             </div>
         </div>
     </div>
 </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data() {
+            return {
+                showExtra: false,
+                hasChosenType: false
+            }
+        },
+        methods: {
+            showExtraLabels(e){
+                // if the user chooses ROLE_CLIENT then show the extra inputs for birthday and address
+                this.showExtra = e.target.defaultValue === "ROLE_CLIENT";
+            }
+        }
+    });
+
+
+    // For google sign up
+    document.getElementById("g_button").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        // check if the user has selected a type
+        // if true, then we will simulate a click and log the user data in
+        checkRadios("GO");
+    });
+
+    function onSignIn(googleUser) {
+        // only execute when the user has chosen a type
+        if(vm.hasChosenType) {
+            var profile = googleUser.getBasicProfile();
+
+            document.getElementById('username').value = "GOOGLE." + profile.getEmail();
+            document.getElementById('name').value = profile.getGivenName();
+            document.getElementById('surname').value = profile.getFamilyName();
+            document.getElementById('password').value = profile.getId();
+            document.getElementById('avatarURL').value = profile.getImageUrl();
+            document.getElementById('email').value = profile.getEmail();
+
+            if (vm.showExtra) {
+                document.getElementById('address').value = "GO_ADDRESS"
+                document.getElementById('bdate').value = "2000-01-01";
+            }
+
+
+            // when the inputs are filled only then submit the form
+            document.getElementById('submit').click();
+
+        }
+        /*
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        */
+    }
+
+
+
+    // For FB sign up
+    document.getElementById("fb_button").addEventListener("click", function(event){
+        event.preventDefault()
+        checkRadios("FB");
+
+        /*let radios = document.getElementsByName("role");
+        let isChecked = false;
+
+        radios.forEach(function (x){
+            if(x.checked){
+                // showExtra is true if ROLE_CLIENT is selected
+                vm.showExtra = x.defaultValue === "ROLE_CLIENT";
+                isChecked = true; //flag
+                // only allow registration when the user has selected a type of user
+                logIn();
+            }
+        });
+
+        // if false, then show error message
+        if(!isChecked){
+            vm.hasChosenType = true;
+        }*/
+    });
+
+    function checkRadios(type){
+        let radios = document.getElementsByName("role");
+        let isChecked = false;
+
+        radios.forEach(function (x){
+            if(x.checked){
+                // showExtra is true if ROLE_CLIENT is selected
+                vm.showExtra = x.defaultValue === "ROLE_CLIENT";
+                vm.hasChosenType = true;
+
+                isChecked = true; //flag
+
+                // only allow registration when the user has selected a type of user
+                if(type==="FB") {
+                    logIn();
+                }else{
+                    document.getElementsByClassName("abcRioButton")[0].click();
+                }
+            }
+        });
+
+        // if false (user has not selected a type), then show error message
+        if(!isChecked){
+            vm.hasChosenType = true;
+        }
+    }
+
+    let person = {};
+
+    function logIn(){
+        FB.login(function (response){
+
+            if(response.status === "connected"){
+                FB.api('/me?fields=id,first_name,last_name,email,picture.type(large)&access_token='
+                    + response.authResponse.accessToken, function (userData){
+
+                    console.log(userData);
+
+                    person.username = userData.email;
+                    document.getElementById('username').value = person.username;
+
+                    person.password = userData.id;
+                    document.getElementById('password').value = person.password;
+
+                    person.name = userData.first_name;
+                    document.getElementById('name').value = person.name;
+
+                    person.surname = userData.last_name;
+                    document.getElementById('surname').value = person.surname;
+
+                    person.avatarURL = userData.picture.data.url;
+                    document.getElementById('avatarURL').value = person.avatarURL;
+
+                    person.email = userData.email;
+                    document.getElementById('email').value = person.email;
+
+                    if(vm.showExtra) {
+                        document.getElementById('address').value = "FB_ADDRESS"
+                        document.getElementById('bdate').value = "2000-01-01";
+                    }
+
+                    // when the inputs are filled only then submit the form
+                    document.getElementById('submit').click();
+
+                   // postRequest();
+
+                    // fetch("http://localhost:8080/register/social/fb", {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //     },
+                    //     body: JSON.stringify(person),
+                    // });
+
+                    // fetch("http://localhost:8080/api/social/fbRegister", {
+                    //     method: 'POST',
+                    //     redirect: "follow",
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //     },
+                    //     body: JSON.stringify(person),
+                    // });
+                })
+            }
+
+        }, {scope:"public_profile, email"})
+    }
+
+    // function postRequest(){
+    //     $.ajax({
+    //         url: 'http://localhost:8080/register/social/fb',
+    //         type: 'post',
+    //         data: person,
+    //         success: function(response){
+    //             console.log("SUCCESS");
+    //         }
+    //     });
+    // }
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '804214807173468',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v10.0'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
