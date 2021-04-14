@@ -52,11 +52,12 @@
                         <input id="password" type="password" name="password" class="form-control input_pass" value="" placeholder="Лозинка">
                     </div>
 
-                    <div class="d-flex justify-content-center mt-3 login_container">
-
-                    <div id="errorDiv" th:if="${error != null}" class="d-flex justify-content-center" style="width: 100%;">
-                            <p class="text-danger">Погрешен username или лозинка</p>
+                    <div class="d-flex justify-content-center mt-3 mb-3 login_container">
+                        <div id="errorDiv" th:if="${error}" class="d-flex justify-content-center text-danger" style="width: 100%;">
+                                Погрешен username или лозинка
+                        </div>
                     </div>
+
                     <div class="d-flex justify-content-center login_container">
 
                         <button type="submit" id="submit" name="button" class="btn login_btn">Најава</button>
@@ -104,12 +105,13 @@
             document.getElementById('username').value = "GOOGLE." + profile.getEmail();
             document.getElementById('password').value = profile.getId();
 
-            if (document.getElementById('errorDiv').innerHTML !== 'BadCredentials') {
+
+            if (document.getElementById('errorDiv')===null || document.getElementById('errorDiv').innerHTML !== 'Погрешен username или лозинка') {
                 // when the inputs are filled only then submit the form
                 document.getElementById('submit').click();
             } else {
                 document.getElementById('loginForm').reset();
-                document.getElementById('errorDiv').innerHTML = "User not found, please register";
+                document.getElementById('errorDiv').innerHTML = "Корисникот не постои, ве молиме регистрирајте се";
             }
         }
     }
