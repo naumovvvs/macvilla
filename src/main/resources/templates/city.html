@@ -2,7 +2,9 @@
 <div class="container-fluid no-padding" id="city_pic">
     <div class="row">
         <div class="col-md-12">
-            <h1 id="city_title" class="animate__animated animate__fadeInLeft">{{ city.name }}</h1>
+            <p id="city_title" class="animate__animated animate__fadeInLeft display-1">
+                {{ city.name }}
+            </p>
             <img v-bind:src="'' + city.thumbnail.imageURL" class="img-fluid w-100">
         </div>
     </div>
@@ -41,7 +43,7 @@
     </div>
 </div>
 
-<div class="row mx-auto mt-3">
+<div class="row mx-auto mt-3 mb-5">
 
     <div class="col-lg-3" id="filter_container">
 
@@ -206,10 +208,10 @@
 
                         <div class="col-md-7 px-3">
                             <div class="card-block px-6">
-                                <h4 class="card-title"> {{ place.name }} </h4>
-                                <p class="card-text">
+                                <h3 class="card-title"> {{ place.name }} </h3>
+                                <h5 class="card-text">
                                     {{ place.description }}
-                                </p>
+                                </h5>
                                 <br>
                                 <div class="col-lg-6 col-md-10 col-sm-10 col-xs-12" style="margin-left: -17px;">
                                     <p>
@@ -221,7 +223,9 @@
                                         <!--{{ roundRating(place.rating) }}-->
                                     </p>
                                 </div>
-                                <a v-bind:href="'/place/' + place.placeId" class="mt-auto btn btn-primary  ">Прочитај повеќе</a>
+                                <div>
+                                    <a v-bind:href="'/place/' + place.placeId" class="mt-auto btn btn-primary">Прочитај повеќе</a>
+                                </div>
                             </div>
                         </div>
                         <!-- Carousel start -->

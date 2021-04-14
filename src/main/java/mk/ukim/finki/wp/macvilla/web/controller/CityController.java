@@ -1,13 +1,11 @@
 package mk.ukim.finki.wp.macvilla.web.controller;
 
-import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.service.CityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import java.util.List;
 
 @Controller
 @RequestMapping("/city")

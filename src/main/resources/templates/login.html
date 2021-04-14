@@ -52,11 +52,13 @@
                         <input id="password" type="password" name="password" class="form-control input_pass" value="" placeholder="Лозинка">
                     </div>
 
-                    <div id="errorDiv" th:text="${error}" class="text-danger ml-3">
-
-                    </div>
-
                     <div class="d-flex justify-content-center mt-3 login_container">
+
+                    <div id="errorDiv" th:if="${error != null}" class="d-flex justify-content-center" style="width: 100%;">
+                            <p class="text-danger">Погрешен username или лозинка</p>
+                    </div>
+                    <div class="d-flex justify-content-center login_container">
+
                         <button type="submit" id="submit" name="button" class="btn login_btn">Најава</button>
                     </div>
                 </form>

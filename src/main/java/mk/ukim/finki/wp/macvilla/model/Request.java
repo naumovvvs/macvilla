@@ -21,10 +21,6 @@ public class Request {
     // time when the request was created
     private Date requestTime;
 
-    // FK to the place for which the request was made
-//    @OneToOne
-//    private Place place;
-
     // Status of the request
     @Enumerated(EnumType.STRING)
     private RequestStatus requestStatus;

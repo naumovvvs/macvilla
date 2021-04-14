@@ -29,46 +29,56 @@ body{
 
 #place_pic #heart_icon:hover {
   color: crimson;
-  width: 40px;
+  width: 65px;
   height: auto;
   cursor: pointer;
 }
 
-#place_pic #title, #addFavorite {
+#place_pic #title {
   /* width: 50%;  */
-  height: 15%;
   /* background-color: red; */
   position: absolute;
   margin-top: -40%;
-  font-size: 50px;
+  margin-left: 4%;
+  font-size: 6vw;
+  font-weight: 350;
+  color: #f5f6fa;
+  letter-spacing: 4px;
+  text-shadow: 0 1px 0 #ccc,
+  0 2px 0 #c9c9c9,
+  0 3px 0 #bbb,
+  0 4px 0 #b9b9b9,
+  0 5px 0 #aaa,
+  0 6px 1px rgba(0,0,0,.1),
+  0 0 5px rgba(0,0,0,.1),
+  0 1px 3px rgba(0,0,0,.3),
+  0 3px 5px rgba(0,0,0,.2),
+  0 5px 10px rgba(0,0,0,.25),
+  0 10px 10px rgba(0,0,0,.2),
+  0 20px 20px rgba(0,0,0,.15);
+}
+
+#place_pic #addFavorite {
+  margin-left: 47%;
+  float: right;
+  height: 15%;
+  position: absolute;
+  margin-top: -35%;
+}
+
+#place_pic #addFavorite a {
   color: white;
 }
 
-#place_pic #addFavorite{
-  margin-left: 51%;
-  float: right;
-}
-
-#place_pic #row_desc_rating {
+#place_pic #row_rating {
   position: absolute;
-  margin-top: -30%;
+  margin-left: 4%;
+  margin-top: -31%;
   /*top: 85%;*/
 }
 
-#place_pic #desc {
-  height: 10%;
-  width: 100%;
-  /* background-color: blue; */
-  font-size: 30px;
-  color: white;
-}
-
 #place_pic #rating {
-  height: 10%;
-  width: 100%;
-
-  /*background-color: green;*/
-  font-size: 30px;
+  font-size: 3vw;
   color: white;
   text-align: end;
 }
@@ -82,7 +92,7 @@ body{
 
 #place_main .column p {
   color: black;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 #place_main #map {
