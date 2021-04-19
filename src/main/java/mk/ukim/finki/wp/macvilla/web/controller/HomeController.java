@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
@@ -32,6 +31,7 @@ public class HomeController {
         model.addAttribute("style2", "city-slider.css");
         model.addAttribute("style3", "reviews.css");
         model.addAttribute("style4", "footer.css");
+        model.addAttribute("style5", "wizard.css");
         model.addAttribute("bodyContent", "home-page");
         // latest 6 reviews for showing in carousel
         model.addAttribute("reviews", this.reviewService.getLatestReviews());
@@ -102,5 +102,10 @@ public class HomeController {
         model.addAttribute("style3", "footer-light.css");
         model.addAttribute("bodyContent", "access-denied");
         return "master-template";
+    }
+
+    @GetMapping("/wizard")
+    public String getWizardPage() {
+        return "wizard";
     }
 }

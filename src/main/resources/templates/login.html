@@ -38,7 +38,7 @@
                                     </svg>
                                 </span>
                         </div>
-                        <input id="username" type="text" name="username" class="form-control input_user" value="" placeholder="Корисничко име">
+                        <input id="username" type="text" name="username" class="form-control input_user" value="" placeholder="Корисничко име" required>
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-append">
@@ -49,7 +49,7 @@
                                       </svg>
                                 </span>
                         </div>
-                        <input id="password" type="password" name="password" class="form-control input_pass" value="" placeholder="Лозинка">
+                        <input id="password" type="password" name="password" class="form-control input_pass" value="" placeholder="Лозинка" required>
                     </div>
 
                     <div class="d-flex justify-content-center mt-3 mb-3 login_container">
@@ -118,10 +118,20 @@
 
     // ===========================================================================================================
 
+    let blockFB = false;
+
+    document.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            blockFB = true;
+            document.getElementById('submit').click();
+        }
+    });
 
     document.getElementById("fb_button").addEventListener("click", function(event){
         event.preventDefault()
-        logIn();
+        if(!blockFB) {
+            logIn();
+        }
     });
 
     function logIn(){
