@@ -4,9 +4,12 @@ import mk.ukim.finki.wp.macvilla.model.Hotelier;
 import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.model.exceptions.HotelierNotFoundException;
 import mk.ukim.finki.wp.macvilla.service.*;
+import mk.ukim.finki.wp.macvilla.service.impl.FileService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,13 +23,17 @@ public class HotelierDashboardController {
     private final ReviewService reviewService;
     private final RequestService requestService;
     private final ImageService imageService;
+    private final FileService fileService;
 
-    public HotelierDashboardController(PlaceService placeService, HotelierService hotelierService, ReviewService reviewService, RequestService requestService, ImageService imageService) {
+    public HotelierDashboardController(PlaceService placeService, HotelierService hotelierService,
+                                       ReviewService reviewService, RequestService requestService,
+                                       ImageService imageService, FileService fileService) {
         this.placeService = placeService;
         this.hotelierService = hotelierService;
         this.reviewService = reviewService;
         this.requestService = requestService;
         this.imageService = imageService;
+        this.fileService = fileService;
     }
 
     @GetMapping(value = {"/hotelier/{id}"})
@@ -77,10 +84,15 @@ public class HotelierDashboardController {
     public String updateHotelier(
             @PathVariable Long id,
             @RequestParam String name, @RequestParam String surname,
-            @RequestParam String username, @RequestParam String password,
-            @RequestParam String email, @RequestParam String thumbnail) {
+            @RequestParam String username, @RequestParam(required = false) String password,
+            @RequestParam String email, @RequestParam(required = false) MultipartFile thumbnail) {
 
-        this.hotelierService.update(id, username, password, name, surname, email, thumbnail);
+        if (thumbnail.getOriginalFilename() != null && !thumbnail.getOriginalFilename().isEmpty()) {
+            this.fileService.uploadFile(thumbnail);
+            this.hotelierService.update(id, username, password, name, surname, email,
+                    FilepathConstants.IMAGE_DESTINATION_PREFIX + thumbnail.getOriginalFilename());
+        }
+        this.hotelierService.update(id, username, password, name, surname, email, "");
         return "redirect:/dashboard/hotelier/" + id;
     }
 }

@@ -79,16 +79,16 @@ public class HotelierServiceImpl implements HotelierService {
     @Override
     public Hotelier update(Long id, String username, String password, String name, String surname,
                            String email, String avatarURL) {
-        // check only for avatar, the other params are required
-        if (avatarURL == null || avatarURL.isEmpty()) {
-            avatarURL = "";
-        }
 
         Hotelier hotelier = (Hotelier) this.hotelierRepository
                 .findById(id).orElseThrow(() -> new HotelierNotFoundException(id));
 
         if (!passwordEncoder.matches(password, hotelier.getPassword()) && !password.isEmpty()) {
             hotelier.setPassword(passwordEncoder.encode(password));
+        }
+
+        if (avatarURL == null || avatarURL.isEmpty()) {
+            avatarURL = hotelier.getAvatarURL();
         }
 
         hotelier.setUsername(username);

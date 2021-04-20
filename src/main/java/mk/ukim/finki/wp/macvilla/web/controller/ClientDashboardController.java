@@ -5,9 +5,12 @@ import mk.ukim.finki.wp.macvilla.model.Place;
 import mk.ukim.finki.wp.macvilla.model.exceptions.ClientNotFoundException;
 import mk.ukim.finki.wp.macvilla.service.ClientService;
 import mk.ukim.finki.wp.macvilla.service.PlaceService;
+import mk.ukim.finki.wp.macvilla.service.impl.FileService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Optional;
 
 @Controller
@@ -16,10 +19,12 @@ public class ClientDashboardController {
 
     private final ClientService clientService;
     private final PlaceService placeService;
+    private final FileService fileService;
 
-    public ClientDashboardController(ClientService clientService, PlaceService placeService) {
+    public ClientDashboardController(ClientService clientService, PlaceService placeService, FileService fileService) {
         this.clientService = clientService;
         this.placeService = placeService;
+        this.fileService = fileService;
     }
 
     @GetMapping(value = {"/client/{id}"})
@@ -64,11 +69,16 @@ public class ClientDashboardController {
     public String updateClient(
             @PathVariable Long id,
             @RequestParam String name, @RequestParam String surname,
-            @RequestParam String username,  @RequestParam String password,
+            @RequestParam String username, @RequestParam(required = false) String password,
             @RequestParam String city, @RequestParam String email,
-            @RequestParam String thumbnail, @RequestParam String birthDate) {
+            @RequestParam(required = false) MultipartFile thumbnail, @RequestParam String birthDate) {
 
-        this.clientService.update(id, username, password, name, surname, email, thumbnail, birthDate, city);
+        if (thumbnail.getOriginalFilename() != null && !thumbnail.getOriginalFilename().isEmpty()) {
+            this.fileService.uploadFile(thumbnail);
+            this.clientService.update(id, username, password, name, surname, email,
+                    FilepathConstants.IMAGE_DESTINATION_PREFIX + thumbnail.getOriginalFilename(), birthDate, city);
+        }
+        this.clientService.update(id, username, password, name, surname, email, "", birthDate, city);
         return "redirect:/dashboard/client/" + id;
     }
 }

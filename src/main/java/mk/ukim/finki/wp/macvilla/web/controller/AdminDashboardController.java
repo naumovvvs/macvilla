@@ -106,12 +106,15 @@ public class AdminDashboardController {
     public String updateAdministrator(
             @PathVariable Long id,
             @RequestParam String name, @RequestParam String surname,
-            @RequestParam String username, @RequestParam String password,
-            @RequestParam String email, @RequestParam MultipartFile thumbnail) {
+            @RequestParam String username, @RequestParam(required = false) String password,
+            @RequestParam String email, @RequestParam(required = false) MultipartFile thumbnail) {
 
-        this.fileService.uploadFile(thumbnail);
-        this.administratorService.update(id, username, password, name, surname, email,
-                FilepathConstants.IMAGE_DESTINATION_PREFIX + thumbnail.getOriginalFilename());
+        if (thumbnail.getOriginalFilename() != null && !thumbnail.getOriginalFilename().isEmpty()) {
+            this.fileService.uploadFile(thumbnail);
+            this.administratorService.update(id, username, password, name, surname, email,
+                    FilepathConstants.IMAGE_DESTINATION_PREFIX + thumbnail.getOriginalFilename());
+        }
+        this.administratorService.update(id, username, password, name, surname, email, "");
         return "redirect:/dashboard/admin/" + id;
     }
 

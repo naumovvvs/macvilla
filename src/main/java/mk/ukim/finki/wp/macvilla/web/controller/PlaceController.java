@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,7 +77,7 @@ public class PlaceController {
         return "master-template";
     }
 
-    @PreAuthorize("hasRole('ROLE_HOTELIER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HOTELIER')")
     @GetMapping(value = {"/register"})
     public String getPlaceRegisterPage(HttpServletRequest request, Model model) {
         model.addAttribute("style1", "navbar.css");
@@ -101,7 +102,7 @@ public class PlaceController {
     public String placeRegister(@RequestParam String name, @RequestParam String description,
                                 @RequestParam String telephoneNumber, @RequestParam String address,
                                 @RequestParam Long categoryId, @RequestParam Long cityId,
-                                @RequestParam String gallery, @RequestParam MultipartFile thumbnail,
+                                @RequestParam MultipartFile[] gallery, @RequestParam MultipartFile thumbnail,
                                 HttpServletRequest request) {
 
         Optional<User> user = this.userService.findByUsername(request.getRemoteUser());
@@ -113,10 +114,10 @@ public class PlaceController {
             Image thumbnailImage = this.imageService.save(FilepathConstants.IMAGE_DESTINATION_PREFIX + thumbnail.getOriginalFilename());
             fileService.uploadFile(thumbnail);
 
-            String[] galleryArray = gallery.split("\\s+");
             List<Image> galleryList = new ArrayList<>();
-            for (String galleryImage : galleryArray) {
-                galleryList.add(this.imageService.save(galleryImage));
+            for (MultipartFile galleryImage : gallery) {
+                this.fileService.uploadFile(galleryImage);
+                galleryList.add(this.imageService.save(galleryImage.getOriginalFilename()));
             }
 
             Request req = new Request(manager);

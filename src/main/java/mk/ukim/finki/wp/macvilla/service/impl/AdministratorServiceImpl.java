@@ -40,16 +40,16 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public Administrator update(Long id, String username, String password, String name, String surname,
                                 String email, String avatarURL) {
-        // check only for avatar, the other params are required
-        if (avatarURL == null || avatarURL.isEmpty()) {
-            avatarURL = "";
-        }
 
         Administrator administrator = (Administrator) this.administratorRepository
                 .findById(id).orElseThrow(() -> new AdministratorNotFoundException(id));
 
         if (!passwordEncoder.matches(password, administrator.getPassword()) && !password.isEmpty()) {
             administrator.setPassword(passwordEncoder.encode(password));
+        }
+
+        if (avatarURL == null || avatarURL.isEmpty()) {
+            avatarURL = administrator.getAvatarURL();
         }
 
         administrator.setUsername(username);

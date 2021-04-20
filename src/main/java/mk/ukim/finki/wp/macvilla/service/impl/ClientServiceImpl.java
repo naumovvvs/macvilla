@@ -70,16 +70,16 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client update(Long id, String username, String password, String name, String surname, String email,
                          String avatarURL, String birthDate, String address) {
-        // check only for avatar, the other params are required
-        if (avatarURL == null || avatarURL.isEmpty()) {
-            avatarURL = "";
-        }
 
         Client client = (Client) this.clientRepository
                 .findById(id).orElseThrow(() -> new ClientNotFoundException(id));
 
         if (!passwordEncoder.matches(password, client.getPassword()) && !password.isEmpty()) {
             client.setPassword(passwordEncoder.encode(password));
+        }
+
+        if (avatarURL == null || avatarURL.isEmpty()) {
+            avatarURL = client.getAvatarURL();
         }
 
         client.setUsername(username);
