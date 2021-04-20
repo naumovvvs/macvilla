@@ -5,7 +5,7 @@
         <div class="user_card">
             <div class="d-flex justify-content-center">
                 <div class="brand_logo_container">
-                    <img src="/img/macVillaLogoSquare.jpg" class="brand_logo" alt="Logo">
+                    <img src="/img/macVillaLogoSquare2.png" class="brand_logo" alt="Logo">
                 </div>
             </div>
             <div class="d-flex justify-content-center form_container">
@@ -230,14 +230,7 @@
 
             // when the inputs are filled only then submit the form
             document.getElementById('submit').click();
-
         }
-        /*
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-        */
     }
 
 
@@ -246,24 +239,6 @@
     document.getElementById("fb_button").addEventListener("click", function(event){
         event.preventDefault()
         checkRadios("FB");
-
-        /*let radios = document.getElementsByName("role");
-        let isChecked = false;
-
-        radios.forEach(function (x){
-            if(x.checked){
-                // showExtra is true if ROLE_CLIENT is selected
-                vm.showExtra = x.defaultValue === "ROLE_CLIENT";
-                isChecked = true; //flag
-                // only allow registration when the user has selected a type of user
-                logIn();
-            }
-        });
-
-        // if false, then show error message
-        if(!isChecked){
-            vm.hasChosenType = true;
-        }*/
     });
 
     function checkRadios(type){
@@ -329,41 +304,11 @@
 
                     // when the inputs are filled only then submit the form
                     document.getElementById('submit').click();
-
-                   // postRequest();
-
-                    // fetch("http://localhost:8080/register/social/fb", {
-                    //     method: 'POST',
-                    //     headers: {
-                    //         'Content-Type': 'application/json',
-                    //     },
-                    //     body: JSON.stringify(person),
-                    // });
-
-                    // fetch("http://localhost:8080/api/social/fbRegister", {
-                    //     method: 'POST',
-                    //     redirect: "follow",
-                    //     headers: {
-                    //         'Content-Type': 'application/json',
-                    //     },
-                    //     body: JSON.stringify(person),
-                    // });
                 })
             }
 
         }, {scope:"public_profile, email"})
     }
-
-    // function postRequest(){
-    //     $.ajax({
-    //         url: 'http://localhost:8080/register/social/fb',
-    //         type: 'post',
-    //         data: person,
-    //         success: function(response){
-    //             console.log("SUCCESS");
-    //         }
-    //     });
-    // }
 
     window.fbAsyncInit = function() {
         FB.init({

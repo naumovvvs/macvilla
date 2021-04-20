@@ -103,9 +103,4 @@ public class HomeController {
         model.addAttribute("bodyContent", "access-denied");
         return "master-template";
     }
-
-    @GetMapping("/wizard")
-    public String getWizardPage() {
-        return "wizard";
-    }
 }

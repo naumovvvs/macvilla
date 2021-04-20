@@ -44,6 +44,14 @@
         </div>
     </div>
 
+
+    <div class="container" id="city-title">
+        <!-- We can get rid of the strikethrough look by adding a span tag and applying a background color to the span. Applying a background to the h2:after won't work because it won't adjust and hug the text. -->
+        <h2 class="background"><span>Г Р А Д О В И</span></h2>
+    </div>
+
+
+
     <!-- City slider -->
     <section class="pt-5 pb-5" id="city-slider">
         <div class="container">
@@ -127,109 +135,108 @@
     </div>
 
 
+    <div class="container mt-5" id="reviews-title">
+        <!-- We can get rid of the strikethrough look by adding a span tag and applying a background color to the span. Applying a background to the h2:after won't work because it won't adjust and hug the text. -->
+        <h2 class="background"><span>КОРИСНИЧКИ МИСЛЕЊА</span></h2>
+    </div>
+
+
     <div class='container reviews'>
         <!-- Panel one -->
-        <div class='panel'>
-            <h6 style="text-align: start; margin: 15px 0 0 25px;">Superman</h6>
-            <img src='http://www.designbolts.com/wp-content/uploads/2014/01/Superman-Flat-Design.png' style="padding: 10px;">
+        <div class='panel' v-for="review in activeReviewArray">
+            <h6 style="text-align: start; margin: 15px 0 0 25px;">{{ review.author.name }} {{ review.author.surname }}</h6>
+            <img alt="Author thumbnail" v-bind:src="review.author.avatarURL"/>
             <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                {{ review.content }}
             </p>
         </div>
-        <!-- Panel Two -->
-        <div class='panel'>
-            <img src='http://www.designbolts.com/wp-content/uploads/2014/01/Batman-Flat-Design.png'>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </p>
-            <h6>Batman</h6>
-        </div>
-        <!-- Panel Three -->
-        <div class='panel'>
-            <img src='http://www.designbolts.com/wp-content/uploads/2014/01/Liz-Sherman-Flat-Design.png'>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </p>
-            <h6>Liz Sherman</h6>
-        </div>
+<!--        &lt;!&ndash; Panel Two &ndash;&gt;-->
+<!--        <div class='panel'>-->
+<!--            <img src='http://www.designbolts.com/wp-content/uploads/2014/01/Batman-Flat-Design.png'>-->
+<!--            <p>-->
+<!--                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.-->
+<!--            </p>-->
+<!--            <h6>Batman</h6>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Panel Three &ndash;&gt;-->
+<!--        <div class='panel'>-->
+<!--            <img src='http://www.designbolts.com/wp-content/uploads/2014/01/Liz-Sherman-Flat-Design.png'>-->
+<!--            <p>-->
+<!--                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.-->
+<!--            </p>-->
+<!--            <h6>Liz Sherman</h6>-->
+<!--        </div>-->
     </div>
 
 
-    <!-- REVIEWS CAROUSEL -->
-    <div class="container" id="reviews">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
-                    </div>
+<!--    &lt;!&ndash; REVIEWS CAROUSEL &ndash;&gt;-->
+<!--    <div class="container" id="reviews">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">-->
+<!--                    <div class="carousel-indicators">-->
+<!--                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"-->
+<!--                                class="active" aria-current="true" aria-label="Slide 1"></button>-->
+<!--                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"-->
+<!--                                aria-label="Slide 2"></button>-->
+<!--                    </div>-->
 
-                    <div class="carousel-inner">
+<!--                    <div class="carousel-inner">-->
 
-                        <div class="carousel-item active">
+<!--                        <div class="carousel-item active">-->
 
-                            <div class="row">
+<!--                            <div class="row">-->
 
-                                <div class="col-md-4" v-for="review in activeReviewArray">
-                                    <div class="single-box">
-                                        <div class="img-area">
-                                            <img alt="Author thumbnail" v-bind:src="review.author.avatarURL"/>
-                                        </div>
-                                        <div class="img-text">
-                                            <h3>{{ review.author.username }}</h3>
-                                            <p>{{ review.content }}</p>
-                                            <p>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                                                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
-                                                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                                                </svg>&nbsp;
-                                                {{ review.reviewDate }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+<!--                                <div class="col-md-4" v-for="review in activeReviewArray">-->
+<!--                                    <div class="single-box">-->
+<!--                                        <div class="img-area">-->
+<!--                                            <img alt="Author thumbnail" v-bind:src="review.author.avatarURL"/>-->
+<!--                                        </div>-->
+<!--                                        <div class="img-text">-->
+<!--                                            <h3>{{ review.author.username }}</h3>-->
+<!--                                            <p>{{ review.content }}</p>-->
+<!--                                            <p>-->
+<!--                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">-->
+<!--                                                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>-->
+<!--                                                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>-->
+<!--                                                </svg>&nbsp;-->
+<!--                                                {{ review.reviewDate }}-->
+<!--                                            </p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
-                            </div>
-                        </div>
+<!--                            </div>-->
+<!--                        </div>-->
 
 
-                        <div class="carousel-item" v-for="reviews in otherReviewArrays">
+<!--                        <div class="carousel-item" v-for="reviews in otherReviewArrays">-->
 
-                            <div class="row">
-                                <div class="col-md-4" v-for="review in reviews">
-                                    <div class="single-box">
-                                        <div class="img-area">
-                                            <img alt="Author thumbnail" v-bind:src="review.author.avatarURL"/>
-                                        </div>
-                                        <div class="img-text">
-                                            <h2>{{ review.author.username }}</h2>
-                                            <p>{{ review.content }}</p>
-                                            <p>{{ review.reviewDate }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+<!--                            <div class="row">-->
+<!--                                <div class="col-md-4" v-for="review in reviews">-->
+<!--                                    <div class="single-box">-->
+<!--                                        <div class="img-area">-->
+<!--                                            <img alt="Author thumbnail" v-bind:src="review.author.avatarURL"/>-->
+<!--                                        </div>-->
+<!--                                        <div class="img-text">-->
+<!--                                            <h2>{{ review.author.username }}</h2>-->
+<!--                                            <p>{{ review.content }}</p>-->
+<!--                                            <p>{{ review.reviewDate }}</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
 
-                        </div>
+<!--                        </div>-->
 
-                    </div>
+<!--                    </div>-->
 
-                </div>
-            </div>
-        </div>
-    </div>
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="/js/wizard.js"></script>
-
-<script>
-    speed=600;
-</script>
 
 <script>
     const cityURL = "http://localhost:8080/api/city";
@@ -294,4 +301,11 @@
                 });
         }
     });
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/wizard.js"></script>
+
+<script>
+    speed=600;
 </script>
