@@ -143,7 +143,7 @@
 
     <div class='container reviews'>
         <!-- Panel one -->
-        <div class='panel' v-for="review in activeReviewArray">
+        <div class='panel' v-for="review in reviewsArray">
             <h6 style="text-align: start; margin: 15px 0 0 25px;">{{ review.author.name }} {{ review.author.surname }}</h6>
             <img alt="Author thumbnail" v-bind:src="review.author.avatarURL"/>
             <p>
@@ -248,8 +248,7 @@
             return {
                 otherCityArrays: [],
                 activeCityArray: [],
-                otherReviewArrays: [],
-                activeReviewArray: []
+                reviewsArray: []
             }
         },
         created() {
@@ -258,6 +257,7 @@
                     return response.json()
                 })
                 .then(otherCityArrays => {
+                    console.log(otherCityArrays)
                     this.otherCityArrays = otherCityArrays;
                     let result = [];
 
@@ -280,24 +280,8 @@
                 .then(response => {
                     return response.json()
                 })
-                .then(otherReviewArrays => {
-                    this.otherReviewArrays = otherReviewArrays;
-                    let result = [];
-
-                    let temp = [];
-                    for (let i = 0; i < Math.ceil(otherReviewArrays.length / 3); i++) {
-                        for (let j = 0; j < 3; j++) {
-                            temp.push(otherReviewArrays[i * 3 + j]);
-                        }
-                        result.push(temp);
-                        temp = [];
-                    }
-                    for(let i = 0; i < result.length; i++){
-                        result[i] = result[i].filter(r => r !== undefined);
-                    }
-
-                    this.activeReviewArray = result[0];
-                    this.otherReviewArrays = result.slice(1);
+                .then(reviewsArray => {
+                    this.reviewsArray = reviewsArray;
                 });
         }
     });

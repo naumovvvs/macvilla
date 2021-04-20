@@ -28,14 +28,11 @@ public class User implements UserDetails{
     private String email;
     // URL for avatar profile picture
     private String avatarURL;
-    // Status of the user
-    private boolean blocked;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
     public User(){
-        this.blocked = false;
     }
 
     public User(String username, String password, String name, String surname, String email, String avatarURL, Role role){
@@ -44,7 +41,6 @@ public class User implements UserDetails{
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.blocked = false;
         this.role = role;
 
         if(avatarURL!=null && !avatarURL.isEmpty()) {

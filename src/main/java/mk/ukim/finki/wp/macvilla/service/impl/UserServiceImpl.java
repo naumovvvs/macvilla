@@ -141,11 +141,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllBlockedUsers() {
-        return this.userRepository.findAllByBlockedTrue();
-    }
-
-    @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userRepository.findByUsername(s).orElseThrow(() -> new UsernameNotFoundException(s));
     }

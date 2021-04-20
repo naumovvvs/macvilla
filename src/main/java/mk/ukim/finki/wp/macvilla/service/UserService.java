@@ -17,7 +17,6 @@ public interface UserService extends UserDetailsService {
     Optional<User> update(Long userId, String username, String password, String name, String surname, String email, String avatarURL);
     Optional<User> findById(Long userId);
     boolean checkIfUsernameExists(String username);
-    List<User> findAllBlockedUsers();
     Optional<User> findByUsername(String username);
 
     @Override

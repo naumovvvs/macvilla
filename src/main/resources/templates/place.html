@@ -89,7 +89,7 @@
 
             <div class="col-lg-3 col-md-4 col-6" v-for="image in place.gallery">
                 <div class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" v-bind:src="'/img/uploaded/' + image.imageURL" alt="image.description"/>
+                    <img class="img-fluid img-thumbnail" v-bind:src="image.imageURL" alt="image.description"/>
                 </div>
             </div>
 

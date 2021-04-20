@@ -14,18 +14,34 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <input type="text" name="txtName" class="form-control" placeholder="Твоето име" value="" required/>
+                    <input type="text"
+                           name="txtName"
+                           class="form-control"
+                           placeholder="Твоето име"
+                           th:value="${user != null ? user.name : ''}"
+                           required/>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="txtSurname" class="form-control" placeholder="Твоето презиме" value="" required/>
+                    <input type="text"
+                           name="txtSurname"
+                           class="form-control"
+                           placeholder="Твоето презиме"
+                           th:value="${user != null ? user.surname : ''}"
+                           required/>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="txtEmail" class="form-control" placeholder="Твојата е-маил адреса" value="" required/>
+                    <input type="text"
+                           name="txtEmail"
+                           class="form-control"
+                           placeholder="Твојата е-маил адреса"
+                           th:value="${user != null ? user.email : ''}"
+                           required/>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <textarea name="txtMsg" class="form-control" placeholder="Порака ... " style="width: 100%; height: 150px;" required></textarea>
+                    <textarea name="txtMsg" class="form-control" placeholder="Порака ... " style="width: 100%; height: 150px;" required>
+                    </textarea>
                 </div>
             </div>
         </div>

@@ -62,21 +62,6 @@ public class HotelierServiceImpl implements HotelierService {
     }
 
     @Override
-    public Hotelier unblock(Long managerId) {
-        Hotelier hotelier = (Hotelier) this.hotelierRepository.findById(managerId)
-                .orElseThrow(() -> new HotelierNotFoundException(managerId));
-        hotelier.setBlocked(false);
-        this.hotelierRepository.save(hotelier);
-        return hotelier;
-    }
-
-    @Override
-    public List<User> findAllBlocked() {
-        return this.hotelierRepository.findAll().stream().filter(User::isBlocked)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public Hotelier update(Long id, String username, String password, String name, String surname,
                            String email, String avatarURL) {
 

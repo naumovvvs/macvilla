@@ -117,7 +117,7 @@ public class PlaceController {
             List<Image> galleryList = new ArrayList<>();
             for (MultipartFile galleryImage : gallery) {
                 this.fileService.uploadFile(galleryImage);
-                galleryList.add(this.imageService.save(galleryImage.getOriginalFilename()));
+                galleryList.add(this.imageService.save(FilepathConstants.IMAGE_DESTINATION_PREFIX + galleryImage.getOriginalFilename()));
             }
 
             Request req = new Request(manager);

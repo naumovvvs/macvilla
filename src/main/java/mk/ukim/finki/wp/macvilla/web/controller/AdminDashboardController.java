@@ -71,8 +71,6 @@ public class AdminDashboardController {
         List<Message> messageList = this.messageService.findAll();
         model.addAttribute("messages", messageList);
 
-        List<User> blockedHoteliers = this.hotelierService.findAllBlocked();
-        model.addAttribute("blockedHoteliers", blockedHoteliers);
         return "master-template";
     }
 
@@ -115,20 +113,6 @@ public class AdminDashboardController {
                     FilepathConstants.IMAGE_DESTINATION_PREFIX + thumbnail.getOriginalFilename());
         }
         this.administratorService.update(id, username, password, name, surname, email, "");
-        return "redirect:/dashboard/admin/" + id;
-    }
-
-    @GetMapping(value = {"/admin/{id}/unblock-user/{userId}"})
-    public String unblockUser(@PathVariable Long id, @PathVariable Long userId) {
-        Hotelier hotelier = (Hotelier) this.hotelierService.findById(userId);
-        hotelierService.unblock(hotelier.getUserId());
-        return "redirect:/dashboard/admin/" + id;
-    }
-
-    @GetMapping(value = {"/admin/{id}/remove-user/{userId}"})
-    public String removeUser(@PathVariable Long id, @PathVariable Long userId) {
-        Hotelier hotelier = (Hotelier) this.hotelierService.findById(userId);
-        this.hotelierService.deleteById(hotelier.getUserId());
         return "redirect:/dashboard/admin/" + id;
     }
 }

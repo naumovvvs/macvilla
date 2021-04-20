@@ -1,5 +1,5 @@
 body {
-    background: -webkit-linear-gradient(left, #0275DB, #5BC0DE);
+    background: url("../img/login-bg.jpg");
 }
 
 .contact-form {

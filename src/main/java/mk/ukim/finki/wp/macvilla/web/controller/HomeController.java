@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class HomeController {
     }
 
     @GetMapping(value = {"/", "/home"})
-    public String getHomePage(HttpServletRequest request, Model model){
+    public String getHomePage(HttpServletRequest request, Model model) {
         // TODO: create master-template AND pass title of page in head tag
         model.addAttribute("headTitle", "Home");
         model.addAttribute("style1", "navbar.css");
@@ -38,29 +39,29 @@ public class HomeController {
 
         Optional<User> optionalUser = this.userService.findByUsername(request.getRemoteUser());
 
-        if(optionalUser.isPresent()) {
+        if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             String roleEnum = user.getRole().name();
             Long id = user.getUserId();
             String role;
 
-            if(roleEnum.equals("ROLE_CLIENT")){
+            if (roleEnum.equals("ROLE_CLIENT")) {
                 role = "client";
-            }else if(roleEnum.equals("ROLE_HOTELIER")) {
+            } else if (roleEnum.equals("ROLE_HOTELIER")) {
                 role = "hotelier";
-            }else {
+            } else {
                 role = "admin";
             }
 
-            model.addAttribute("userId", "/dashboard/" + role +"/" + id);
-        }else{
+            model.addAttribute("userId", "/dashboard/" + role + "/" + id);
+        } else {
             model.addAttribute("userId", "/login");
         }
         return "master-template";
     }
 
     @GetMapping(value = {"/about-us"})
-    public String getAboutUsPage(Model model){
+    public String getAboutUsPage(Model model) {
         model.addAttribute("headTitle", "About Us");
         model.addAttribute("style1", "navbar.css");
         model.addAttribute("style2", "about-us.css");
@@ -70,14 +71,18 @@ public class HomeController {
     }
 
     @GetMapping(value = {"/contact"})
-    public String getContactPage(@RequestParam(required = false)String sentMessage, Model model){
+    public String getContactPage(@RequestParam(required = false) String sentMessage, Model model,
+                                 HttpServletRequest request) {
         model.addAttribute("headTitle", "Contact");
         model.addAttribute("style1", "navbar.css");
         model.addAttribute("style2", "contact.css");
         model.addAttribute("style3", "footer-light.css");
         model.addAttribute("bodyContent", "contact");
 
-        if(sentMessage!=null && !sentMessage.isEmpty()){
+        Optional<User> optionalUser = this.userService.findByUsername(request.getRemoteUser());
+        optionalUser.ifPresent(user -> model.addAttribute("user", user));
+
+        if (sentMessage != null && !sentMessage.isEmpty()) {
             model.addAttribute("sentMessage", true);
         }
 
@@ -85,7 +90,7 @@ public class HomeController {
     }
 
     @GetMapping("/not-found")
-    public String getNotFoundPage(Model model){
+    public String getNotFoundPage(Model model) {
         model.addAttribute("headTitle", "Not Found - 404");
         model.addAttribute("style1", "navbar.css");
         model.addAttribute("style2", "not-found.css");
@@ -95,7 +100,7 @@ public class HomeController {
     }
 
     @GetMapping("/access-denied")
-    public String getAccessDeniedPage(Model model){
+    public String getAccessDeniedPage(Model model) {
         model.addAttribute("headTitle", "Access Denied - 403");
         model.addAttribute("style1", "navbar.css");
         model.addAttribute("style2", "access-denied.css");
