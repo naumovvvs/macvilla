@@ -1,6 +1,3 @@
-
-
-
 let path = window.location.pathname;
 let pom = "";
 
@@ -46,38 +43,9 @@ var vm = new Vue({
         });
     },
     methods: {
-        // postReview: function (){
-        //     // import axios from 'axios';
-        //
-        //     let radio = document.querySelector('input[name="ratingStars"]:checked');
-        //     let reviewContent = document.getElementById("reviewContent");
-        //
-        //     if(radio === null || radio.value === "" || reviewContent === null || reviewContent.value === ""){
-        //         if(radio!==null)
-        //             radio.checked = false;
-        //
-        //         if(reviewContent!==null)
-        //             reviewContent.value = "";
-        //
-        //         return;
-        //     }
-        //
-        //
-        //     // Simple POST request with a JSON body using fetch
-        //     const requestOptions = {
-        //         method: "POST",
-        //         headers: { "Content-Type": "application/json" },
-        //         body: JSON.stringify({ title: "Vue POST Request Example" })
-        //     };
-        //     fetch(apiURL + "/reviews/new", requestOptions)
-        //         .then(response => response.json())
-        //         .then(data => (this.postId = data.id));
-        //
-        //     console.log(radio.value);
-        //     console.log(reviewContent.value);
-        //
-        //     radio.checked = false;
-        //     reviewContent.value = "";
-        // }
+        fixDate: (date) => {
+            let parts = date.split("T");
+            return parts[0];
+        }
     }
 });

@@ -117,8 +117,8 @@
                 <ul class="list-group" v-for="review in reviews">
                     <li class="list-group-item list-group-item-action mb-3">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">{{ review.author.username }}</h5>
-                            <small>{{ review.reviewDate }}</small>
+                            <h5 class="mb-1">{{ review.author.name }} {{ review.author.surname }}</h5>
+                            <small>{{ fixDate(review.reviewDate) }}</small>
                         </div>
                         <p class="mb-1">{{ review.content }}</p>
                         <small>
