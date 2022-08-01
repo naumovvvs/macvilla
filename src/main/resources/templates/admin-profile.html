@@ -1,0 +1,300 @@
+<div class="container admin" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <div class="row gutters">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="account-settings">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img th:src="@{ ${admin.avatarURL} }"
+                                     alt="User picture">
+                            </div>
+                            <h5 class="user-name" th:text="${admin.name} + ' ' + ${admin.surname}"></h5>
+                            <h6 class="user-email" th:text="${admin.email}"></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <form th:method="POST" th:action="@{'/dashboard/admin/{id}/edit' (id=${admin.userId})}" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mb-3 text-primary">Лични информации</h6>
+                                <hr/>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="name">Име</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="name"
+                                            name="name"
+                                            placeholder="Внеси име"
+                                            th:value="${admin.name}"
+                                            required>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="username">Корисничко име</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="username"
+                                            name="username"
+                                            placeholder="Внеси корисничко име"
+                                            th:value="${admin.username}"
+                                            required>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="surname">Презиме</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="surname"
+                                            name="surname"
+                                            placeholder="Внеси презиме"
+                                            th:value="${admin.surname}"
+                                            required>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="email">E-mail адреса</label>
+                                    <input type="email"
+                                           class="form-control"
+                                           id="email"
+                                           name="email"
+                                           placeholder="Внеси e-mail адреса"
+                                           th:value="${admin.email}"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="password">Лозинка</label>
+                                    <input
+                                            type="password"
+                                            class="form-control"
+                                            id="password"
+                                            name="password"
+                                            placeholder="Внеси нова лозинка">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="thumbnail">Профилна слика</label>
+                                    <input type="file"
+                                           class="form-control"
+                                           id="thumbnail"
+                                           name="thumbnail"
+                                           th:value="${admin.avatarURL}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <br/>
+                                <a th:href="@{'/city/add'}" class="btn btn-outline-success btn-bg">Додади град</a>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mt-3 text-primary">Менаџирани барања за регистрација</h6>
+                                <hr/>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card">
+                                        <div class="" id="headingOne">
+                                            <h2 class="mb-0">
+                                                <button class="btn btn-warning collapsed" type="button"
+                                                        data-toggle="collapse" data-target="#collapseOne"
+                                                        aria-expanded="true" aria-controls="collapseOne">
+                                                    Неодлучени барања
+                                                </button>
+                                            </h2>
+                                        </div>
+
+                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                             data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="list-group" th:if="${pendingPlaces.size() > 0}">
+
+                                                    <div class="list-group-item list-group-item-action"
+                                                         aria-current="true"
+                                                         th:each="p: ${pendingPlaces}">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                            <div>
+                                                                <p class="mb-1" style="display: inline-block;">
+                                                                    Автор <b><th:block th:text="${p.manager.username}"/></b>
+                                                                </p>
+                                                                &nbsp;|&nbsp;
+                                                                <p class="mb-1" style="display: inline-block;">
+                                                                    Место <b><th:block th:text="${p.name}"/></b>
+                                                                </p>
+                                                            </div>
+                                                            <div>
+                                                                <a th:href="@{'/dashboard/admin/{id}/approve/{requestId}' ( id=${admin.userId}, requestId=${p.request.requestId} ) }"
+                                                                   class="btn btn-outline-success btn-sm">
+                                                                    Одобри
+                                                                </a>
+                                                                <a th:href="@{'/dashboard/admin/{id}/deny/{requestId}' ( id=${admin.userId}, requestId=${p.request.requestId} ) }"
+                                                                   class="btn btn-outline-danger btn-sm">
+                                                                    Одбиј
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <p class="small mb-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                                                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                                                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                                            </svg>&nbsp;
+                                                            <th:block th:text="${p.request.requestTime}"/>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="" id="headingTwo">
+                                            <h2 class="mb-0">
+                                                <button class="btn btn-success collapsed" type="button"
+                                                        data-toggle="collapse" data-target="#collapseTwo"
+                                                        aria-expanded="false" aria-controls="collapseTwo">
+                                                    Одобрени барања
+                                                </button>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                             data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="list-group" th:if="${approvedPlaces.size() > 0}">
+
+                                                    <div class="list-group-item list-group-item-action"
+                                                         aria-current="true"
+                                                         th:each="a: ${approvedPlaces}">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                            <div>
+                                                                <p class="mb-1" style="display: inline-block;">
+                                                                    Автор <b><th:block th:text="${a.manager.username}"/></b>
+                                                                </p>
+                                                                &nbsp;|&nbsp;
+                                                                <p class="mb-1" style="display: inline-block;">
+                                                                    Место <b><th:block th:text="${a.name}"/></b>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <p class="small mb-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                                                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                                                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                                            </svg>&nbsp;
+                                                            <th:block th:text="${a.request.requestTime}"/>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="" id="headingThree">
+                                            <h2 class="mb-0">
+                                                <button class="btn btn-danger collapsed" type="button"
+                                                        data-toggle="collapse" data-target="#collapseThree"
+                                                        aria-expanded="false" aria-controls="collapseThree">
+                                                    Одбиени барања
+                                                </button>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                             data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="list-group" th:if="${deniedPlaces.size() > 0}">
+
+                                                    <div class="list-group-item list-group-item-action"
+                                                         aria-current="true"
+                                                         th:each="d: ${deniedPlaces}">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                            <div>
+                                                                <p class="mb-1" style="display: inline-block;">
+                                                                    Автор <b><th:block th:text="${d.manager.username}"/></b>
+                                                                </p>
+                                                                &nbsp;|&nbsp;
+                                                                <p class="mb-1" style="display: inline-block;">
+                                                                    Место <b><th:block th:text="${d.name}"/></b>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <p class="small mb-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                                                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                                                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                                            </svg>&nbsp;
+                                                            <th:block th:text="${d.request.requestTime}"/>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mt-3 text-primary">Пораки од корисници</h6>
+                                <hr/>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-0">
+                                <div class="list-group" th:if="${messages.size() > 0}">
+
+                                    <div class="list-group-item list-group-item-action"
+                                         aria-current="true"
+                                         th:each="m: ${messages}">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <div>
+                                                <h6 class="mb-1" th:text="${m.userName} + ' ' + ${m.userSurname}"></h6>
+                                                <p class="mb-1" th:text="${m.content}"></p>
+                                                <p class="small mb-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0275d8" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                                                    </svg>&nbsp;
+                                                    <th:block th:text="${m.userEmail}"/>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <a th:href="@{'/messages/delete/{id}' (id=${m.id}) }"
+                                                   class="btn btn-danger btn-sm">
+                                                    Избриши
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-0">
+                                <div class="text-right">
+                                    <a type="button" class="btn btn-secondary" th:href="@{ '/home' }">Назад</a>
+                                    <button class="btn btn-primary" type="submit">
+                                        Измени
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

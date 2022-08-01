@@ -1,26 +1,38 @@
 package mk.ukim.finki.wp.macvilla.model;
 
 import lombok.Data;
+import javax.persistence.*;
+import java.util.Date;
 
 @Data
+@Entity
 public class Review {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
     private String content;
     private Float rating;
+    // date when the user posted the review
+    private Date reviewDate;
+
     // FK to the author
-    private Long authorId;
+    @ManyToOne
+    private Client author;
     // FK to the place
-    private Long placeId;
+    @ManyToOne
+    private Place place;
 
     public Review(){
-        this.placeId = null;
-        this.authorId = null;
+        this.place = null;
+        this.author = null;
     }
 
-    public Review(String content, Float rating, Long authorId, Long placeId){
+    public Review(String content, Float rating, Client author, Place place){
         this.content = content;
         this.rating = rating;
-        this.authorId = authorId;
-        this.placeId = placeId;
+        this.author = author;
+        this.place = place;
+        long millis = System.currentTimeMillis();
+        this.reviewDate = new Date(millis);
     }
 }

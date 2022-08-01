@@ -1,0 +1,194 @@
+<div id="app" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+    <!-- Carousel -->
+    <div class="carouselFeatured">
+        <div id="carouselHomePage" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselHomePage" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselHomePage" data-slide-to="1"></li>
+                <li data-target="#carouselHomePage" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" id="carouselVideos">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <video class="video-fluid d-block w-100" autoplay loop muted>
+                            <source src="video/ohrid.mp4" type="video/mp4"/>
+                        </video>
+                        <p class="display-4 p-over-video">Охрид</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <video class="video-fluid d-block w-100" autoplay loop muted>
+                            <source src="video/berovo.mp4" type="video/mp4"/>
+                        </video>
+                        <p class="display-4 p-over-video">Берово</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <video class="video-fluid d-block w-100" autoplay loop muted>
+                            <source src="video/ponikva-mod.mp4" type="video/mp4"/>
+                        </video>
+                        <p class="display-4 p-over-video">Кочани</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselHomePage" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Претходно</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselHomePage" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Следно</span>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="container" id="city-title">
+        <!-- We can get rid of the strikethrough look by adding a span tag and applying a background color to the span. Applying a background to the h2:after won't work because it won't adjust and hug the text. -->
+        <h2 class="background"><span>Г Р А Д О В И</span></h2>
+    </div>
+
+
+
+    <!-- City slider -->
+    <section class="pt-5 pb-5" id="city-slider">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">
+                                <div class="row">
+
+                                    <div class="col-md-4 col-sm-12 col-xs-12 mb-3" v-for="city in activeCityArray">
+                                        <div class="card box">
+                                            <div class="img-fluid slide-img">
+                                                <img alt="..." v-bind:src="city.thumbnail.imageURL">
+                                                <div class="overlay">
+                                                    <a v-bind:href="'/city/'+ city.cityId" class="more-btn">Повеќе</a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{ city.name }}</h4>
+                                                <hr/>
+                                                <p class="card-text">{{ city.description }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="carousel-item" v-for="cities in otherCityArrays">
+                                <div class="row">
+
+                                    <div class="col-md-4 col-sm-12 col-xs-12 mb-3" v-for="city in cities">
+                                        <div class="card box">
+                                            <div class="img-fluid slide-img">
+                                                <img alt="..." v-bind:src="city.thumbnail.imageURL"/>
+                                                <div class="overlay">
+                                                    <a v-bind:href="'/city/'+ city.cityId" class="more-btn">Повеќе</a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{ city.name }}</h4>
+                                                <hr/>
+                                                <p class="card-text">{{ city.description }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <a class="btn btn-light mb-3 mr-1" href="#carouselExampleIndicators2" role="button"
+                       data-slide="prev">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="auto" fill="currentColor"
+                             class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                            <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                        </svg>
+                    </a>
+                    <a class="btn btn-light mb-3" href="#carouselExampleIndicators2" role="button" data-slide="next">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="auto" fill="currentColor"
+                             class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!--    MacVilla Promotivna slika   -->
+    <div class="container mb-3">
+        <div class="row">
+            <img src="img/macVilla-naslovna.png"/>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    const cityURL = "http://localhost:8080/api/city";
+    const reviewURL = "http://localhost:8080/api/reviews";
+
+    var vm = new Vue({
+        el: "#app",
+        data() {
+            return {
+                otherCityArrays: [],
+                activeCityArray: [],
+                reviewsArray: []
+            }
+        },
+        created() {
+            fetch(cityURL)
+                .then(response => {
+                    return response.json()
+                })
+                .then(otherCityArrays => {
+                    console.log(otherCityArrays)
+                    this.otherCityArrays = otherCityArrays;
+                    let result = [];
+
+                    let temp = [];
+                    for (let i = 0; i < Math.ceil(otherCityArrays.length / 3); i++) {
+                        for (let j = 0; j < 3; j++) {
+                            temp.push(otherCityArrays[i * 3 + j]);
+                        }
+                        result.push(temp);
+                        temp = [];
+                    }
+                    for(let i = 0; i < result.length; i++){
+                        result[i] = result[i].filter(r => r !== undefined);
+                    }
+
+                    this.activeCityArray = result[0];
+                    this.otherCityArrays = result.slice(1);
+                });
+            fetch(reviewURL)
+                .then(response => {
+                    return response.json()
+                })
+                .then(reviewsArray => {
+                    this.reviewsArray = reviewsArray;
+                });
+        }
+    });
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/wizard.js"></script>
+
+<script>
+    speed=600;
+</script>

@@ -1,0 +1,56 @@
+<div class="container contact-form" style="border-radius: 3px;">
+    <div class="contact-image">
+        <img src="./img/contact.png" alt="Contact"/>
+    </div>
+    <form method="post" action="/messages/add">
+        <h3>Контактирај не</h3>
+        <h6>Ќе ни претставува задоволство да добиеме твој feedback!</h6>
+        <div class="row mb-5 animate__animated animate__fadeInDown animate__delay-0.5s" th:if="${sentMessage}">
+            <div class="alert alert-success" role="alert" >
+                <h4 class="alert-heading">Ви благодариме!</h4>
+                <p>Вашата порака е проследена до админот и ќе биде разгледана во најкус можен рок!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="text"
+                           name="txtName"
+                           class="form-control"
+                           placeholder="Твоето име"
+                           th:value="${user != null ? user.name : ''}"
+                           required/>
+                </div>
+                <div class="form-group">
+                    <input type="text"
+                           name="txtSurname"
+                           class="form-control"
+                           placeholder="Твоето презиме"
+                           th:value="${user != null ? user.surname : ''}"
+                           required/>
+                </div>
+                <div class="form-group">
+                    <input type="text"
+                           name="txtEmail"
+                           class="form-control"
+                           placeholder="Твојата е-маил адреса"
+                           th:value="${user != null ? user.email : ''}"
+                           required/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <textarea name="txtMsg" class="form-control" placeholder="Порака..." style="width: 100%; height: 150px;" required>
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 7%">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="submit" name="btnSubmit" class="btnContact" value="Испрати порака" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

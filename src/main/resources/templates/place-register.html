@@ -1,0 +1,136 @@
+<div class="container place-register" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <div class="row gutters">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="account-settings">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img th:src="@{ ${hotelier.avatarURL} }"
+                                     alt="User picture">
+                            </div>
+                            <h5 class="user-name" th:text="${hotelier.name} + ' ' + ${hotelier.surname}"></h5>
+                            <h6 class="user-email" th:text="${hotelier.email}"></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <form th:method="POST" th:action="@{'/place/register'}" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mb-2 text-primary">Детални информации за туристичко место</h6>
+                                <hr/>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="name">Име</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="name"
+                                            name="name"
+                                            placeholder="Внеси име"
+                                            required>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="telephoneNumber">Телефонски број</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="telephoneNumber"
+                                           name="telephoneNumber"
+                                           placeholder="ddd/ddd-ddd"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="description">Опис</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="description"
+                                            name="description"
+                                            placeholder="Внеси краток опис"
+                                            required>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="category">Категорија</label>
+                                    <select id="category"
+                                            name="categoryId"
+                                            class="form-control">
+                                        <option th:each="c : ${categories}"
+                                                th:value="${c.categoryId}"
+                                                th:text="${c.description}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="address">Адреса</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="address"
+                                            name="address"
+                                            placeholder="Внеси адреса"
+                                            required>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="city">Град</label>
+                                    <select id="city"
+                                            name="cityId"
+                                            class="form-control">
+                                        <option th:each="c : ${cities}"
+                                                th:value="${c.cityId}"
+                                                th:text="${c.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="thumbnail">Слика</label>
+                                    <input type="file"
+                                           class="form-control"
+                                           id="thumbnail"
+                                           name="thumbnail">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="gallery">Галерија</label>
+                                    <input class="form-control"
+                                           type="file"
+                                           name="gallery"
+                                           id="gallery"
+                                           multiple/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-0">
+                                <div class="text-right">
+                                    <a type="button" class="btn btn-secondary" th:href="@{ '/home' }">Назад</a>
+                                    <button class="btn btn-primary" type="submit">
+                                        Регистрирај
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

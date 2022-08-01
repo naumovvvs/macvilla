@@ -1,0 +1,109 @@
+body{
+  overflow-x: hidden;
+}
+
+#place_pic {
+  width: 100%;
+  max-height: 100vh;
+  min-height: auto;
+  overflow: hidden;
+  position: relative;
+  /*background-image: url("../img/place-1.jpg");*/
+}
+
+.no-padding{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#place_pic img {
+  width: 100%;
+  object-fit: fill;
+}
+
+#place_pic #heart_icon {
+  position: relative;
+  left: 90%;
+  right: 0;
+}
+
+#place_pic #heart_icon:hover {
+  color: crimson;
+  width: 65px;
+  height: auto;
+  cursor: pointer;
+}
+
+#place_pic #title {
+  /* width: 50%;  */
+  /* background-color: red; */
+  position: absolute;
+  margin-top: -40%;
+  margin-left: 4%;
+  font-size: 6vw;
+  font-weight: 350;
+  color: #f5f6fa;
+  letter-spacing: 4px;
+  text-shadow: 0 1px 0 #ccc,
+  0 2px 0 #c9c9c9,
+  0 3px 0 #bbb,
+  0 4px 0 #b9b9b9,
+  0 5px 0 #aaa,
+  0 6px 1px rgba(0,0,0,.1),
+  0 0 5px rgba(0,0,0,.1),
+  0 1px 3px rgba(0,0,0,.3),
+  0 3px 5px rgba(0,0,0,.2),
+  0 5px 10px rgba(0,0,0,.25),
+  0 10px 10px rgba(0,0,0,.2),
+  0 20px 20px rgba(0,0,0,.15);
+}
+
+#place_pic #addFavorite {
+  margin-left: 47%;
+  float: right;
+  height: 15%;
+  position: absolute;
+  margin-top: -35%;
+}
+
+#place_pic #addFavorite a {
+  color: white;
+}
+
+#place_pic #row_rating {
+  position: absolute;
+  margin-left: 4%;
+  margin-top: -31%;
+  /*top: 85%;*/
+}
+
+#place_pic #rating {
+  font-size: 3vw;
+  color: white;
+  text-align: end;
+}
+
+#place_main {
+  min-height: 27vh;
+  width: 100%;
+  /* background-color: gray; */
+  border: 1px solid gray;
+}
+
+#place_main .column p {
+  color: black;
+  font-size: 1.5rem;
+}
+
+#place_main #map {
+  text-align: end;
+  position: relative;
+  top: 5%;
+}
+
+#review_container{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+/*# sourceMappingURL=place.css.map */

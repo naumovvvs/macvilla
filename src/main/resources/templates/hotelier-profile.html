@@ -1,0 +1,172 @@
+<div class="container hotelier" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <div class="row gutters">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="account-settings">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img th:src="@{ ${hotelier.avatarURL} }"
+                                     alt="User picture">
+                            </div>
+                            <h5 class="user-name" th:text="${hotelier.name} + ' ' + ${hotelier.surname}"></h5>
+                            <h6 class="user-email" th:text="${hotelier.email}"></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <form th:method="POST" th:action="@{'/dashboard/hotelier/{id}/edit' (id=${hotelier.userId})}" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mb-2 text-primary">Лични информации</h6>
+                                <hr/>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="name">Име</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="name"
+                                            name="name"
+                                            placeholder="Внеси име"
+                                            th:value="${hotelier.name}"
+                                            required>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="username">Корисничко име</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="username"
+                                            name="username"
+                                            placeholder="Внеси корисничко име"
+                                            th:value="${hotelier.username}"
+                                            required>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="surname">Презиме</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="surname"
+                                            name="surname"
+                                            placeholder="Внеси презиме"
+                                            th:value="${hotelier.surname}"
+                                            required>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="email">E-mail адреса</label>
+                                    <input type="email"
+                                           class="form-control"
+                                           id="email"
+                                           name="email"
+                                           placeholder="Внеси e-mail адреса"
+                                           th:value="${hotelier.email}"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="password">Лозинка</label>
+                                    <input
+                                            type="password"
+                                            class="form-control"
+                                            id="password"
+                                            name="password"
+                                            placeholder="Внеси нова лозинка">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="thumbnail">Профилна слика</label>
+                                    <input type="file"
+                                           class="form-control"
+                                           id="thumbnail"
+                                           name="thumbnail"
+                                           th:value="${hotelier.avatarURL}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-2">
+                                <a href="/place/register" class="btn btn-outline-success" id="registerBtn">
+                                    Регистрирај туристичко место
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mt-3 mb-3 text-primary">Менаџирани туристички места</h6>
+                                <hr/>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="list-group" th:if="${managedPlaces.size() > 0}">
+
+                                    <div th:each="place: ${managedPlaces}"
+                                       th:href="@{'/place/{id}' ( id=${place.placeId} ) }"
+                                       class="list-group-item list-group-item-action"
+                                       aria-current="true">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <div class="d-flex">
+                                                <th:block th:if="${#strings.equals(place.request.requestStatus, 'PENDING')}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#f0ad4e" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                                                    </svg>
+                                                </th:block>
+                                                <th:block th:if="${#strings.equals(place.request.requestStatus, 'APPROVED')}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#5cb85c" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                                    </svg>
+                                                </th:block>
+                                                <th:block th:if="${#strings.equals(place.request.requestStatus, 'DENIED')}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#d9534f" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                                                    </svg>
+                                                </th:block>
+                                                &nbsp;&nbsp;
+                                                <h6 class="mb-1" th:text="${place.name}"></h6>
+                                            </div>
+
+                                            <a th:href="@{'/dashboard/hotelier/{id}/remove-place/{placeId}' ( id=${hotelier.userId}, placeId=${place.placeId} ) }"
+                                               class="btn btn-outline-danger btn-sm">
+                                                Избриши
+                                            </a>
+
+                                        </div>
+                                        <p class="mb-1">
+                                            <th:block th:text="${place.rating}"/>
+                                            | <small>Број на посети:
+                                            <th:block th:text="${place.visits}"/>
+                                        </small></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-0">
+                                <div class="text-right">
+                                    <a type="button" class="btn btn-secondary" th:href="@{ '/home' }">Назад</a>
+                                    <button class="btn btn-primary" type="submit">
+                                        Измени
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

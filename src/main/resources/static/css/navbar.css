@@ -1,0 +1,28 @@
+#nav-menu {
+    background-color: #fff;
+}
+
+.dropdown-menu {
+    min-width: 7rem;
+}
+
+.dropdown-toggle-split {
+    border-radius: 0;
+}
+
+.navbar-brand {
+    padding-right: 30px;
+}
+
+.navbar-nav .nav-item {
+    padding-right: 15px;
+}
+
+#login-link {
+    color: white;
+    text-decoration: none;
+}
+
+#login-link:hover {
+    text-decoration: none;
+}
